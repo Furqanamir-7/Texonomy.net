@@ -1,26 +1,163 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: #F36A3D;
+  --color-secondary: #FF8C5A;
+  --color-accent: #FFB088;
+  --color-background: #F8F6F4;
+  --color-dark: #151515;
+  --color-text: #444444;
+  --color-card: #ffffff;
+  --font-sans: "Satoshi", system-ui, sans-serif;
+  --radius-card: 28px;
+  --shadow-soft: 0 4px 24px -4px rgba(21, 21, 21, 0.08);
+  --shadow-card: 0 8px 40px -8px rgba(243, 106, 61, 0.12);
+  --shadow-glass: 0 8px 32px rgba(21, 21, 21, 0.06);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: "Satoshi";
+  src: url("https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap");
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(243, 106, 61, 0.2);
+  color: var(--color-dark);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #F36A3D 0%, #FF8C5A 50%, #FFB088 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #F36A3D 0%, #FF8C5A 60%, #FFB088 100%);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-dark {
+  background: rgba(21, 21, 21, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-shadow {
+  box-shadow: var(--shadow-soft);
+}
+
+.card-shadow-hover {
+  box-shadow: var(--shadow-card);
+}
+
+.section-padding {
+  padding: 6rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 8rem 2rem;
+  }
+}
+
+.container-custom {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8F6F4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFB088;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F36A3D;
+}
+
+/* Page transition overlay */
+.page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Blob float */
+@keyframes blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -30px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+.animate-blob {
+  animation: blob-float 8s ease-in-out infinite;
+}
+
+.animate-blob-delayed {
+  animation: blob-float 8s ease-in-out 2s infinite;
+}
+
+.animate-blob-slow {
+  animation: blob-float 12s ease-in-out 4s infinite;
 }
