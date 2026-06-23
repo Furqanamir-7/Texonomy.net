@@ -8,12 +8,10 @@ import { GlobalPresenceSection } from "@/components/sections/GlobalPresenceSecti
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { ContactCTA } from "@/components/sections/ContactCTA";
-import { BackgroundEffects } from "@/components/layout/BackgroundEffects";
 
 export default function HomePage() {
   return (
     <>
-      <BackgroundEffects />
       <HeroSection />
       <AboutPreview />
       <FeaturedYarnSection />

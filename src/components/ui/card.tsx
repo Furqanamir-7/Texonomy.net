@@ -8,15 +8,13 @@ interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
 export function GlassCard({
   className,
   hover = true,
-  dark = false,
   children,
   ...props
 }: GlassCardProps) {
   return (
     <div
       className={cn(
-        "rounded-[28px] p-6 md:p-8 transition-all duration-500",
-        dark ? "glass-dark text-white" : "glass card-shadow",
+        "rounded-[28px] p-6 md:p-8 transition-all duration-500 glass card-shadow",
         hover && "hover:card-shadow-hover hover:-translate-y-1",
         className
       )}
@@ -32,7 +30,6 @@ interface ProductCardProps {
   description: string;
   color?: string;
   items?: string[];
-  href?: string;
   className?: string;
   featured?: boolean;
 }
@@ -48,8 +45,8 @@ export function ProductCard({
   return (
     <div
       className={cn(
-        "group relative rounded-[28px] bg-white p-6 md:p-8 card-shadow transition-all duration-500 hover:card-shadow-hover hover:-translate-y-2 overflow-hidden",
-        featured && "md:col-span-2 md:row-span-1",
+        "group relative rounded-[28px] bg-card border border-white/5 p-6 md:p-8 card-shadow transition-all duration-500 hover:card-shadow-hover hover:-translate-y-2 overflow-hidden",
+        featured && "md:col-span-2",
         className
       )}
     >
@@ -61,14 +58,14 @@ export function ProductCard({
         className="w-12 h-1 rounded-full mb-5 transition-all duration-300 group-hover:w-20"
         style={{ background: color }}
       />
-      <h3 className="text-xl md:text-2xl font-bold text-dark mb-3">{title}</h3>
-      <p className="text-text/80 leading-relaxed mb-4">{description}</p>
+      <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">{title}</h3>
+      <p className="text-muted leading-relaxed mb-4">{description}</p>
       {items && (
         <div className="flex flex-wrap gap-2">
           {items.map((item) => (
             <span
               key={item}
-              className="text-xs font-medium px-3 py-1 rounded-full bg-background text-text/70"
+              className="text-xs font-medium px-3 py-1 rounded-full bg-card-elevated text-muted border border-white/5"
             >
               {item}
             </span>
@@ -93,7 +90,7 @@ export function FeatureCard({
   return (
     <div
       className={cn(
-        "rounded-[28px] bg-white p-6 card-shadow transition-all duration-500 hover:card-shadow-hover hover:-translate-y-1 group",
+        "rounded-[28px] bg-card border border-white/5 p-6 card-shadow transition-all duration-500 hover:card-shadow-hover hover:-translate-y-1 group",
         className
       )}
     >
@@ -102,8 +99,8 @@ export function FeatureCard({
           {icon}
         </div>
       )}
-      <h3 className="text-lg font-bold text-dark mb-2">{title}</h3>
-      <p className="text-sm text-text/70 leading-relaxed">{description}</p>
+      <h3 className="text-lg font-bold text-foreground mb-2">{title}</h3>
+      <p className="text-sm text-muted leading-relaxed">{description}</p>
     </div>
   );
 }

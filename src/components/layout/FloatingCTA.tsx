@@ -30,8 +30,8 @@ export function FloatingCTA() {
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
             className="fixed bottom-24 right-6 z-40 w-72 rounded-[28px] glass card-shadow p-6"
           >
-            <h4 className="font-bold text-dark mb-2">Quick Inquiry</h4>
-            <p className="text-xs text-text/60 mb-4">
+            <h4 className="font-bold text-foreground mb-2">Quick Inquiry</h4>
+            <p className="text-xs text-muted mb-4">
               Need yarn samples or a quote? We respond within 24 hours.
             </p>
             <Link

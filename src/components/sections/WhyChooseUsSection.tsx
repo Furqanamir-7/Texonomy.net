@@ -20,7 +20,7 @@ export function WhyChooseUsSection() {
               Why Atlas
             </span>
           </FadeIn>
-          <TextReveal className="text-3xl md:text-4xl font-bold text-dark mt-4">
+          <TextReveal className="text-3xl md:text-4xl font-bold text-foreground mt-4">
             Why Choose Us
           </TextReveal>
         </div>
@@ -30,12 +30,12 @@ export function WhyChooseUsSection() {
             const Icon = icons[i];
             return (
               <motion.div key={item.title} variants={staggerItem}>
-                <div className="rounded-[28px] bg-white p-8 card-shadow h-full transition-all duration-500 hover:card-shadow-hover hover:-translate-y-1 group">
+                <div className="rounded-[28px] bg-card p-8 card-shadow h-full transition-all duration-500 hover:card-shadow-hover hover:-translate-y-1 group">
                   <div className="w-12 h-12 rounded-2xl gradient-bg flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
                     <Icon className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-dark mb-2">{item.title}</h3>
-                  <p className="text-sm text-text/70 leading-relaxed">{item.description}</p>
+                  <h3 className="text-lg font-bold text-foreground mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted leading-relaxed">{item.description}</p>
                 </div>
               </motion.div>
             );
@@ -48,12 +48,12 @@ export function WhyChooseUsSection() {
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="text-center rounded-[28px] bg-white p-8 card-shadow"
+                className="text-center rounded-[28px] bg-card p-8 card-shadow"
               >
                 <div className="text-4xl md:text-5xl font-bold gradient-text">
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                 </div>
-                <p className="text-sm text-text/50 mt-2">{stat.label}</p>
+                <p className="text-sm text-muted mt-2">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -61,7 +61,7 @@ export function WhyChooseUsSection() {
 
         {/* Process Timeline */}
         <FadeIn>
-          <h3 className="text-2xl font-bold text-dark text-center mb-12">
+          <h3 className="text-2xl font-bold text-foreground text-center mb-12">
             Our Process
           </h3>
           <div className="grid md:grid-cols-4 gap-6 relative">
@@ -71,8 +71,8 @@ export function WhyChooseUsSection() {
                 <div className="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mx-auto mb-4 text-white font-bold text-lg relative z-10">
                   {step.step}
                 </div>
-                <h4 className="font-bold text-dark mb-2">{step.title}</h4>
-                <p className="text-xs text-text/60 leading-relaxed">{step.description}</p>
+                <h4 className="font-bold text-foreground mb-2">{step.title}</h4>
+                <p className="text-xs text-muted leading-relaxed">{step.description}</p>
               </div>
             ))}
           </div>

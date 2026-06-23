@@ -11,11 +11,10 @@ const buttonVariants = cva(
         default:
           "gradient-bg text-white shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02] active:scale-[0.98]",
         outline:
-          "border border-dark/10 bg-white/80 text-dark hover:bg-white hover:border-primary/30 hover:shadow-md",
-        ghost: "text-text hover:bg-primary/5 hover:text-primary",
-        dark: "bg-dark text-white hover:bg-dark/90 hover:scale-[1.02] active:scale-[0.98]",
-        glass:
-          "glass text-dark hover:bg-white/90 hover:shadow-md border border-white/60",
+          "border border-white/15 bg-card/80 text-foreground hover:bg-card-elevated hover:border-primary/40",
+        ghost: "text-muted hover:bg-primary/10 hover:text-primary",
+        dark: "bg-card-elevated text-foreground hover:bg-card border border-white/10 hover:scale-[1.02] active:scale-[0.98]",
+        glass: "glass text-foreground hover:bg-card-elevated border border-white/10",
       },
       size: {
         default: "h-12 px-7 py-3",

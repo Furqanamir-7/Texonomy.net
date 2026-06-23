@@ -56,7 +56,7 @@ export default function ContactPage() {
               ].map((item) => (
                 <FadeIn key={item.label} delay={0.3}>
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-card/10 flex items-center justify-center shrink-0">
                       <item.icon className="w-4 h-4" />
                     </div>
                     <div>
@@ -71,45 +71,45 @@ export default function ContactPage() {
         </div>
 
         {/* Right - Form */}
-        <div className="p-8 md:p-16 flex flex-col justify-center bg-background">
+        <div className="p-8 md:p-16 flex flex-col justify-center bg-card-elevated">
           <FadeIn>
             {submitted ? (
               <div className="text-center py-12">
                 <div className="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mx-auto mb-6">
                   <Send className="w-6 h-6 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold text-dark mb-3">Inquiry Received!</h2>
-                <p className="text-text/60">
+                <h2 className="text-2xl font-bold text-foreground mb-3">Inquiry Received!</h2>
+                <p className="text-muted">
                   Thank you for your interest. Our team will respond within 24 hours.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6 max-w-lg">
-                <h2 className="text-2xl font-bold text-dark mb-2">Business Inquiry</h2>
-                <p className="text-sm text-text/50 mb-8">
+                <h2 className="text-2xl font-bold text-foreground mb-2">Business Inquiry</h2>
+                <p className="text-sm text-muted mb-8">
                   Fill out the form and we&apos;ll get back to you promptly.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm font-medium text-dark mb-1.5 block">Name *</label>
+                    <label className="text-sm font-medium text-foreground mb-1.5 block">Name *</label>
                     <input
                       required
                       type="text"
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-2xl bg-white border border-dark/5 focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all text-sm"
+                      className="w-full px-4 py-3 rounded-2xl bg-card border border-white/8 focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all text-sm"
                       placeholder="Your name"
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-dark mb-1.5 block">Company *</label>
+                    <label className="text-sm font-medium text-foreground mb-1.5 block">Company *</label>
                     <input
                       required
                       type="text"
                       value={form.company}
                       onChange={(e) => setForm({ ...form, company: e.target.value })}
-                      className="w-full px-4 py-3 rounded-2xl bg-white border border-dark/5 focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all text-sm"
+                      className="w-full px-4 py-3 rounded-2xl bg-card border border-white/8 focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all text-sm"
                       placeholder="Company name"
                     />
                   </div>
@@ -117,34 +117,34 @@ export default function ContactPage() {
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm font-medium text-dark mb-1.5 block">Email *</label>
+                    <label className="text-sm font-medium text-foreground mb-1.5 block">Email *</label>
                     <input
                       required
                       type="email"
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-2xl bg-white border border-dark/5 focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all text-sm"
+                      className="w-full px-4 py-3 rounded-2xl bg-card border border-white/8 focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all text-sm"
                       placeholder="you@company.com"
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-dark mb-1.5 block">Phone</label>
+                    <label className="text-sm font-medium text-foreground mb-1.5 block">Phone</label>
                     <input
                       type="tel"
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      className="w-full px-4 py-3 rounded-2xl bg-white border border-dark/5 focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all text-sm"
+                      className="w-full px-4 py-3 rounded-2xl bg-card border border-white/8 focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all text-sm"
                       placeholder="+1 (555) 000-0000"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium text-dark mb-1.5 block">Product Interest</label>
+                  <label className="text-sm font-medium text-foreground mb-1.5 block">Product Interest</label>
                   <select
                     value={form.product}
                     onChange={(e) => setForm({ ...form, product: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl bg-white border border-dark/5 focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all text-sm"
+                    className="w-full px-4 py-3 rounded-2xl bg-card border border-white/8 focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all text-sm"
                   >
                     <option value="yarn">Yarn</option>
                     <option value="fabrics">Fabrics</option>
@@ -155,13 +155,13 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium text-dark mb-1.5 block">Message *</label>
+                  <label className="text-sm font-medium text-foreground mb-1.5 block">Message *</label>
                   <textarea
                     required
                     rows={4}
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl bg-white border border-dark/5 focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all text-sm resize-none"
+                    className="w-full px-4 py-3 rounded-2xl bg-card border border-white/8 focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all text-sm resize-none"
                     placeholder="Tell us about your requirements, quantities, and specifications..."
                   />
                 </div>
@@ -179,7 +179,7 @@ export default function ContactPage() {
             <div className="mt-8 rounded-[28px] bg-dark/5 h-48 flex items-center justify-center">
               <div className="text-center">
                 <MapPin className="w-8 h-8 text-primary/30 mx-auto mb-2" />
-                <p className="text-sm text-text/40">Map — {COMPANY.address}</p>
+                <p className="text-sm text-muted">Map — {COMPANY.address}</p>
               </div>
             </div>
           </FadeIn>

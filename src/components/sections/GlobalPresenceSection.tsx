@@ -33,7 +33,7 @@ export function GlobalPresenceSection() {
                 {exportCountries.slice(0, 9).map((country) => (
                   <div
                     key={country.name}
-                    className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 text-sm text-white/70"
+                    className="flex items-center gap-2 px-3 py-2 rounded-xl bg-card/5 text-sm text-white/70"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                     {country.name}

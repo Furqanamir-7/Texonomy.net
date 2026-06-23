@@ -17,11 +17,11 @@ export default function AboutPage() {
               Our Story
             </span>
           </FadeIn>
-          <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-bold text-dark mt-4 mb-8 max-w-4xl">
+          <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mt-4 mb-8 max-w-4xl">
             {`Building Global Textile Partnerships Since ${COMPANY.founded}`}
           </TextReveal>
           <FadeIn delay={0.2}>
-            <p className="text-lg text-text/70 leading-relaxed max-w-3xl">{story}</p>
+            <p className="text-lg text-muted leading-relaxed max-w-3xl">{story}</p>
           </FadeIn>
         </div>
       </section>
@@ -31,11 +31,11 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat) => (
               <FadeIn key={stat.label}>
-                <div className="rounded-[28px] bg-white p-8 card-shadow text-center">
+                <div className="rounded-[28px] bg-card p-8 card-shadow text-center">
                   <div className="text-4xl font-bold gradient-text">
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </div>
-                  <p className="text-sm text-text/50 mt-2">{stat.label}</p>
+                  <p className="text-sm text-muted mt-2">{stat.label}</p>
                 </div>
               </FadeIn>
             ))}
@@ -43,20 +43,20 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section-padding bg-white/50">
+      <section className="section-padding bg-card/50">
         <div className="container-custom grid md:grid-cols-2 gap-8">
           <FadeIn>
             <GlassCard>
               <span className="text-primary text-sm font-semibold">Mission</span>
-              <h2 className="text-2xl font-bold text-dark mt-3 mb-4">What Drives Us</h2>
-              <p className="text-text/70 leading-relaxed">{mission}</p>
+              <h2 className="text-2xl font-bold text-foreground mt-3 mb-4">What Drives Us</h2>
+              <p className="text-muted leading-relaxed">{mission}</p>
             </GlassCard>
           </FadeIn>
           <FadeIn delay={0.1}>
             <GlassCard>
               <span className="text-primary text-sm font-semibold">Vision</span>
-              <h2 className="text-2xl font-bold text-dark mt-3 mb-4">Where We&apos;re Headed</h2>
-              <p className="text-text/70 leading-relaxed">{vision}</p>
+              <h2 className="text-2xl font-bold text-foreground mt-3 mb-4">Where We&apos;re Headed</h2>
+              <p className="text-muted leading-relaxed">{vision}</p>
             </GlassCard>
           </FadeIn>
         </div>
@@ -64,18 +64,18 @@ export default function AboutPage() {
 
       <section className="section-padding">
         <div className="container-custom">
-          <TextReveal className="text-3xl md:text-4xl font-bold text-dark text-center mb-12">
+          <TextReveal className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
             Core Values
           </TextReveal>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {coreValues.map((value, i) => (
               <FadeIn key={value.title} delay={i * 0.1}>
-                <div className="rounded-[28px] bg-white p-8 card-shadow h-full hover:card-shadow-hover hover:-translate-y-1 transition-all duration-500">
+                <div className="rounded-[28px] bg-card p-8 card-shadow h-full hover:card-shadow-hover hover:-translate-y-1 transition-all duration-500">
                   <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center text-white font-bold text-sm mb-4">
                     {value.title[0]}
                   </div>
-                  <h3 className="font-bold text-dark text-lg mb-2">{value.title}</h3>
-                  <p className="text-sm text-text/70 leading-relaxed">{value.description}</p>
+                  <h3 className="font-bold text-foreground text-lg mb-2">{value.title}</h3>
+                  <p className="text-sm text-muted leading-relaxed">{value.description}</p>
                 </div>
               </FadeIn>
             ))}

@@ -16,11 +16,11 @@ export default function HomeTextilePage() {
               Home Textile
             </span>
           </FadeIn>
-          <TextReveal className="text-4xl md:text-5xl font-bold text-dark mt-4 mb-6">
+          <TextReveal className="text-4xl md:text-5xl font-bold text-foreground mt-4 mb-6">
             Luxury Home Textiles
           </TextReveal>
           <FadeIn delay={0.2}>
-            <p className="text-lg text-text/70 max-w-2xl">
+            <p className="text-lg text-muted max-w-2xl">
               Premium bedsheets, towels, curtains, and kitchen textiles crafted
               for hospitality, retail, and export markets worldwide.
             </p>
@@ -33,7 +33,7 @@ export default function HomeTextilePage() {
           <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {homeTextileProducts.map((product, i) => (
               <motion.div key={product.name} variants={staggerItem}>
-                <div className="group rounded-[28px] bg-white overflow-hidden card-shadow transition-all duration-500 hover:card-shadow-hover hover:-translate-y-2">
+                <div className="group rounded-[28px] bg-card overflow-hidden card-shadow transition-all duration-500 hover:card-shadow-hover hover:-translate-y-2">
                   <div
                     className="h-48 bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/20 flex items-center justify-center"
                     style={{ opacity: 0.5 + i * 0.1 }}
@@ -43,10 +43,10 @@ export default function HomeTextilePage() {
                     </span>
                   </div>
                   <div className="p-8">
-                    <h3 className="text-xl font-bold text-dark mb-3 group-hover:text-primary transition-colors">
+                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
                       {product.name}
                     </h3>
-                    <p className="text-sm text-text/70 leading-relaxed">
+                    <p className="text-sm text-muted leading-relaxed">
                       {product.description}
                     </p>
                   </div>

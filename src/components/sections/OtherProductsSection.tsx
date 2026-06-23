@@ -8,14 +8,14 @@ import { otherProducts } from "@/lib/data/products";
 
 export function OtherProductsSection() {
   return (
-    <section className="section-padding bg-white/50">
+    <section className="section-padding bg-card/50">
       <div className="container-custom">
         <FadeIn>
           <span className="text-primary text-sm font-semibold uppercase tracking-wider">
             Beyond Yarn
           </span>
         </FadeIn>
-        <TextReveal className="text-3xl md:text-4xl font-bold text-dark mt-4 mb-12">
+        <TextReveal className="text-3xl md:text-4xl font-bold text-foreground mt-4 mb-12">
           Complete Textile Solutions
         </TextReveal>
 
@@ -24,23 +24,23 @@ export function OtherProductsSection() {
             <motion.div key={product.title} variants={staggerItem}>
               <Link href={product.href} className="block group">
                 <div
-                  className={`relative rounded-[28px] bg-white p-8 card-shadow transition-all duration-500 hover:card-shadow-hover hover:-translate-y-2 hover:scale-[1.02] overflow-hidden h-full`}
+                  className={`relative rounded-[28px] bg-card p-8 card-shadow transition-all duration-500 hover:card-shadow-hover hover:-translate-y-2 hover:scale-[1.02] overflow-hidden h-full`}
                 >
                   <div
                     className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-50`}
                   />
                   <div className="relative">
-                    <h3 className="text-xl font-bold text-dark mb-3 group-hover:text-primary transition-colors">
+                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
                       {product.title}
                     </h3>
-                    <p className="text-sm text-text/70 leading-relaxed mb-6">
+                    <p className="text-sm text-muted leading-relaxed mb-6">
                       {product.description}
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {product.items.map((item) => (
                         <span
                           key={item}
-                          className="text-xs px-3 py-1 rounded-full bg-background/80 text-text/60"
+                          className="text-xs px-3 py-1 rounded-full bg-card-elevated/80 text-muted"
                         >
                           {item}
                         </span>

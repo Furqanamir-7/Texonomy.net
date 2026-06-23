@@ -35,21 +35,19 @@ export function Navbar() {
         )}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 2.2 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
       >
         <nav
           className={cn(
             "flex items-center justify-between px-4 md:px-6 py-3 rounded-full transition-all duration-500",
-            scrolled
-              ? "glass card-shadow backdrop-blur-xl"
-              : "bg-white/60 backdrop-blur-md border border-white/40"
+            "glass card-shadow backdrop-blur-xl"
           )}
         >
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <div className="w-8 h-8 rounded-full gradient-bg flex items-center justify-center">
               <span className="text-white text-xs font-bold">AT</span>
             </div>
-            <span className="font-bold text-dark hidden sm:block">
+            <span className="font-bold text-foreground hidden sm:block">
               Atlas<span className="text-primary">Textile</span>
             </span>
           </Link>
@@ -71,7 +69,7 @@ export function Navbar() {
                         pathname.startsWith("/home-textile") ||
                         pathname.startsWith("/garments")
                         ? "text-primary bg-primary/5"
-                        : "text-text hover:text-primary hover:bg-primary/5"
+                        : "text-muted hover:text-primary hover:bg-primary/10"
                     )}
                   >
                     {link.label}
@@ -109,12 +107,12 @@ export function Navbar() {
                                   <h4
                                     className={cn(
                                       "font-semibold text-sm",
-                                      child.featured ? "text-white" : "text-dark"
+                                      child.featured ? "text-white" : "text-foreground"
                                     )}
                                   >
                                     {child.title}
                                     {child.featured && (
-                                      <span className="ml-2 text-xs bg-white/20 px-2 py-0.5 rounded-full">
+                                      <span className="ml-2 text-xs bg-card/10 px-2 py-0.5 rounded-full">
                                         Flagship
                                       </span>
                                     )}
@@ -122,7 +120,7 @@ export function Navbar() {
                                   <p
                                     className={cn(
                                       "text-xs mt-1",
-                                      child.featured ? "text-white/80" : "text-text/60"
+                                      child.featured ? "text-white/80" : "text-muted"
                                     )}
                                   >
                                     {child.description}
@@ -150,7 +148,7 @@ export function Navbar() {
                     "px-4 py-2 rounded-full text-sm font-medium transition-colors",
                     pathname === link.href
                       ? "text-primary bg-primary/5"
-                      : "text-text hover:text-primary hover:bg-primary/5"
+                      : "text-muted hover:text-primary hover:bg-primary/5"
                   )}
                 >
                   {link.label}
@@ -195,7 +193,7 @@ export function Navbar() {
                       "block px-4 py-3 rounded-2xl text-sm font-medium",
                       pathname === link.href
                         ? "text-primary bg-primary/5"
-                        : "text-text hover:bg-primary/5"
+                        : "text-muted hover:bg-primary/5"
                     )}
                   >
                     {link.label}
@@ -206,7 +204,7 @@ export function Navbar() {
                         <Link
                           key={child.href}
                           href={child.href}
-                          className="px-4 py-2 text-xs text-text/70 hover:text-primary"
+                          className="px-4 py-2 text-xs text-muted hover:text-primary"
                         >
                           {child.title}
                         </Link>
@@ -215,7 +213,7 @@ export function Navbar() {
                   )}
                 </div>
               ))}
-              <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-dark/5">
+              <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-white/8">
                 <Button asChild>
                   <Link href="/contact">Contact Us</Link>
                 </Button>

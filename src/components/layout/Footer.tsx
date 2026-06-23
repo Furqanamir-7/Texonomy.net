@@ -28,7 +28,7 @@ export function Footer() {
                 <a
                   key={i}
                   href="#"
-                  className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-colors"
+                  className="w-10 h-10 rounded-full bg-card/5 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-colors"
                   aria-label="Social link"
                 >
                   <Icon className="w-4 h-4" />

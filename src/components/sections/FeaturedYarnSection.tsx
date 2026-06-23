@@ -22,7 +22,7 @@ export function FeaturedYarnSection() {
                 Flagship Product
               </span>
             </FadeIn>
-            <TextReveal className="text-3xl md:text-4xl lg:text-5xl font-bold text-dark mt-4">
+            <TextReveal className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4">
               Premium Yarn Collection
             </TextReveal>
           </div>
@@ -40,7 +40,7 @@ export function FeaturedYarnSection() {
           {featuredYarn.map((product) => (
             <motion.div key={product.id} variants={staggerItem}>
               <Link href="/yarn" className="block group">
-                <div className="relative rounded-[28px] bg-white p-8 card-shadow transition-all duration-500 hover:card-shadow-hover hover:-translate-y-2 overflow-hidden">
+                <div className="relative rounded-[28px] bg-card p-8 card-shadow transition-all duration-500 hover:card-shadow-hover hover:-translate-y-2 overflow-hidden">
                   <div
                     className="absolute top-0 right-0 w-40 h-40 rounded-full opacity-10 blur-3xl transition-all duration-500 group-hover:opacity-20 group-hover:scale-150"
                     style={{ background: product.color }}
@@ -49,17 +49,17 @@ export function FeaturedYarnSection() {
                     className="w-14 h-1 rounded-full mb-6 transition-all duration-300 group-hover:w-24"
                     style={{ background: product.color }}
                   />
-                  <h3 className="text-2xl font-bold text-dark mb-3 group-hover:text-primary transition-colors">
+                  <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
                     {product.name}
                   </h3>
-                  <p className="text-text/70 leading-relaxed mb-6 line-clamp-2">
+                  <p className="text-muted leading-relaxed mb-6 line-clamp-2">
                     {product.description}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-6">
                     {product.applications.slice(0, 3).map((app) => (
                       <span
                         key={app}
-                        className="text-xs px-3 py-1 rounded-full bg-background text-text/60"
+                        className="text-xs px-3 py-1 rounded-full bg-card-elevated text-muted"
                       >
                         {app}
                       </span>

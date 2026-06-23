@@ -26,11 +26,11 @@ export default function YarnPage() {
                 Flagship Product
               </span>
             </FadeIn>
-            <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-bold text-dark mt-4 mb-6">
+            <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mt-4 mb-6">
               Premium Yarn Supply
             </TextReveal>
             <FadeIn delay={0.2}>
-              <p className="text-lg text-text/70 leading-relaxed mb-8">
+              <p className="text-lg text-muted leading-relaxed mb-8">
                 From cotton to polyester, compact to melange — we supply every yarn
                 type your manufacturing needs, with rigorous quality control and
                 competitive global pricing.
@@ -47,9 +47,9 @@ export default function YarnPage() {
       </section>
 
       {/* Product Categories */}
-      <section className="section-padding bg-white/50">
+      <section className="section-padding bg-card/50">
         <div className="container-custom">
-          <TextReveal className="text-3xl md:text-4xl font-bold text-dark mb-12">
+          <TextReveal className="text-3xl md:text-4xl font-bold text-foreground mb-12">
             Yarn Categories
           </TextReveal>
 
@@ -65,29 +65,29 @@ export default function YarnPage() {
             {yarnProducts.map((product) => (
               <TabsContent key={product.id} value={product.id}>
                 <FadeIn>
-                  <div className="rounded-[28px] bg-white p-8 md:p-12 card-shadow">
+                  <div className="rounded-[28px] bg-card p-8 md:p-12 card-shadow">
                     <div className="grid lg:grid-cols-2 gap-12">
                       <div>
                         <div
                           className="w-16 h-1 rounded-full mb-6"
                           style={{ background: product.color }}
                         />
-                        <h3 className="text-3xl font-bold text-dark mb-4">{product.name}</h3>
-                        <p className="text-text/70 leading-relaxed mb-8">{product.description}</p>
+                        <h3 className="text-3xl font-bold text-foreground mb-4">{product.name}</h3>
+                        <p className="text-muted leading-relaxed mb-8">{product.description}</p>
 
-                        <h4 className="font-semibold text-dark mb-3">Applications</h4>
+                        <h4 className="font-semibold text-foreground mb-3">Applications</h4>
                         <div className="flex flex-wrap gap-2 mb-8">
                           {product.applications.map((app) => (
                             <span
                               key={app}
-                              className="px-3 py-1 rounded-full bg-background text-sm text-text/70"
+                              className="px-3 py-1 rounded-full bg-card-elevated text-sm text-muted"
                             >
                               {app}
                             </span>
                           ))}
                         </div>
 
-                        <h4 className="font-semibold text-dark mb-3">Available Counts</h4>
+                        <h4 className="font-semibold text-foreground mb-3">Available Counts</h4>
                         <div className="flex flex-wrap gap-2">
                           {product.counts.map((count) => (
                             <span
@@ -101,21 +101,21 @@ export default function YarnPage() {
                       </div>
 
                       <div className="space-y-6">
-                        <div className="rounded-2xl bg-background p-6">
-                          <h4 className="font-semibold text-dark mb-2">Composition</h4>
-                          <p className="text-sm text-text/70">{product.composition}</p>
+                        <div className="rounded-2xl bg-card-elevated p-6">
+                          <h4 className="font-semibold text-foreground mb-2">Composition</h4>
+                          <p className="text-sm text-muted">{product.composition}</p>
                         </div>
-                        <div className="rounded-2xl bg-background p-6">
-                          <h4 className="font-semibold text-dark mb-2">Packaging</h4>
-                          <p className="text-sm text-text/70">{product.packaging}</p>
+                        <div className="rounded-2xl bg-card-elevated p-6">
+                          <h4 className="font-semibold text-foreground mb-2">Packaging</h4>
+                          <p className="text-sm text-muted">{product.packaging}</p>
                         </div>
-                        <div className="rounded-2xl bg-background p-6">
-                          <h4 className="font-semibold text-dark mb-3">Specifications</h4>
+                        <div className="rounded-2xl bg-card-elevated p-6">
+                          <h4 className="font-semibold text-foreground mb-3">Specifications</h4>
                           <div className="space-y-2">
                             {Object.entries(product.specifications).map(([key, val]) => (
                               <div key={key} className="flex justify-between text-sm">
-                                <span className="text-text/50">{key}</span>
-                                <span className="text-dark font-medium">{val}</span>
+                                <span className="text-muted">{key}</span>
+                                <span className="text-foreground font-medium">{val}</span>
                               </div>
                             ))}
                           </div>
@@ -133,17 +133,17 @@ export default function YarnPage() {
       {/* Comparison Table */}
       <section className="section-padding">
         <div className="container-custom">
-          <TextReveal className="text-3xl md:text-4xl font-bold text-dark mb-12">
+          <TextReveal className="text-3xl md:text-4xl font-bold text-foreground mb-12">
             Yarn Comparison
           </TextReveal>
           <FadeIn>
             <div className="overflow-x-auto rounded-[28px] card-shadow">
-              <table className="w-full bg-white">
+              <table className="w-full bg-card">
                 <thead>
-                  <tr className="border-b border-dark/5">
-                    <th className="text-left p-4 md:p-6 font-semibold text-dark">Product</th>
+                  <tr className="border-b border-white/8">
+                    <th className="text-left p-4 md:p-6 font-semibold text-foreground">Product</th>
                     {yarnComparisonFields.map((field) => (
-                      <th key={field} className="text-left p-4 md:p-6 font-semibold text-dark text-sm">
+                      <th key={field} className="text-left p-4 md:p-6 font-semibold text-foreground text-sm">
                         {field}
                       </th>
                     ))}
@@ -153,13 +153,13 @@ export default function YarnPage() {
                   {yarnComparisonData.map((row, i) => (
                     <tr
                       key={row.product}
-                      className={`border-b border-dark/5 transition-colors hover:bg-primary/5 ${
-                        i % 2 === 0 ? "" : "bg-background/50"
+                      className={`border-b border-white/8 transition-colors hover:bg-primary/5 ${
+                        i % 2 === 0 ? "" : "bg-card-elevated/50"
                       }`}
                     >
-                      <td className="p-4 md:p-6 font-medium text-dark">{row.product}</td>
+                      <td className="p-4 md:p-6 font-medium text-foreground">{row.product}</td>
                       {yarnComparisonFields.map((field) => (
-                        <td key={field} className="p-4 md:p-6 text-sm text-text/70">
+                        <td key={field} className="p-4 md:p-6 text-sm text-muted">
                           {row[field]}
                         </td>
                       ))}

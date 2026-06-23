@@ -21,7 +21,7 @@ export function TestimonialsSection() {
               Testimonials
             </span>
           </FadeIn>
-          <TextReveal className="text-3xl md:text-4xl font-bold text-dark mt-4">
+          <TextReveal className="text-3xl md:text-4xl font-bold text-foreground mt-4">
             Trusted by Industry Leaders
           </TextReveal>
         </div>
@@ -35,10 +35,10 @@ export function TestimonialsSection() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.4 }}
-                className="rounded-[28px] bg-white p-8 md:p-12 card-shadow relative"
+                className="rounded-[28px] bg-card p-8 md:p-12 card-shadow relative"
               >
                 <Quote className="w-10 h-10 text-primary/20 mb-6" />
-                <p className="text-lg md:text-xl text-dark leading-relaxed mb-8">
+                <p className="text-lg md:text-xl text-foreground leading-relaxed mb-8">
                   &ldquo;{testimonials[current].quote}&rdquo;
                 </p>
                 <div className="flex items-center gap-4">
@@ -46,10 +46,10 @@ export function TestimonialsSection() {
                     {testimonials[current].logo}
                   </div>
                   <div>
-                    <div className="font-semibold text-dark">
+                    <div className="font-semibold text-foreground">
                       {testimonials[current].author}
                     </div>
-                    <div className="text-sm text-text/50">
+                    <div className="text-sm text-muted">
                       {testimonials[current].role}, {testimonials[current].company}
                     </div>
                   </div>
@@ -60,7 +60,7 @@ export function TestimonialsSection() {
             <div className="flex justify-center gap-4 mt-8">
               <button
                 onClick={prev}
-                className="w-12 h-12 rounded-full bg-white card-shadow flex items-center justify-center hover:bg-primary/5 transition-colors"
+                className="w-12 h-12 rounded-full bg-card card-shadow flex items-center justify-center hover:bg-primary/5 transition-colors"
                 aria-label="Previous testimonial"
               >
                 <ChevronLeft className="w-5 h-5" />
@@ -79,7 +79,7 @@ export function TestimonialsSection() {
               </div>
               <button
                 onClick={next}
-                className="w-12 h-12 rounded-full bg-white card-shadow flex items-center justify-center hover:bg-primary/5 transition-colors"
+                className="w-12 h-12 rounded-full bg-card card-shadow flex items-center justify-center hover:bg-primary/5 transition-colors"
                 aria-label="Next testimonial"
               >
                 <ChevronRight className="w-5 h-5" />
@@ -94,7 +94,7 @@ export function TestimonialsSection() {
             {[...clientLogos, ...clientLogos].map((logo, i) => (
               <span
                 key={i}
-                className="mx-8 text-lg font-semibold text-dark/15 uppercase tracking-wider"
+                className="mx-8 text-lg font-semibold text-foreground/15 uppercase tracking-wider"
               >
                 {logo}
               </span>

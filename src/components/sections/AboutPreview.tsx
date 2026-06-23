@@ -23,18 +23,18 @@ export function AboutPreview() {
               </span>
             </FadeIn>
             <TextReveal
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-dark mt-4 mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6"
             >
               Your Trusted Global Textile Partner
             </TextReveal>
             <FadeIn delay={0.2}>
-              <p className="text-text/70 leading-relaxed mb-6">
+              <p className="text-muted leading-relaxed mb-6">
                 Atlas Textile Trading connects world-class yarn manufacturers with
                 international buyers who demand consistency, quality, and reliability.
                 With 17+ years of experience, we&apos;ve built a supply network spanning
                 45+ countries.
               </p>
-              <p className="text-text/70 leading-relaxed">
+              <p className="text-muted leading-relaxed">
                 Yarn is our flagship product — representing 80% of our trade volume —
                 backed by rigorous quality control and competitive global pricing.
               </p>
@@ -48,8 +48,8 @@ export function AboutPreview() {
                   <div className="w-12 h-12 rounded-2xl gradient-bg flex items-center justify-center mx-auto mb-4">
                     <item.icon className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="font-bold text-dark text-lg">{item.title}</h3>
-                  <p className="text-xs text-text/50 mt-1">{item.description}</p>
+                  <h3 className="font-bold text-foreground text-lg">{item.title}</h3>
+                  <p className="text-xs text-muted mt-1">{item.description}</p>
                 </GlassCard>
               </FadeIn>
             ))}

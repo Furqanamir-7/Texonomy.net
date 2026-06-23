@@ -31,7 +31,7 @@ export function ContactCTA() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="bg-white text-primary border-white hover:bg-white/90 hover:text-primary"
+                  className="bg-card text-primary border-white hover:bg-card/90 hover:text-primary"
                   asChild
                 >
                   <Link href="/contact">

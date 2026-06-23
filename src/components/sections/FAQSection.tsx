@@ -6,7 +6,7 @@ import { faqs } from "@/lib/data/faq";
 
 export function FAQSection() {
   return (
-    <section className="section-padding bg-white/50">
+    <section className="section-padding bg-card/50">
       <div className="container-custom max-w-3xl">
         <div className="text-center mb-12">
           <FadeIn>
@@ -14,7 +14,7 @@ export function FAQSection() {
               FAQ
             </span>
           </FadeIn>
-          <TextReveal className="text-3xl md:text-4xl font-bold text-dark mt-4">
+          <TextReveal className="text-3xl md:text-4xl font-bold text-foreground mt-4">
             Frequently Asked Questions
           </TextReveal>
         </div>
@@ -25,7 +25,7 @@ export function FAQSection() {
               <AccordionItem
                 key={i}
                 value={`item-${i}`}
-                className="rounded-[28px] bg-white px-6 card-shadow border-none"
+                className="rounded-[28px] bg-card px-6 card-shadow border-none"
               >
                 <AccordionTrigger className="text-base">
                   {faq.question}

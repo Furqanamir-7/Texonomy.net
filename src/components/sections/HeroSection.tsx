@@ -3,85 +3,87 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { MagneticButton } from "@/components/animations/MagneticButton";
-import { TextReveal, FadeIn } from "@/components/animations/TextReveal";
-import { YarnSpoolScene } from "@/components/3d/dynamic";
+import { FadeIn } from "@/components/animations/TextReveal";
+import { HeroGlobeScene } from "@/components/3d/dynamic";
 import { COMPANY } from "@/lib/constants";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-24">
-      {/* Background blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 -right-32 w-[500px] h-[500px] rounded-full bg-primary/15 blur-3xl animate-blob" />
-        <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full bg-secondary/10 blur-3xl animate-blob-delayed" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/5 blur-3xl animate-blob-slow" />
+    <section className="relative min-h-[100dvh] flex flex-col justify-end overflow-hidden">
+      {/* Orange ambient glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-primary/10 via-primary/5 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-2/3 gradient-hero" />
+        <div className="absolute top-1/4 right-0 w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] rounded-full bg-primary/8 blur-[120px]" />
       </div>
 
-      <div className="container-custom relative z-10 grid lg:grid-cols-2 gap-12 items-center py-12">
-        <div>
-          <FadeIn delay={2.4}>
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              B2B Textile Trading Since {COMPANY.founded}
-            </span>
-          </FadeIn>
+      {/* 3D Globe — full bleed background */}
+      <div className="absolute inset-0 z-0">
+        <HeroGlobeScene className="w-full h-full" />
+      </div>
 
-          <TextReveal
-            as="h1"
-            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-dark leading-[1.1] mb-6"
-            delay={2.5}
-          >
-            {COMPANY.tagline}
-          </TextReveal>
+      {/* Content overlay */}
+      <div className="container-custom relative z-10 pb-8 pt-28 md:pt-32 md:pb-16">
+        {/* Massive headline — ECLIPSE-inspired */}
+        <FadeIn delay={0.3}>
+          <p className="text-primary text-xs md:text-sm font-semibold uppercase tracking-[0.2em] mb-4 md:mb-6">
+            Global B2B Textile Trading · Est. {COMPANY.founded}
+          </p>
+        </FadeIn>
 
-          <FadeIn delay={2.8}>
-            <p className="text-lg text-text/70 leading-relaxed mb-8 max-w-lg">
-              Supplying premium-quality yarn and textile products to manufacturers
-              across the globe. Your trusted partner for consistent supply and
-              competitive pricing.
-            </p>
-          </FadeIn>
+        <FadeIn delay={0.4}>
+          <h1 className="text-[clamp(2.5rem,8vw,7rem)] font-black text-foreground leading-[0.95] tracking-tight mb-4 md:mb-6 max-w-5xl">
+            ATLAS
+            <span className="block gradient-text">TEXTILE</span>
+          </h1>
+        </FadeIn>
 
-          <FadeIn delay={3.0}>
-            <div className="flex flex-wrap gap-4">
-              <MagneticButton>
-                <Button size="lg" asChild>
-                  <Link href="/yarn">
-                    Explore Yarn
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </Button>
-              </MagneticButton>
-              <MagneticButton>
-                <Button variant="outline" size="lg" asChild>
-                  <Link href="/contact">Contact Us</Link>
-                </Button>
-              </MagneticButton>
-            </div>
-          </FadeIn>
+        <FadeIn delay={0.5}>
+          <p className="text-base md:text-xl text-muted leading-relaxed mb-8 max-w-xl">
+            Premium yarn supply worldwide. Connecting manufacturers across{" "}
+            <span className="text-foreground font-medium">45+ countries</span> with
+            consistent quality and competitive pricing.
+          </p>
+        </FadeIn>
 
-          <FadeIn delay={3.2}>
-            <div className="flex gap-8 mt-12 pt-8 border-t border-dark/5">
-              {[
-                { value: "45+", label: "Countries" },
-                { value: "200+", label: "Partners" },
-                { value: "50K+", label: "Tons/Year" },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <div className="text-2xl font-bold text-dark">{stat.value}</div>
-                  <div className="text-xs text-text/50 mt-1">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </FadeIn>
-        </div>
+        <FadeIn delay={0.6}>
+          <div className="flex flex-wrap gap-3 md:gap-4 mb-10 md:mb-14">
+            <Button size="lg" asChild>
+              <Link href="/yarn">
+                Explore Yarn
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+            <Button variant="outline" size="lg" asChild>
+              <Link href="/contact">Contact Us</Link>
+            </Button>
+          </div>
+        </FadeIn>
 
-        <FadeIn delay={2.6} direction="left" className="relative h-[400px] lg:h-[600px]">
-          <div className="absolute inset-0 rounded-[28px] bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent" />
-          <YarnSpoolScene className="w-full h-full" />
+        {/* Stats row */}
+        <FadeIn delay={0.7}>
+          <div className="flex flex-wrap gap-6 md:gap-12 pt-6 md:pt-8 border-t border-white/10">
+            {[
+              { value: "45+", label: "Export Countries" },
+              { value: "200+", label: "Mill Partners" },
+              { value: "50K+", label: "Tons / Year" },
+              { value: "17+", label: "Years" },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <div className="text-2xl md:text-3xl font-bold text-foreground">{stat.value}</div>
+                <div className="text-xs text-muted mt-1 uppercase tracking-wider">{stat.label}</div>
+              </div>
+            ))}
+          </div>
         </FadeIn>
       </div>
+
+      {/* Scroll indicator */}
+      <FadeIn delay={1} className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden md:block">
+        <div className="w-5 h-8 rounded-full border border-white/20 flex items-start justify-center p-1.5">
+          <div className="w-1 h-2 rounded-full bg-primary animate-bounce" />
+        </div>
+      </FadeIn>
     </section>
   );
 }

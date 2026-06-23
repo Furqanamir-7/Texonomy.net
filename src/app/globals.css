@@ -4,21 +4,19 @@
   --color-primary: #F36A3D;
   --color-secondary: #FF8C5A;
   --color-accent: #FFB088;
-  --color-background: #F8F6F4;
-  --color-dark: #151515;
-  --color-text: #444444;
-  --color-card: #ffffff;
+  --color-background: #080808;
+  --color-foreground: #F2F0ED;
+  --color-muted: #8A8680;
+  --color-card: #121212;
+  --color-card-elevated: #1A1A1A;
+  --color-dark: #080808;
+  --color-text: #A8A4A0;
+  --color-border: rgba(255, 255, 255, 0.08);
   --font-sans: "Satoshi", system-ui, sans-serif;
   --radius-card: 28px;
-  --shadow-soft: 0 4px 24px -4px rgba(21, 21, 21, 0.08);
-  --shadow-card: 0 8px 40px -8px rgba(243, 106, 61, 0.12);
-  --shadow-glass: 0 8px 32px rgba(21, 21, 21, 0.06);
-}
-
-@font-face {
-  font-family: "Satoshi";
-  src: url("https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap");
-  font-display: swap;
+  --shadow-soft: 0 4px 24px -4px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 8px 40px -8px rgba(243, 106, 61, 0.15);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -27,6 +25,7 @@
 
 html {
   scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
 }
 
 html.lenis,
@@ -54,8 +53,8 @@ body {
 }
 
 ::selection {
-  background: rgba(243, 106, 61, 0.2);
-  color: var(--color-dark);
+  background: rgba(243, 106, 61, 0.35);
+  color: var(--color-foreground);
 }
 
 .gradient-text {
@@ -69,18 +68,27 @@ body {
   background: linear-gradient(135deg, #F36A3D 0%, #FF8C5A 60%, #FFB088 100%);
 }
 
-.glass {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+.gradient-hero {
+  background: linear-gradient(
+    180deg,
+    rgba(8, 8, 8, 0) 0%,
+    rgba(8, 8, 8, 0.6) 50%,
+    rgba(8, 8, 8, 0.95) 100%
+  );
 }
 
-.glass-dark {
-  background: rgba(21, 21, 21, 0.75);
+.glass {
+  background: rgba(18, 18, 18, 0.75);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-dark {
+  background: rgba(8, 8, 8, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .card-shadow {
@@ -92,10 +100,16 @@ body {
 }
 
 .section-padding {
-  padding: 6rem 1.5rem;
+  padding: 4rem 1rem;
 }
 
 @media (min-width: 768px) {
+  .section-padding {
+    padding: 6rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
   .section-padding {
     padding: 8rem 2rem;
   }
@@ -105,35 +119,34 @@ body {
   max-width: 1280px;
   margin: 0 auto;
   width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-/* Custom scrollbar */
+@media (min-width: 768px) {
+  .container-custom {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F8F6F4;
+  background: #080808;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #FFB088;
+  background: #F36A3D;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #F36A3D;
+  background: #FF8C5A;
 }
 
-/* Page transition overlay */
-.page-transition-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-}
-
-/* Marquee */
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -143,21 +156,29 @@ body {
   animation: marquee 30s linear infinite;
 }
 
-/* Blob float */
-@keyframes blob-float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -30px) scale(1.05); }
-  66% { transform: translate(-20px, 20px) scale(0.95); }
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
 }
 
-.animate-blob {
-  animation: blob-float 8s ease-in-out infinite;
+.globe-pin-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #FF8C5A;
+  white-space: nowrap;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(8, 8, 8, 0.85);
+  border: 1px solid rgba(243, 106, 61, 0.4);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: 0.02em;
 }
 
-.animate-blob-delayed {
-  animation: blob-float 8s ease-in-out 2s infinite;
-}
-
-.animate-blob-slow {
-  animation: blob-float 12s ease-in-out 4s infinite;
+@media (min-width: 768px) {
+  .globe-pin-label {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
 }
