@@ -1,17 +1,46 @@
-export const COLORS = {
-  primary: "#F36A3D",
-  secondary: "#FF8C5A",
-  accent: "#FFB088",
-  background: "#F8F6F4",
-  dark: "#151515",
-  text: "#444444",
+export const SITE = {
+  name: "Texonomy",
+  url: "https://www.texonomy.net",
+  tagline: "Two Arms. One Intelligence.",
+  motto: "The Science of Textile Business",
+  description:
+    "Texonomy combines B2B textile trading with strategic industry intelligence. Two divisions. One company.",
+  email: "hello@texonomy.com",
+  phone: "+91 98765 43210",
+  address: "Textile Hub, Ring Road, Surat, Gujarat 395002, India",
 } as const;
 
-export const COMPANY = {
-  name: "Atlas Textile Trading",
-  tagline: "Global Textile Trading. Premium Yarn Supply Worldwide.",
-  email: "trade@atlastextile.com",
-  phone: "+1 (555) 234-8900",
-  address: "1200 Commerce Tower, Suite 450, New York, NY 10001",
-  founded: 2008,
-} as const;
+export const GATEWAY_STATS = [
+  { value: 68, suffix: "+", label: "Countries" },
+  { value: 24, suffix: "+", label: "Years" },
+  { value: 12, suffix: "", label: "Service Lines" },
+  { value: 100, suffix: "%", label: "Quality Rate" },
+] as const;
+
+export const THINKS_NAV = [
+  { label: "Home", path: "/thinks" },
+  { label: "Training", path: "/thinks/training" },
+  { label: "Consulting", path: "/thinks/consulting" },
+  { label: "Intelligence", path: "/thinks/intelligence" },
+  { label: "Insights", path: "/thinks/insights" },
+  { label: "Case Studies", path: "/thinks/case-studies" },
+  { label: "Contact", path: "/thinks/contact" },
+] as const;
+
+export const TRADES_NAV = [
+  { label: "Home", path: "/trades" },
+  { label: "Yarn", path: "/trades/yarn" },
+  { label: "Fabrics", path: "/trades/fabrics" },
+  { label: "Export Markets", path: "/trades/export-markets" },
+  { label: "Contact", path: "/trades/contact" },
+] as const;
+
+export const TRADES_PRODUCTS = [
+  { label: "Yarn", path: "/trades/yarn", desc: "Cotton, polyester, blended & melange" },
+  { label: "Fabrics", path: "/trades/fabrics", desc: "Knit, woven, denim & greige" },
+  { label: "Home Textile", path: "/trades/home-textile", desc: "Bedsheets, towels & curtains" },
+  { label: "Garments", path: "/trades/garments", desc: "T-shirts, polo & sportswear" },
+] as const;
+
+export const ACCENT = "#00B4D8";
+export const BRONZE = "#6B7B8C";

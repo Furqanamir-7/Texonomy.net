@@ -1,53 +1,90 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
-  {
-    variants: {
-      variant: {
-        default:
-          "gradient-bg text-white shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02] active:scale-[0.98]",
-        outline:
-          "border border-white/15 bg-card/80 text-foreground hover:bg-card-elevated hover:border-primary/40",
-        ghost: "text-muted hover:bg-primary/10 hover:text-primary",
-        dark: "bg-card-elevated text-foreground hover:bg-card border border-white/10 hover:scale-[1.02] active:scale-[0.98]",
-        glass: "glass text-foreground hover:bg-card-elevated border border-white/10",
-      },
-      size: {
-        default: "h-12 px-7 py-3",
-        sm: "h-10 px-5 text-xs",
-        lg: "h-14 px-9 text-base",
-        icon: "h-10 w-10",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-);
+type ButtonVariant = "primary" | "secondary" | "ghost" | "outline";
+type ButtonSize = "sm" | "md" | "lg";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
+interface ButtonProps {
+  children: React.ReactNode;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  href?: string;
+  to?: string;
+  className?: string;
+  onClick?: () => void;
+  type?: "button" | "submit";
+  disabled?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
+const variants: Record<ButtonVariant, string> = {
+  primary:
+    "bg-accent text-bg-primary font-semibold hover:bg-accent-hover shadow-lg shadow-accent/20 hover:shadow-accent/40",
+  secondary:
+    "bg-bg-elevated text-text-primary border border-border hover:border-accent/50 hover:bg-bg-secondary",
+  ghost: "text-text-secondary hover:text-accent hover:bg-accent/5",
+  outline:
+    "border border-accent/60 text-accent hover:bg-accent/10 hover:border-accent",
+};
+
+const sizes: Record<ButtonSize, string> = {
+  sm: "px-4 py-2 text-sm",
+  md: "px-6 py-3 text-base",
+  lg: "px-8 py-4 text-lg",
+};
+
+export function Button({
+  children,
+  variant = "primary",
+  size = "md",
+  href,
+  to,
+  className,
+  onClick,
+  type = "button",
+  disabled,
+}: ButtonProps) {
+  const classes = cn(
+    "inline-flex items-center justify-center gap-2 rounded-lg transition-all duration-300 cursor-pointer",
+    variants[variant],
+    sizes[size],
+    disabled && "opacity-50 cursor-not-allowed",
+    className,
+  );
+
+  const motionProps = {
+    whileHover: disabled ? {} : { scale: 1.03 },
+    whileTap: disabled ? {} : { scale: 0.97 },
+    transition: { type: "spring" as const, stiffness: 400, damping: 17 },
+  };
+
+  if (to) {
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
+      <motion.div {...motionProps} className="inline-block">
+        <Link to={to} className={classes}>
+          {children}
+        </Link>
+      </motion.div>
     );
   }
-);
-Button.displayName = "Button";
 
-export { Button, buttonVariants };
+  if (href) {
+    return (
+      <motion.a {...motionProps} href={href} className={classes}>
+        {children}
+      </motion.a>
+    );
+  }
+
+  return (
+    <motion.button
+      {...motionProps}
+      type={type}
+      className={classes}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {children}
+    </motion.button>
+  );
+}
