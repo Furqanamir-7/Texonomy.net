@@ -18,6 +18,7 @@ import TradesGarments from "@/pages/trades/Garments";
 import TradesExportMarkets from "@/pages/trades/ExportMarkets";
 import TradesRfq from "@/pages/trades/Rfq";
 import TradesContact from "@/pages/trades/Contact";
+import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
 
 export default function App() {
   return (
@@ -54,6 +55,7 @@ export default function App() {
         <Route path="insights" element={<Navigate to="/thinks/insights" replace />} />
         <Route path="contact" element={<Navigate to="/thinks/contact" replace />} />
       </Routes>
+      <WhatsAppButton />
     </BrowserRouter>
   );
 }

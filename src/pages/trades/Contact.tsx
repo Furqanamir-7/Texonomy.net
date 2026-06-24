@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Phone, MapPin, Send } from "lucide-react";
 import { SITE } from "@/lib/constants";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { ContactEmails } from "@/components/shared/ContactEmails";
 
 export default function TradesContact() {
   const [submitted, setSubmitted] = useState(false);
@@ -15,8 +16,13 @@ export default function TradesContact() {
         <h1 className="font-display text-3xl font-bold mb-6">Get in Touch</h1>
         <ul className="space-y-4 text-text-secondary text-sm">
           <li className="flex gap-2"><MapPin size={16} className="text-accent shrink-0" />{SITE.address}</li>
-          <li className="flex gap-2"><Mail size={16} className="text-accent shrink-0" />{SITE.email}</li>
-          <li className="flex gap-2"><Phone size={16} className="text-accent shrink-0" />{SITE.phone}</li>
+          <li><ContactEmails iconSize={16} /></li>
+          <li className="flex gap-2">
+            <Phone size={16} className="text-accent shrink-0" />
+            <a href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+              WhatsApp: {SITE.whatsapp}
+            </a>
+          </li>
         </ul>
       </div>
       <div className="lg:col-span-3 p-10">

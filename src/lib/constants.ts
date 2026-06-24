@@ -5,8 +5,10 @@ export const SITE = {
   motto: "The Science of Textile Business",
   description:
     "Texonomy combines B2B textile trading with strategic industry intelligence. Two divisions. One company.",
-  email: "hello@texonomy.com",
-  phone: "+91 98765 43210",
+  emails: ["ghafoor@texonomy.net", "Eisa@texonomy.net"] as const,
+  phone: "+92-301-8415155",
+  whatsapp: "+92-301-8415155",
+  whatsappUrl: "https://wa.me/923018415155",
   address: "Textile Hub, Ring Road, Surat, Gujarat 395002, India",
 } as const;
 

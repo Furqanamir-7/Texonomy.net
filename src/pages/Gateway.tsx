@@ -12,12 +12,12 @@ import {
   Shield,
   Sparkles,
   ChevronDown,
-  Mail,
   Phone,
 } from "lucide-react";
 import { Canvas } from "@react-three/fiber";
 import { SITE, GATEWAY_STATS } from "@/lib/constants";
 import { Logo } from "@/components/shared/Logo";
+import { ContactEmails } from "@/components/shared/ContactEmails";
 import { AnimatedCounter } from "@/components/shared/AnimatedCounter";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -412,12 +412,10 @@ export default function Gateway() {
             </div>
             <div>
               <h4 className="font-display font-semibold mb-4">Contact</h4>
-              <div className="space-y-2 text-sm text-text-secondary">
-                <a href={`mailto:${SITE.email}`} className="flex items-center gap-2 hover:text-accent transition-colors">
-                  <Mail size={14} className="text-accent" />{SITE.email}
-                </a>
-                <a href={`tel:${SITE.phone}`} className="flex items-center gap-2 hover:text-accent transition-colors">
-                  <Phone size={14} className="text-accent" />{SITE.phone}
+              <div className="space-y-3 text-sm text-text-secondary">
+                <ContactEmails />
+                <a href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-accent transition-colors">
+                  <Phone size={14} className="text-accent" />{SITE.whatsapp}
                 </a>
               </div>
             </div>
