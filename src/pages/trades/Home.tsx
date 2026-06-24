@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Quote, Factory, Globe, Package, Shirt } from "lucide-react";
+import { ArrowRight, Factory, Globe, Package, Shirt } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Section, SectionHeader } from "@/components/ui/Section";
@@ -9,7 +9,6 @@ import { HeroImage } from "@/components/shared/HeroImage";
 import {
   yarnProducts,
   tradesStats,
-  tradesTestimonials,
   industries,
 } from "@/data/trades/products";
 import { Link } from "react-router-dom";
@@ -101,22 +100,6 @@ export default function TradesHome() {
               <div className="p-4 rounded-xl border border-border text-center text-sm font-medium hover:border-accent/30 hover:bg-accent/5 transition-colors">
                 {ind}
               </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </Section>
-
-      <Section>
-        <SectionHeader eyebrow="Client Voices" title="Trusted by mills worldwide" />
-        <div className="grid md:grid-cols-3 gap-6">
-          {tradesTestimonials.map((t, i) => (
-            <ScrollReveal key={t.author} delay={i * 0.1}>
-              <Card>
-                <Quote size={24} className="text-accent/40 mb-3" />
-                <p className="text-text-secondary text-sm italic mb-4">&ldquo;{t.quote}&rdquo;</p>
-                <div className="font-semibold text-sm">{t.author}</div>
-                <div className="text-text-muted text-xs">{t.company}</div>
-              </Card>
             </ScrollReveal>
           ))}
         </div>

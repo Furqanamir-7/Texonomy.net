@@ -38,21 +38,6 @@ const CAPABILITIES = [
   { icon: Shield, title: "Quality Assurance", desc: "Lab-tested yarn, documented specs, and consistent shipment quality." },
 ];
 
-const CLIENTS = ["Arvind Mills", "Welspun", "Vardhman", "Raymond", "Trident", "Alok Industries"];
-
-const TESTIMONIALS = [
-  {
-    quote: "Texonomy bridges the gap between sourcing and strategy — one partner for yarn supply and market insight.",
-    author: "Rajesh Mehta",
-    role: "MD, Surat Yarn Mills",
-  },
-  {
-    quote: "Their dual offering means our sales team trains with the same people who understand our supply chain.",
-    author: "Ahmed Al-Rashidi",
-    role: "Al-Rashidi Textiles, Turkey",
-  },
-];
-
 function HeroScene() {
   const { isMobile, prefersReducedMotion } = useDevice();
   if (prefersReducedMotion) return null;
@@ -336,41 +321,6 @@ export default function Gateway() {
               ))}
             </div>
           </ScrollReveal>
-        </div>
-      </section>
-
-      {/* Clients */}
-      <section className="py-16 px-4">
-        <ScrollReveal className="text-center">
-          <p className="text-text-muted text-xs uppercase tracking-widest mb-8">Trusted by leading textile enterprises</p>
-          <div className="flex flex-wrap justify-center gap-x-10 gap-y-4">
-            {CLIENTS.map((c) => (
-              <span key={c} className="font-display font-semibold text-lg text-text-secondary/50 hover:text-accent/70 transition-colors">
-                {c}
-              </span>
-            ))}
-          </div>
-        </ScrollReveal>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20 px-4 bg-bg-secondary border-y border-border">
-        <div className="mx-auto max-w-5xl">
-          <ScrollReveal className="text-center mb-12">
-            <SectionLabel text="Client Voices" className="justify-center" />
-            <h2 className="font-display text-3xl font-bold">What industry leaders say</h2>
-          </ScrollReveal>
-          <div className="grid md:grid-cols-2 gap-6">
-            {TESTIMONIALS.map((t, i) => (
-              <ScrollReveal key={t.author} delay={i * 0.1}>
-                <Card glow className="h-full">
-                  <p className="text-text-primary leading-relaxed italic mb-6">&ldquo;{t.quote}&rdquo;</p>
-                  <div className="font-semibold">{t.author}</div>
-                  <div className="text-text-muted text-sm">{t.role}</div>
-                </Card>
-              </ScrollReveal>
-            ))}
-          </div>
         </div>
       </section>
 
