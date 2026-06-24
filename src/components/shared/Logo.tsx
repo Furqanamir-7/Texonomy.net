@@ -12,16 +12,22 @@ interface LogoProps {
   className?: string;
 }
 
+const logoSrc: Record<LogoVariant, string> = {
+  nav: "/logo-web.png",
+  hero: "/logo-header.png",
+  footer: "/logo-web.png",
+};
+
 const baseImgSizes: Record<LogoVariant, string> = {
-  nav: "h-9 w-auto object-contain object-left scale-[3] origin-left",
+  nav: "h-10 w-10 object-contain object-left scale-[3] origin-left",
   hero: "h-16 md:h-20 w-auto max-w-[320px] object-contain scale-[3] origin-left",
-  footer: "h-12 w-auto object-contain scale-[3] origin-center",
+  footer: "h-10 w-10 object-contain scale-[3] origin-center",
 };
 
 const wrapperSizes: Record<LogoVariant, string> = {
-  nav: "h-14 overflow-hidden flex items-center max-w-[min(78vw,360px)]",
+  nav: "h-14 w-28 overflow-hidden flex items-center shrink-0",
   hero: "overflow-hidden flex items-center max-w-sm",
-  footer: "h-14 overflow-hidden flex items-center justify-center max-w-sm",
+  footer: "h-14 w-28 overflow-hidden flex items-center justify-center shrink-0",
 };
 
 export function Logo({ variant = "nav", to = "/", division, className }: LogoProps) {
@@ -29,7 +35,7 @@ export function Logo({ variant = "nav", to = "/", division, className }: LogoPro
     <div className="flex items-center gap-2.5 h-full">
       <div className={cn(wrapperSizes[variant])}>
         <img
-          src="/logo-header.png"
+          src={logoSrc[variant]}
           alt={SITE.name}
           className={cn(baseImgSizes[variant], className)}
         />
