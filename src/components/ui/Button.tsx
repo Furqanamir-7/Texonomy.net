@@ -33,6 +33,15 @@ const sizes: Record<ButtonSize, string> = {
   lg: "px-8 py-4 text-lg",
 };
 
+const motionProps = (disabled?: boolean) => ({
+  whileHover: disabled ? undefined : { scale: 1.03 },
+  whileTap: disabled ? undefined : { scale: 0.97 },
+  transition: { type: "spring" as const, stiffness: 400, damping: 17 },
+});
+
+const MotionLink = motion.create(Link);
+const MotionAnchor = motion.a;
+
 export function Button({
   children,
   variant = "primary",
@@ -45,44 +54,42 @@ export function Button({
   disabled,
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 rounded-lg transition-all duration-300 cursor-pointer",
+    "inline-flex items-center justify-center gap-2 rounded-lg transition-colors duration-300 cursor-pointer relative z-10",
     variants[variant],
     sizes[size],
-    disabled && "opacity-50 cursor-not-allowed",
+    disabled && "opacity-50 cursor-not-allowed pointer-events-none",
     className,
   );
 
-  const motionProps = {
-    whileHover: disabled ? {} : { scale: 1.03 },
-    whileTap: disabled ? {} : { scale: 0.97 },
-    transition: { type: "spring" as const, stiffness: 400, damping: 17 },
-  };
-
-  if (to) {
+  if (to && !disabled) {
     return (
-      <motion.div {...motionProps} className="inline-block">
-        <Link to={to} className={classes}>
-          {children}
-        </Link>
-      </motion.div>
+      <MotionLink to={to} className={classes} {...motionProps(disabled)}>
+        {children}
+      </MotionLink>
     );
   }
 
-  if (href) {
+  if (href && !disabled) {
+    const external = href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:");
     return (
-      <motion.a {...motionProps} href={href} className={classes}>
+      <MotionAnchor
+        href={href}
+        className={classes}
+        {...motionProps(disabled)}
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      >
         {children}
-      </motion.a>
+      </MotionAnchor>
     );
   }
 
   return (
     <motion.button
-      {...motionProps}
       type={type}
       className={classes}
       onClick={onClick}
       disabled={disabled}
+      {...motionProps(disabled)}
     >
       {children}
     </motion.button>

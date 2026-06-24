@@ -21,8 +21,11 @@ const icons = { training: BookOpen, consulting: Brain, intelligence: LineChart, 
 export default function ThinksHome() {
   return (
     <>
-      <HeroBackdrop src="/images/hero-thinks.jpg" alt="Strategic business planning and market analysis">
-        <Scene3D particleCount={120} className="opacity-40" />
+      <HeroBackdrop
+        src="/images/hero-thinks.jpg"
+        alt="Strategic business planning and market analysis"
+        effect={<Scene3D particleCount={120} className="opacity-40" />}
+      >
         <div className="mx-auto max-w-7xl px-4 py-20 text-center">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}>
             <SectionLabel text="Strategic Intelligence for Textile Professionals" className="justify-center" />

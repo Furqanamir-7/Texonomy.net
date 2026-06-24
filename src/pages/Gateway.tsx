@@ -42,18 +42,21 @@ function HeroScene() {
   const { isMobile, prefersReducedMotion } = useDevice();
   if (prefersReducedMotion) return null;
   return (
-    <Suspense fallback={null}>
-      <Canvas
-        camera={{ position: [0, 0, 8], fov: 50 }}
-        dpr={isMobile ? 1 : 1.5}
-        gl={{ alpha: true, antialias: !isMobile }}
-        className="!absolute inset-0"
-      >
+    <div className="absolute inset-0 pointer-events-none" aria-hidden>
+      <Suspense fallback={null}>
+        <Canvas
+          camera={{ position: [0, 0, 8], fov: 50 }}
+          dpr={isMobile ? 1 : 1.5}
+          gl={{ alpha: true, antialias: !isMobile }}
+          className="!absolute inset-0"
+          style={{ pointerEvents: "none" }}
+        >
         <ambientLight intensity={0.2} />
         <pointLight position={[10, 10, 10]} intensity={0.4} color="#00b4d8" />
         <ThreadParticles3D count={isMobile ? 60 : 140} />
-      </Canvas>
-    </Suspense>
+        </Canvas>
+      </Suspense>
+    </div>
   );
 }
 
@@ -87,14 +90,14 @@ export default function Gateway() {
         <img
           src="/images/hero-gateway.jpg"
           alt="Textile fibers and woven fabric"
-          className="absolute inset-0 w-full h-full object-cover opacity-20"
+          className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
           loading="eager"
         />
         <HeroScene />
-        <div className="absolute inset-0 woven-pattern opacity-30" />
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-primary/40 via-bg-primary/85 to-bg-primary" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
+        <div className="absolute inset-0 woven-pattern opacity-30 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-bg-primary/40 via-bg-primary/85 to-bg-primary pointer-events-none" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 text-center max-w-4xl mx-auto mb-14">
           <motion.div
