@@ -63,9 +63,9 @@ export const yarnProducts: YarnProduct[] = [
 
 export const tradesStats = [
   { value: "24+", label: "Years" },
-  { value: "68", label: "Countries" },
   { value: "15+", label: "Product Lines" },
   { value: "100%", label: "On-time Rate" },
+  { value: "24h", label: "Quote Response" },
 ] as const;
 
 export const tradesTestimonials = [
@@ -89,11 +89,6 @@ export const tradesTestimonials = [
     company: "Bauer Textilwerk",
     country: "Germany",
   },
-] as const;
-
-export const exportCountries = [
-  "USA", "UK", "Germany", "France", "Turkey", "Bangladesh",
-  "China", "UAE", "Italy", "Canada", "Australia", "Pakistan",
 ] as const;
 
 export const industries = [

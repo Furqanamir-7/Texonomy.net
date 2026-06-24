@@ -6,12 +6,10 @@ import { Section, SectionHeader } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { HeroImage } from "@/components/shared/HeroImage";
-import { MarqueeStrip } from "@/components/shared/MarqueeStrip";
 import {
   yarnProducts,
   tradesStats,
   tradesTestimonials,
-  exportCountries,
   industries,
 } from "@/data/trades/products";
 import { Link } from "react-router-dom";
@@ -37,7 +35,7 @@ export default function TradesHome() {
           </motion.div>
           <HeroImage
             src="/images/hero-trades.jpg"
-            alt="Premium cotton yarn for global mills"
+            alt="Industrial yarn spools in a textile manufacturing facility"
             className="h-80 lg:h-96 shadow-2xl shadow-accent/10"
             overlay="gradient"
           />
@@ -108,14 +106,6 @@ export default function TradesHome() {
         </div>
       </Section>
 
-      <Section className="bg-bg-primary border-y border-border">
-        <SectionHeader eyebrow="Global Reach" title="Trading across continents." align="center" />
-        <MarqueeStrip items={exportCountries} className="py-4" />
-        <div className="text-center mt-8">
-          <Button to="/trades/export-markets" variant="outline">View Export Markets</Button>
-        </div>
-      </Section>
-
       <Section>
         <SectionHeader eyebrow="Client Voices" title="Trusted by mills worldwide" />
         <div className="grid md:grid-cols-3 gap-6">
@@ -125,7 +115,7 @@ export default function TradesHome() {
                 <Quote size={24} className="text-accent/40 mb-3" />
                 <p className="text-text-secondary text-sm italic mb-4">&ldquo;{t.quote}&rdquo;</p>
                 <div className="font-semibold text-sm">{t.author}</div>
-                <div className="text-text-muted text-xs">{t.company} · {t.country}</div>
+                <div className="text-text-muted text-xs">{t.company}</div>
               </Card>
             </ScrollReveal>
           ))}

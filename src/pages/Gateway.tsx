@@ -28,7 +28,7 @@ import { useDevice } from "@/hooks/useDevice";
 
 const HEADLINE_WORDS = ["Two", "Arms.", "One", "Intelligence."];
 
-const TRADES_FEATURES = ["Premium yarn & fabrics", "68+ export markets", "24h quote response", "End-to-end logistics"];
+const TRADES_FEATURES = ["Premium yarn & fabrics", "Global export supply", "24h quote response", "End-to-end logistics"];
 const THINKS_FEATURES = ["Market intelligence", "Sales & ops training", "Production consulting", "Custom research"];
 
 const CAPABILITIES = [
@@ -187,7 +187,7 @@ export default function Gateway() {
                 </div>
               </div>
               <p className="text-text-secondary text-sm leading-relaxed mb-6">
-                B2B textile trading — premium yarn, fabrics, home textile, and garments for mills, manufacturers, and exporters in 68+ countries.
+                B2B textile trading — premium yarn, fabrics, home textile, and garments for mills, manufacturers, and exporters worldwide.
               </p>
               <ul className="grid grid-cols-2 gap-2 mb-8">
                 {TRADES_FEATURES.map((f) => (
@@ -324,7 +324,7 @@ export default function Gateway() {
               {[
                 { label: "Trades", value: "B2B Supply", icon: Package },
                 { label: "Thinks", value: "Advisory", icon: Brain },
-                { label: "Reach", value: "68+ Countries", icon: Globe },
+                { label: "Reach", value: "Global Supply", icon: Globe },
                 { label: "Experience", value: "24+ Years", icon: Shield },
               ].map((item) => (
                 <div

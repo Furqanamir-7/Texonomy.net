@@ -11,10 +11,10 @@ export const SITE = {
 } as const;
 
 export const GATEWAY_STATS = [
-  { value: 68, suffix: "+", label: "Countries" },
   { value: 24, suffix: "+", label: "Years" },
   { value: 12, suffix: "", label: "Service Lines" },
   { value: 100, suffix: "%", label: "Quality Rate" },
+  { value: 500, suffix: "+", label: "Clients Served" },
 ] as const;
 
 export const THINKS_NAV = [

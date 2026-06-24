@@ -12,20 +12,28 @@ interface LogoProps {
   className?: string;
 }
 
-const imgSizes: Record<LogoVariant, string> = {
-  nav: "h-9 md:h-10 w-auto max-w-[min(52vw,220px)] md:max-w-[280px] object-contain object-left",
-  hero: "h-16 md:h-20 w-auto max-w-[320px] object-contain",
-  footer: "h-12 md:h-14 w-auto max-w-[260px] object-contain",
+const baseImgSizes: Record<LogoVariant, string> = {
+  nav: "h-9 w-auto object-contain object-left scale-[3] origin-left",
+  hero: "h-16 md:h-20 w-auto max-w-[320px] object-contain scale-[3] origin-left",
+  footer: "h-12 w-auto object-contain scale-[3] origin-center",
+};
+
+const wrapperSizes: Record<LogoVariant, string> = {
+  nav: "h-14 overflow-hidden flex items-center max-w-[min(78vw,360px)]",
+  hero: "overflow-hidden flex items-center max-w-sm",
+  footer: "h-14 overflow-hidden flex items-center justify-center max-w-sm",
 };
 
 export function Logo({ variant = "nav", to = "/", division, className }: LogoProps) {
   const content = (
-    <div className="flex items-center gap-2.5">
-      <img
-        src="/logo-header.png"
-        alt={SITE.name}
-        className={cn(imgSizes[variant], className)}
-      />
+    <div className="flex items-center gap-2.5 h-full">
+      <div className={cn(wrapperSizes[variant])}>
+        <img
+          src="/logo-header.png"
+          alt={SITE.name}
+          className={cn(baseImgSizes[variant], className)}
+        />
+      </div>
       {division && variant === "nav" && (
         <span className="hidden sm:inline-flex px-2 py-0.5 rounded-md text-[10px] font-bold tracking-widest uppercase bg-accent/10 text-accent border border-accent/20">
           {division}
