@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, MapPin, Send } from "lucide-react";
-import { SITE } from "@/lib/constants";
+import { Send } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { ContactEmails } from "@/components/shared/ContactEmails";
+import { ContactDetails } from "@/components/shared/ContactDetails";
 
 export default function TradesContact() {
   const [submitted, setSubmitted] = useState(false);
@@ -14,16 +13,7 @@ export default function TradesContact() {
     <div className="grid lg:grid-cols-5 min-h-[80vh]">
       <div className="lg:col-span-2 bg-bg-secondary p-10 flex flex-col justify-center">
         <h1 className="font-display text-3xl font-bold mb-6">Get in Touch</h1>
-        <ul className="space-y-4 text-text-secondary text-sm">
-          <li className="flex gap-2"><MapPin size={16} className="text-accent shrink-0" />{SITE.address}</li>
-          <li><ContactEmails iconSize={16} /></li>
-          <li className="flex gap-2">
-            <Phone size={16} className="text-accent shrink-0" />
-            <a href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-              WhatsApp: {SITE.whatsapp}
-            </a>
-          </li>
-        </ul>
+        <ContactDetails iconSize={16} showAddress className="space-y-4 text-text-secondary text-sm" />
       </div>
       <div className="lg:col-span-3 p-10">
         <Section containerClass="max-w-lg">

@@ -9,7 +9,7 @@ interface ContactEmailsProps {
 
 export function ContactEmails({ className, iconSize = 14 }: ContactEmailsProps) {
   return (
-    <div className={cn("space-y-2", className)}>
+    <div className={cn("space-y-2 flex flex-col", className)}>
       {SITE.emails.map((email) => (
         <a
           key={email}

@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import { Phone } from "lucide-react";
 import { SITE } from "@/lib/constants";
 import { Logo } from "@/components/shared/Logo";
-import { ContactEmails } from "@/components/shared/ContactEmails";
+import { ContactDetails } from "@/components/shared/ContactDetails";
 import { cn } from "@/lib/utils";
 
 type Division = "gateway" | "thinks" | "trades";
@@ -31,7 +30,7 @@ export function SiteFooter({ division = "gateway", className }: SiteFooterProps)
             </div>
             <div>
               <h4 className="font-display font-semibold mb-4">Contact</h4>
-              <ContactBlock />
+              <ContactBlock align="left" />
             </div>
           </div>
           <FooterBottom />
@@ -66,21 +65,8 @@ export function SiteFooter({ division = "gateway", className }: SiteFooterProps)
   );
 }
 
-function ContactBlock({ className }: { className?: string }) {
-  return (
-    <div className={cn("space-y-2", className)}>
-      <ContactEmails iconSize={14} />
-      <a
-        href={SITE.whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 hover:text-accent transition-colors text-sm"
-      >
-        <Phone size={14} className="text-accent shrink-0" />
-        WhatsApp: {SITE.whatsapp}
-      </a>
-    </div>
-  );
+function ContactBlock({ className, align = "center" }: { className?: string; align?: "left" | "center" }) {
+  return <ContactDetails className={className} iconSize={14} align={align} />;
 }
 
 function FooterBottom() {

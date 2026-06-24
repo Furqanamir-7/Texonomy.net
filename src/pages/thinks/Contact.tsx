@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, MapPin, Clock, Send, Calendar } from "lucide-react";
-import { SITE } from "@/lib/constants";
+import { Clock, Send, Calendar } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import { ContactEmails } from "@/components/shared/ContactEmails";
+import { ContactDetails } from "@/components/shared/ContactDetails";
 
 export default function ThinksContact() {
   const [submitted, setSubmitted] = useState(false);
@@ -58,15 +57,8 @@ export default function ThinksContact() {
             <Card hover={false}>
               <h3 className="font-semibold mb-4">Office</h3>
               <ul className="space-y-3 text-sm text-text-secondary">
-                <li className="flex gap-2"><MapPin size={16} className="text-accent shrink-0" />{SITE.address}</li>
-                <li><ContactEmails iconSize={16} /></li>
-                <li className="flex gap-2">
-                  <Phone size={16} className="text-accent shrink-0" />
-                  <a href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                    WhatsApp: {SITE.whatsapp}
-                  </a>
-                </li>
-                <li className="flex gap-2"><Clock size={16} className="text-accent shrink-0" />Mon – Sat, 9 AM – 6 PM IST</li>
+                <ContactDetails iconSize={16} showAddress align="left" />
+                <li className="flex gap-2"><Clock size={16} className="text-accent shrink-0" />Mon – Sat, 9 AM – 6 PM PKT</li>
               </ul>
             </Card>
             <Card hover={false} className="mt-4 bg-accent/5 border-accent/20">

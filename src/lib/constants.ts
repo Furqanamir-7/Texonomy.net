@@ -6,10 +6,10 @@ export const SITE = {
   description:
     "Texonomy combines B2B textile trading with strategic industry intelligence. Two divisions. One company.",
   emails: ["ghafoor@texonomy.net", "Eisa@texonomy.net"] as const,
-  phone: "+92-301-8415155",
-  whatsapp: "+92-301-8415155",
-  whatsappUrl: "https://wa.me/923018415155",
-  address: "Textile Hub, Ring Road, Surat, Gujarat 395002, India",
+  phone: "+93281739889",
+  whatsapp: "+93281739889",
+  whatsappUrl: "https://wa.me/93281739889",
+  address: "434 - B Canal View Society, Lahore, Pakistan",
 } as const;
 
 export const GATEWAY_STATS = [
