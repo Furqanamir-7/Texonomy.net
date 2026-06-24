@@ -19,20 +19,20 @@ const logoSrc: Record<LogoVariant, string> = {
 };
 
 const baseImgSizes: Record<LogoVariant, string> = {
-  nav: "h-10 w-10 object-contain object-left scale-[3] origin-left",
+  nav: "h-8 w-8 object-contain object-left scale-[2.25] origin-left",
   hero: "h-16 md:h-20 w-auto max-w-[320px] object-contain scale-[3] origin-left",
   footer: "h-10 w-10 object-contain scale-[3] origin-center",
 };
 
 const wrapperSizes: Record<LogoVariant, string> = {
-  nav: "h-14 w-28 overflow-hidden flex items-center shrink-0",
+  nav: "h-14 w-16 overflow-hidden flex items-center shrink-0",
   hero: "overflow-hidden flex items-center max-w-sm",
   footer: "h-14 w-28 overflow-hidden flex items-center justify-center shrink-0",
 };
 
 export function Logo({ variant = "nav", to = "/", division, className }: LogoProps) {
   const content = (
-    <div className="flex items-center gap-2.5 h-full">
+    <div className="flex items-center gap-2 h-full">
       <div className={cn(wrapperSizes[variant])}>
         <img
           src={logoSrc[variant]}
@@ -40,6 +40,11 @@ export function Logo({ variant = "nav", to = "/", division, className }: LogoPro
           className={cn(baseImgSizes[variant], className)}
         />
       </div>
+      {variant === "nav" && (
+        <span className="font-display font-bold text-base sm:text-lg tracking-[0.12em] text-text-primary whitespace-nowrap">
+          TE<span className="text-accent">X</span>ONOMY
+        </span>
+      )}
       {division && variant === "nav" && (
         <span className="hidden sm:inline-flex px-2 py-0.5 rounded-md text-[10px] font-bold tracking-widest uppercase bg-accent/10 text-accent border border-accent/20">
           {division}
