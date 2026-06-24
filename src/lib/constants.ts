@@ -6,9 +6,9 @@ export const SITE = {
   description:
     "Texonomy combines B2B textile trading with strategic industry intelligence. Two divisions. One company.",
   emails: ["ghafoor@texonomy.net", "Eisa@texonomy.net"] as const,
-  phone: "+92-381739889",
-  whatsapp: "+92-381739889",
-  whatsappUrl: "https://wa.me/92381739889",
+  phone: "+92 3281739889",
+  whatsapp: "+92 3281739889",
+  whatsappUrl: "https://wa.me/923281739889",
   address: "434 - B Canal View Society, Lahore, Pakistan",
 } as const;
 
