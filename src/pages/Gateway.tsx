@@ -12,12 +12,11 @@ import {
   Shield,
   Sparkles,
   ChevronDown,
-  Phone,
 } from "lucide-react";
 import { Canvas } from "@react-three/fiber";
 import { SITE, GATEWAY_STATS } from "@/lib/constants";
 import { Logo } from "@/components/shared/Logo";
-import { ContactEmails } from "@/components/shared/ContactEmails";
+import { SiteFooter } from "@/components/shared/SiteFooter";
 import { AnimatedCounter } from "@/components/shared/AnimatedCounter";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -395,37 +394,7 @@ export default function Gateway() {
         </ScrollReveal>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-4 border-t border-border bg-bg-primary">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid md:grid-cols-3 gap-10 mb-10">
-            <div>
-              <Logo variant="footer" to="/" className="mb-4" />
-              <p className="text-text-muted text-sm leading-relaxed">{SITE.description}</p>
-            </div>
-            <div>
-              <h4 className="font-display font-semibold mb-4">Divisions</h4>
-              <div className="flex flex-col gap-2 text-sm text-text-secondary">
-                <Link to="/trades" className="hover:text-accent transition-colors">Texonomy Trades</Link>
-                <Link to="/thinks" className="hover:text-accent transition-colors">Texonomy Thinks</Link>
-              </div>
-            </div>
-            <div>
-              <h4 className="font-display font-semibold mb-4">Contact</h4>
-              <div className="space-y-3 text-sm text-text-secondary">
-                <ContactEmails />
-                <a href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-accent transition-colors">
-                  <Phone size={14} className="text-accent" />{SITE.whatsapp}
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4 text-text-muted text-xs">
-            <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
-            <p>{SITE.motto}</p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter division="gateway" />
     </div>
   );
 }

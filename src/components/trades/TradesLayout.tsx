@@ -1,5 +1,5 @@
 import { TradesNav } from "./TradesNav";
-import { TradesFooter } from "./TradesFooter";
+import { SiteFooter } from "@/components/shared/SiteFooter";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 
 export function TradesLayout() {
@@ -7,7 +7,7 @@ export function TradesLayout() {
     <>
       <TradesNav />
       <PageWrapper />
-      <TradesFooter />
+      <SiteFooter division="trades" />
     </>
   );
 }

@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import { SITE } from "@/lib/constants";
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -9,15 +10,16 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 export function WhatsAppButton() {
-  return (
+  return createPortal(
     <a
       href={SITE.whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Chat on WhatsApp: ${SITE.whatsapp}`}
-      className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-accent/35 bg-bg-elevated/95 text-accent shadow-lg shadow-black/30 backdrop-blur-xl transition-all hover:scale-105 hover:border-accent hover:bg-accent/15 hover:shadow-accent/20"
+      className="fixed bottom-6 right-6 z-[9999] flex h-14 w-14 items-center justify-center rounded-full border border-accent/35 bg-bg-elevated/95 text-accent shadow-lg shadow-black/30 backdrop-blur-xl transition-all hover:scale-105 hover:border-accent hover:bg-accent/15 hover:shadow-accent/20"
     >
       <WhatsAppIcon className="h-7 w-7" />
-    </a>
+    </a>,
+    document.body,
   );
 }

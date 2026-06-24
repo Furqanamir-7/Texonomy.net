@@ -1,5 +1,5 @@
 import { ThinksNav } from "./ThinksNav";
-import { ThinksFooter } from "./ThinksFooter";
+import { SiteFooter } from "@/components/shared/SiteFooter";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 
 export function ThinksLayout() {
@@ -7,7 +7,7 @@ export function ThinksLayout() {
     <>
       <ThinksNav />
       <PageWrapper />
-      <ThinksFooter />
+      <SiteFooter division="thinks" />
     </>
   );
 }
