@@ -1,24 +1,25 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Factory, Globe, Package, Shirt } from "lucide-react";
+import { ArrowRight, Factory, Globe, Package } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { SectionLabel } from "@/components/shared/SectionLabel";
-import { HeroImage } from "@/components/shared/HeroImage";
-import {
-  yarnProducts,
-  tradesStats,
-  industries,
-} from "@/data/trades/products";
+import { GlobeHeroPanel } from "@/components/trades/GlobeHeroPanel";
+import { TRADES_CATEGORIES } from "@/data/trades/trades.config";
+import { yarnProducts, tradesStats } from "@/data/trades/products";
 import { Link } from "react-router-dom";
 
+const CATEGORY_ICONS = { yarns: Package, fabrics: Factory, "home-textiles": Package, garments: Package };
+
 export default function TradesHome() {
+  const activeCategories = TRADES_CATEGORIES.filter((c) => !c.placeholder);
+
   return (
     <>
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-bg-primary to-bg-primary" />
-        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           <motion.div initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }}>
             <SectionLabel text="Global Textile Trading" />
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
@@ -26,18 +27,16 @@ export default function TradesHome() {
             </h1>
             <p className="text-text-secondary text-lg mb-8 leading-relaxed">
               Supplying mills, manufacturers, and exporters with consistent-quality yarn across every major market.
+              Explore our global supplier and customer network on the map.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button to="/trades/yarn" size="lg">Explore Yarn <ArrowRight size={18} /></Button>
-              <Button to="/trades/contact" variant="outline" size="lg">Contact Us</Button>
+              <Button to="/trades/rfq" variant="outline" size="lg">Request a Quote</Button>
             </div>
           </motion.div>
-          <HeroImage
-            src="/images/hero-trades.jpg"
-            alt="Industrial yarn spools in a textile manufacturing facility"
-            className="h-80 lg:h-96 shadow-2xl shadow-accent/10"
-            overlay="gradient"
-          />
+          <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.15 }}>
+            <GlobeHeroPanel />
+          </motion.div>
         </div>
       </section>
 
@@ -51,6 +50,41 @@ export default function TradesHome() {
           ))}
         </div>
       </section>
+
+      <Section>
+        <SectionHeader
+          eyebrow="Trade Categories"
+          title="Yarn, fabric, and home textiles — sourced to spec."
+          description="Four trade categories. Click through to explore subcategories and request a quote."
+        />
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {TRADES_CATEGORIES.map((cat, i) => {
+            const Icon = CATEGORY_ICONS[cat.id as keyof typeof CATEGORY_ICONS] ?? Package;
+            return (
+              <ScrollReveal key={cat.id} delay={i * 0.08}>
+                <Link to={cat.placeholder ? "#" : cat.path}>
+                  <Card className={`h-full ${cat.placeholder ? "opacity-60" : ""}`}>
+                    <Icon size={28} className="text-accent mb-3" />
+                    <h3 className="font-display text-lg font-semibold mb-2">
+                      {cat.label}
+                      {cat.placeholder && (
+                        <span className="ml-2 text-xs text-text-muted font-normal">(Coming soon)</span>
+                      )}
+                    </h3>
+                    <p className="text-text-secondary text-sm mb-3">{cat.description}</p>
+                    {!cat.placeholder && cat.subcategories.length > 0 && (
+                      <p className="text-text-muted text-xs">
+                        {cat.subcategories.slice(0, 4).map((s) => s.label).join(" · ")}
+                        {cat.subcategories.length > 4 ? " · …" : ""}
+                      </p>
+                    )}
+                  </Card>
+                </Link>
+              </ScrollReveal>
+            );
+          })}
+        </div>
+      </Section>
 
       <Section className="bg-gradient-to-br from-accent/20 via-accent/10 to-bg-primary">
         <SectionHeader eyebrow="Flagship Product" title="Yarn for every mill. Count for every need." />
@@ -71,36 +105,18 @@ export default function TradesHome() {
         </div>
       </Section>
 
-      <Section>
-        <SectionHeader eyebrow="Products" title="Beyond yarn" />
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            { icon: Factory, title: "Fabrics", desc: "Knit, woven, denim, and greige.", path: "/trades/fabrics" },
-            { icon: Package, title: "Home Textile", desc: "Bedsheets, towels, curtains.", path: "/trades/home-textile" },
-            { icon: Shirt, title: "Garments", desc: "T-shirts, polo, sportswear.", path: "/trades/garments" },
-          ].map((item, i) => (
-            <ScrollReveal key={item.title} delay={i * 0.1}>
-              <Link to={item.path}>
-                <Card>
-                  <item.icon size={28} className="text-accent mb-3" />
-                  <h3 className="font-display text-lg font-semibold mb-2">{item.title}</h3>
-                  <p className="text-text-secondary text-sm">{item.desc}</p>
-                </Card>
-              </Link>
-            </ScrollReveal>
-          ))}
-        </div>
-      </Section>
-
       <Section className="bg-bg-secondary">
-        <SectionHeader eyebrow="Industries" title="Serving every segment" />
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {industries.map((ind, i) => (
-            <ScrollReveal key={ind} delay={i * 0.05}>
-              <div className="p-4 rounded-xl border border-border text-center text-sm font-medium hover:border-accent/30 hover:bg-accent/5 transition-colors">
-                {ind}
-              </div>
-            </ScrollReveal>
+        <SectionHeader eyebrow="Quick Links" title="Explore our trade network" />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {activeCategories.map((cat) => (
+            <Link
+              key={cat.id}
+              to={cat.path}
+              className="p-4 rounded-xl border border-border hover:border-accent/30 hover:bg-accent/5 transition-colors text-center"
+            >
+              <div className="font-medium text-sm">{cat.label}</div>
+              <div className="text-text-muted text-xs mt-1">{cat.subcategories.length} types</div>
+            </Link>
           ))}
         </div>
       </Section>

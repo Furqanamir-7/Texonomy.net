@@ -18,6 +18,9 @@ import TradesGarments from "@/pages/trades/Garments";
 import TradesExportMarkets from "@/pages/trades/ExportMarkets";
 import TradesRfq from "@/pages/trades/Rfq";
 import TradesContact from "@/pages/trades/Contact";
+import SuppliersCertifications from "@/pages/trades/SuppliersCertifications";
+import TradingAlliances from "@/pages/trades/TradingAlliances";
+import SellersAudit from "@/pages/trades/SellersAudit";
 import { GlobalChrome } from "@/components/shared/GlobalChrome";
 
 export default function App() {
@@ -44,6 +47,9 @@ export default function App() {
           <Route path="home-textile" element={<TradesHomeTextile />} />
           <Route path="garments" element={<TradesGarments />} />
           <Route path="export-markets" element={<TradesExportMarkets />} />
+          <Route path="suppliers-certifications" element={<SuppliersCertifications />} />
+          <Route path="trading-alliances" element={<TradingAlliances />} />
+          <Route path="sellers-audit" element={<SellersAudit />} />
           <Route path="rfq" element={<TradesRfq />} />
           <Route path="contact" element={<TradesContact />} />
         </Route>

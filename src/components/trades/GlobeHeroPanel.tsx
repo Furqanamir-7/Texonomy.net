@@ -1,0 +1,108 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, MapPin, Package } from "lucide-react";
+import { TradingGlobe3D, type GlobeMarker } from "@/components/3d/TradingGlobe3D";
+import { GLOBE_MARKERS } from "@/data/trades/globe-markers";
+import { cn } from "@/lib/utils";
+
+type Filter = "all" | "supplier" | "customer";
+
+export function GlobeHeroPanel({ className }: { className?: string }) {
+  const [filter, setFilter] = useState<Filter>("all");
+  const [active, setActive] = useState<GlobeMarker | null>(null);
+
+  const chips = GLOBE_MARKERS.filter((m) => {
+    if (filter === "all") return true;
+    if (filter === "supplier") return m.role === "supplier" || m.role === "both";
+    return m.role === "customer" || m.role === "both";
+  });
+
+  return (
+    <div className={cn("flex flex-col gap-4", className)}>
+      <TradingGlobe3D
+        filter={filter}
+        activeId={active?.id ?? null}
+        onSelect={setActive}
+        className="h-72 sm:h-80 lg:h-[420px] w-full"
+      />
+
+      <div className="flex flex-wrap gap-2">
+        {(["all", "supplier", "customer"] as const).map((f) => (
+          <button
+            key={f}
+            onClick={() => setFilter(f)}
+            className={cn(
+              "px-3 py-1.5 rounded-full text-xs font-medium border transition-colors",
+              filter === f
+                ? "bg-accent/15 border-accent/40 text-accent"
+                : "border-border text-text-muted hover:text-text-primary hover:border-border/80",
+            )}
+          >
+            {f === "all" ? "All Regions" : f === "supplier" ? "Suppliers" : "Customers"}
+          </button>
+        ))}
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        {chips.map((m) => (
+          <button
+            key={m.id}
+            onClick={() => setActive(m)}
+            className={cn(
+              "px-3 py-1.5 rounded-lg text-xs border transition-colors text-left",
+              active?.id === m.id
+                ? "bg-accent/10 border-accent/40 text-accent"
+                : "border-border/60 text-text-secondary hover:border-accent/30 hover:text-text-primary",
+            )}
+          >
+            <span className="font-medium">{m.name}</span>
+            <span className="text-text-muted ml-1.5">· {m.products.slice(0, 2).join(", ")}</span>
+          </button>
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {active && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            className="rounded-xl border border-accent/30 bg-bg-elevated/95 backdrop-blur-xl p-5 shadow-xl shadow-accent/5"
+          >
+            <div className="flex items-start justify-between gap-3 mb-3">
+              <div>
+                <div className="flex items-center gap-2 text-accent text-xs font-semibold uppercase tracking-wider mb-1">
+                  <MapPin size={12} />
+                  {active.role === "both" ? "Supplier & Customer" : active.role === "supplier" ? "Supplier" : "Customer"}
+                </div>
+                <h3 className="font-display text-lg font-bold">{active.headline}</h3>
+              </div>
+              <button
+                onClick={() => setActive(null)}
+                className="p-1 rounded-lg text-text-muted hover:text-text-primary hover:bg-bg-primary transition-colors"
+                aria-label="Close"
+              >
+                <X size={16} />
+              </button>
+            </div>
+            {active.stats && (
+              <p className="text-accent text-sm font-medium mb-2">{active.stats}</p>
+            )}
+            <p className="text-text-secondary text-sm leading-relaxed mb-4">{active.detail}</p>
+            <div className="flex items-center gap-2 flex-wrap">
+              <Package size={14} className="text-accent shrink-0" />
+              {active.products.map((p) => (
+                <span
+                  key={p}
+                  className="px-2.5 py-1 rounded-full text-xs bg-accent/10 text-accent border border-accent/20"
+                >
+                  {p}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}

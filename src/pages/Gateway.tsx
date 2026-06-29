@@ -2,21 +2,16 @@ import { useState, Suspense } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  Package,
-  Globe,
-  Brain,
-  GraduationCap,
-  LineChart,
   Factory,
-  Shield,
   Sparkles,
   ChevronDown,
+  Mail,
+  Phone,
 } from "lucide-react";
 import { Canvas } from "@react-three/fiber";
-import { SITE, GATEWAY_STATS } from "@/lib/constants";
+import { SITE } from "@/lib/constants";
 import { Logo } from "@/components/shared/Logo";
 import { SiteFooter } from "@/components/shared/SiteFooter";
-import { AnimatedCounter } from "@/components/shared/AnimatedCounter";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
@@ -24,18 +19,41 @@ import { SectionLabel } from "@/components/shared/SectionLabel";
 import { ThreadParticles3D } from "@/components/3d/ThreadParticles3D";
 import { useDevice } from "@/hooks/useDevice";
 
-const HEADLINE_WORDS = ["Two", "Arms.", "One", "Intelligence."];
+const WHAT_WE_TRADE = [
+  {
+    title: "Yarn",
+    desc: "Cotton, polyester, and blended yarns. Ring-spun, open-end, and vortex, from Ne 4 to Ne 120.",
+    path: "/trades/yarn",
+  },
+  {
+    title: "Fabric",
+    desc: "Cotton, poly-cotton, Tencel-cotton, and blended constructions.",
+    path: "/trades/fabrics",
+  },
+  {
+    title: "Home Textiles",
+    desc: "Bed linen, towels, quilts, duvets, and furnishings.",
+    path: "/trades/home-textile",
+  },
+];
 
-const TRADES_FEATURES = ["Premium yarn & fabrics", "Global export supply", "24h quote response", "End-to-end logistics"];
-const THINKS_FEATURES = ["Market intelligence", "Sales & ops training", "Production consulting", "Custom research"];
-
-const CAPABILITIES = [
-  { icon: Package, title: "Yarn & Raw Materials", desc: "Cotton, polyester, blended counts sourced to spec for mills worldwide." },
-  { icon: Factory, title: "Production Advisory", desc: "Capacity planning, process optimization, and cost structure analysis." },
-  { icon: GraduationCap, title: "Industry Training", desc: "Hands-on programs for sales teams, plant managers, and procurement." },
-  { icon: LineChart, title: "Market Intelligence", desc: "Price tracking, demand forecasts, and trade flow analysis." },
-  { icon: Globe, title: "Global Trade Network", desc: "Supply chains spanning South Asia, GCC, Europe, and the Americas." },
-  { icon: Shield, title: "Quality Assurance", desc: "Lab-tested yarn, documented specs, and consistent shipment quality." },
+const WHY_TEXONOMY = [
+  {
+    title: "Two decades of product knowledge",
+    desc: "Count systems, fiber behavior, and how a yarn or fabric performs before it ever ships.",
+  },
+  {
+    title: "The right quality, deliberately",
+    desc: "Texonomy matches the textile to your end use — so you don't pay for quality you don't need, or get caught short on the quality you do.",
+  },
+  {
+    title: "Production-plan thinking",
+    desc: "Hundreds of production plans built over the years mean an order gets read the way a mill reads it, not the way a broker does.",
+  },
+  {
+    title: "Quotes in an hour or two",
+    desc: "Knowing the markets and the mills cold means fast, specific pricing — not a service promise, just what working the trade looks like.",
+  },
 ];
 
 function HeroScene() {
@@ -51,9 +69,9 @@ function HeroScene() {
           className="!absolute inset-0"
           style={{ pointerEvents: "none" }}
         >
-        <ambientLight intensity={0.2} />
-        <pointLight position={[10, 10, 10]} intensity={0.4} color="#00b4d8" />
-        <ThreadParticles3D count={isMobile ? 60 : 140} />
+          <ambientLight intensity={0.2} />
+          <pointLight position={[10, 10, 10]} intensity={0.4} color="#00b4d8" />
+          <ThreadParticles3D count={isMobile ? 60 : 140} />
         </Canvas>
       </Suspense>
     </div>
@@ -65,21 +83,21 @@ export default function Gateway() {
 
   return (
     <div className="min-h-screen bg-bg-primary">
-      {/* Top bar */}
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-bg-primary/80 backdrop-blur-xl">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
           <Logo to="/" />
           <nav className="hidden sm:flex items-center gap-6 text-sm text-text-secondary">
+            <a href="#what-we-trade" className="hover:text-accent transition-colors">What We Trade</a>
+            <a href="#why-texonomy" className="hover:text-accent transition-colors">Why Texonomy</a>
             <a href="#divisions" className="hover:text-accent transition-colors">Divisions</a>
-            <a href="#capabilities" className="hover:text-accent transition-colors">Capabilities</a>
-            <a href="#about" className="hover:text-accent transition-colors">About</a>
+            <a href="#contact" className="hover:text-accent transition-colors">Contact</a>
           </nav>
           <div className="flex items-center gap-2">
             <Button to="/trades/rfq" size="sm" variant="ghost" className="hidden md:inline-flex">
-              Get a Quote
+              Request a Quote
             </Button>
-            <Button to="/thinks/contact" size="sm">
-              Contact
+            <Button to="/trades" size="sm">
+              What We Trade
             </Button>
           </div>
         </div>
@@ -96,10 +114,8 @@ export default function Gateway() {
         <HeroScene />
         <div className="absolute inset-0 woven-pattern opacity-30 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-b from-bg-primary/40 via-bg-primary/85 to-bg-primary pointer-events-none" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 text-center max-w-4xl mx-auto mb-14">
+        <div className="relative z-10 text-center max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -107,178 +123,105 @@ export default function Gateway() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/5 text-accent text-xs font-semibold tracking-widest uppercase mb-8"
           >
             <Sparkles size={14} />
-            {SITE.motto}
+            Texonomy — Trades &amp; Thinks
           </motion.div>
 
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 flex flex-wrap justify-center gap-x-3 gap-y-1">
-            {HEADLINE_WORDS.map((word, i) => (
-              <motion.span
-                key={word}
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 + i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className={word === "Intelligence." ? "text-gradient" : ""}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.55 }}
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
+          >
+            We trade textiles — and we{" "}
+            <span className="text-gradient">understand them.</span>
+          </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55 }}
-            className="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8"
+            transition={{ delay: 0.4 }}
+            className="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10"
           >
-            One company. Two specialized divisions — <strong className="text-text-primary font-medium">commercial execution</strong> and{" "}
-            <strong className="text-text-primary font-medium">strategic insight</strong> — built for the global textile economy.
+            B2B textile supply — yarn, fabric, and home textiles — for mills, manufacturers, and exporters,
+            by people who know count systems, trade flows, and where margins come from.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.65 }}
+            transition={{ delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button to="/trades" size="lg">
-              Explore Trades <ArrowRight size={18} />
+            <Button to="/trades/rfq" size="lg">
+              Request a Quote <ArrowRight size={18} />
             </Button>
-            <Button to="/thinks" variant="outline" size="lg">
-              Explore Thinks
+            <Button to="/trades" variant="outline" size="lg">
+              What We Trade
             </Button>
-          </motion.div>
-        </div>
-
-        {/* Division cards */}
-        <div id="divisions" className="relative z-10 w-full max-w-6xl grid md:grid-cols-2 gap-5">
-          {/* Trades */}
-          <motion.div
-            onMouseEnter={() => setHovered("trades")}
-            onMouseLeave={() => setHovered(null)}
-            animate={{ scale: hovered === "trades" ? 1.02 : hovered === "thinks" ? 0.98 : 1 }}
-            transition={{ duration: 0.35 }}
-            className="group relative rounded-2xl border border-border overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-bg-elevated" />
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-accent/5 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent to-accent-muted" />
-            <div className="relative p-8 md:p-10">
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <span className="text-accent text-xs font-bold tracking-widest uppercase">Texonomy Trades</span>
-                  <h2 className="font-display text-2xl md:text-3xl font-bold mt-2">Source. Supply. Deliver.</h2>
-                </div>
-                <div className="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center shrink-0">
-                  <Package size={24} className="text-accent" />
-                </div>
-              </div>
-              <p className="text-text-secondary text-sm leading-relaxed mb-6">
-                B2B textile trading — premium yarn, fabrics, home textile, and garments for mills, manufacturers, and exporters worldwide.
-              </p>
-              <ul className="grid grid-cols-2 gap-2 mb-8">
-                {TRADES_FEATURES.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-xs text-text-secondary">
-                    <span className="w-1 h-1 rounded-full bg-accent shrink-0" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <Button to="/trades" size="lg" className="w-full sm:w-auto">
-                Enter Trades <ArrowRight size={18} />
-              </Button>
-            </div>
-          </motion.div>
-
-          {/* Thinks */}
-          <motion.div
-            onMouseEnter={() => setHovered("thinks")}
-            onMouseLeave={() => setHovered(null)}
-            animate={{ scale: hovered === "thinks" ? 1.02 : hovered === "trades" ? 0.98 : 1 }}
-            transition={{ duration: 0.35 }}
-            className="group relative rounded-2xl border border-border overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-bg-elevated" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-accent/20 via-accent/5 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent-muted to-accent" />
-            <div className="relative p-8 md:p-10">
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <span className="text-accent text-xs font-bold tracking-widest uppercase">Texonomy Thinks</span>
-                  <h2 className="font-display text-2xl md:text-3xl font-bold mt-2">Consult. Train. Advise.</h2>
-                </div>
-                <div className="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center shrink-0">
-                  <Brain size={24} className="text-accent" />
-                </div>
-              </div>
-              <p className="text-text-secondary text-sm leading-relaxed mb-6">
-                Training programs, market intelligence, production consulting, and strategic advisory for textile industry professionals.
-              </p>
-              <ul className="grid grid-cols-2 gap-2 mb-8">
-                {THINKS_FEATURES.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-xs text-text-secondary">
-                    <span className="w-1 h-1 rounded-full bg-accent shrink-0" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <Button to="/thinks" variant="outline" size="lg" className="w-full sm:w-auto">
-                Enter Thinks <ArrowRight size={18} />
-              </Button>
-            </div>
           </motion.div>
         </div>
 
         <motion.a
-          href="#stats"
+          href="#what-we-trade"
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
-          className="relative z-10 mt-12 text-text-muted hover:text-accent transition-colors"
+          className="relative z-10 mt-16 text-text-muted hover:text-accent transition-colors"
           aria-label="Scroll down"
         >
           <ChevronDown size={28} />
         </motion.a>
       </section>
 
-      {/* Stats */}
-      <section id="stats" className="py-20 border-y border-border bg-bg-secondary relative overflow-hidden">
-        <div className="absolute inset-0 woven-pattern opacity-20" />
-        <div className="relative mx-auto max-w-6xl px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {GATEWAY_STATS.map((s, i) => (
-              <ScrollReveal key={s.label} delay={i * 0.08}>
-                <div className="text-center p-6 rounded-2xl border border-border/50 bg-bg-elevated/40 hover:border-accent/30 transition-colors">
-                  <div className="font-display text-4xl md:text-5xl font-bold text-accent mb-1">
-                    <AnimatedCounter to={s.value} suffix={s.suffix} />
-                  </div>
-                  <div className="text-text-muted text-sm uppercase tracking-wider">{s.label}</div>
-                </div>
+      {/* What We Trade */}
+      <section id="what-we-trade" className="py-24 md:py-32 px-4 border-y border-border bg-bg-secondary">
+        <div className="mx-auto max-w-7xl">
+          <ScrollReveal className="text-center mb-16">
+            <SectionLabel text="What We Trade" className="justify-center" />
+            <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
+              Yarn, fabric, and home textiles — sourced to spec.
+            </h2>
+          </ScrollReveal>
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
+            {WHAT_WE_TRADE.map((item, i) => (
+              <ScrollReveal key={item.title} delay={i * 0.08}>
+                <Card className="h-full">
+                  <Factory size={28} className="text-accent mb-4" />
+                  <h3 className="font-display text-xl font-semibold mb-2">{item.title}</h3>
+                  <p className="text-text-secondary text-sm leading-relaxed mb-4">{item.desc}</p>
+                  <Button to={item.path} variant="ghost" size="sm">
+                    View {item.title} →
+                  </Button>
+                </Card>
               </ScrollReveal>
             ))}
           </div>
+          <ScrollReveal>
+            <p className="text-center text-text-muted text-sm max-w-xl mx-auto">
+              Don&apos;t see your product? Send the spec anyway — sourcing the right textile is what we do.
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* Capabilities */}
-      <section id="capabilities" className="py-24 md:py-32 px-4">
+      {/* Why Texonomy */}
+      <section id="why-texonomy" className="py-24 md:py-32 px-4">
         <div className="mx-auto max-w-7xl">
-          <ScrollReveal className="text-center mb-16">
-            <SectionLabel text="Unified Capabilities" className="justify-center" />
-            <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-              Everything the textile industry needs
+          <ScrollReveal className="mb-16 max-w-3xl">
+            <span className="text-accent text-xs font-bold tracking-widest uppercase">Why Texonomy</span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mt-4 mb-4 leading-tight">
+              The right quality for the job — not over-spec&apos;d, not under.
             </h2>
-            <p className="text-text-secondary text-lg max-w-2xl mx-auto">
-              From sourcing yarn at scale to training your sales force — Texonomy covers the full value chain under one roof.
+            <p className="text-text-secondary text-lg leading-relaxed">
+              Texonomy is a new name backed by twenty years on the textile floor. Every quote carries that judgment:
+              knowing what a spec actually needs, and what it doesn&apos;t.
             </p>
           </ScrollReveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {CAPABILITIES.map((cap, i) => (
-              <ScrollReveal key={cap.title} delay={i * 0.07}>
+          <div className="grid sm:grid-cols-2 gap-6">
+            {WHY_TEXONOMY.map((item, i) => (
+              <ScrollReveal key={item.title} delay={i * 0.07}>
                 <Card className="h-full">
-                  <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                    <cap.icon size={22} className="text-accent" />
-                  </div>
-                  <h3 className="font-display text-lg font-semibold mb-2">{cap.title}</h3>
-                  <p className="text-text-secondary text-sm leading-relaxed">{cap.desc}</p>
+                  <h3 className="font-display text-lg font-semibold mb-2">{item.title}</h3>
+                  <p className="text-text-secondary text-sm leading-relaxed">{item.desc}</p>
                 </Card>
               </ScrollReveal>
             ))}
@@ -286,60 +229,85 @@ export default function Gateway() {
         </div>
       </section>
 
-      {/* About / Why */}
-      <section id="about" className="py-24 md:py-32 px-4 bg-bg-secondary border-y border-border">
-        <div className="mx-auto max-w-7xl grid lg:grid-cols-2 gap-16 items-center">
-          <ScrollReveal direction="left">
-            <SectionLabel text="Why Texonomy" />
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 leading-tight">
-              The only partner that <span className="text-gradient">trades</span> and <span className="text-gradient">thinks</span> for you
-            </h2>
-            <p className="text-text-secondary leading-relaxed mb-6">
-              Most firms do one or the other — supply yarn or advise on markets. Texonomy was built to do both, because the best sourcing decisions come from the deepest market intelligence.
-            </p>
-            <p className="text-text-secondary leading-relaxed mb-8">
-              Whether you need 10 tonnes of Ne 30 combed cotton or a training program for your export sales team, you get practitioners who understand count systems, trade flows, and margin pressure — not generic consultants.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Button to="/trades/yarn" variant="secondary" size="sm">Browse Yarn Products</Button>
-              <Button to="/thinks/consulting" variant="ghost" size="sm">View Consulting →</Button>
-            </div>
+      {/* Two Divisions */}
+      <section id="divisions" className="py-24 md:py-32 px-4 bg-bg-secondary border-y border-border">
+        <div className="mx-auto max-w-7xl">
+          <ScrollReveal className="text-center mb-16">
+            <SectionLabel text="The Two Divisions" className="justify-center" />
+            <h2 className="font-display text-3xl md:text-5xl font-bold">Two divisions. One trade.</h2>
           </ScrollReveal>
-          <ScrollReveal direction="right">
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { label: "Trades", value: "B2B Supply", icon: Package },
-                { label: "Thinks", value: "Advisory", icon: Brain },
-                { label: "Reach", value: "Global Supply", icon: Globe },
-                { label: "Experience", value: "24+ Years", icon: Shield },
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  className="p-6 rounded-2xl border border-border bg-bg-elevated/60 hover:border-accent/30 transition-colors text-center"
-                >
-                  <item.icon size={28} className="text-accent mx-auto mb-3" />
-                  <div className="text-text-muted text-xs uppercase tracking-wider mb-1">{item.label}</div>
-                  <div className="font-display font-bold text-lg">{item.value}</div>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
+          <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
+            <motion.div
+              onMouseEnter={() => setHovered("trades")}
+              onMouseLeave={() => setHovered(null)}
+              animate={{ scale: hovered === "trades" ? 1.02 : hovered === "thinks" ? 0.98 : 1 }}
+              transition={{ duration: 0.35 }}
+              className="group relative rounded-2xl border border-border overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-bg-elevated" />
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-accent/5 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent to-accent-muted" />
+              <div className="relative p-8 md:p-10">
+                <span className="text-accent text-xs font-bold tracking-widest uppercase">Texonomy Trades</span>
+                <h3 className="font-display text-2xl font-bold mt-2 mb-4">Our core business.</h3>
+                <p className="text-text-secondary text-sm leading-relaxed mb-8">
+                  Sourcing and supplying yarn, fabric, and home textiles to mills, manufacturers, and exporters.
+                </p>
+                <Button to="/trades" size="lg">
+                  Go to Trades <ArrowRight size={18} />
+                </Button>
+              </div>
+            </motion.div>
+
+            <motion.div
+              onMouseEnter={() => setHovered("thinks")}
+              onMouseLeave={() => setHovered(null)}
+              animate={{ scale: hovered === "thinks" ? 1.02 : hovered === "trades" ? 0.98 : 1 }}
+              transition={{ duration: 0.35 }}
+              className="group relative rounded-2xl border border-border overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-bg-elevated" />
+              <div className="absolute inset-0 bg-gradient-to-bl from-accent/20 via-accent/5 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent-muted to-accent" />
+              <div className="relative p-8 md:p-10">
+                <span className="text-accent text-xs font-bold tracking-widest uppercase">Texonomy Thinks</span>
+                <h3 className="font-display text-2xl font-bold mt-2 mb-4">The advisory side.</h3>
+                <p className="text-text-secondary text-sm leading-relaxed mb-8">
+                  Training, consulting, and market intelligence for textile professionals. Newer than Trades,
+                  built on the same floor experience.
+                </p>
+                <Button to="/thinks" variant="outline" size="lg">
+                  Explore Thinks <ArrowRight size={18} />
+                </Button>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-24 px-4">
+      {/* Contact CTA */}
+      <section id="contact" className="py-24 px-4">
         <ScrollReveal>
           <div className="mx-auto max-w-4xl rounded-3xl border border-accent/25 bg-gradient-to-br from-accent/15 via-bg-elevated to-bg-secondary p-10 md:p-16 text-center relative overflow-hidden">
             <div className="absolute inset-0 woven-pattern opacity-40" />
             <div className="relative">
-              <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Ready to work with Texonomy?</h2>
+              <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Tell us what you need.</h2>
               <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
-                Source premium yarn, train your team, or decode your market — start with the division that fits your needs.
+                Send your spec — count, volume, destination — and we&apos;ll come back within an hour or two.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button to="/trades/rfq" size="lg">Request a Quote</Button>
-                <Button to="/thinks/contact" variant="outline" size="lg">Book a Consultation</Button>
+              <Button to="/trades/rfq" size="lg" className="mb-8">
+                Request a Quote
+              </Button>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-text-secondary">
+                <a href={`mailto:${SITE.emails[0]}`} className="flex items-center gap-2 hover:text-accent transition-colors">
+                  <Mail size={16} className="text-accent" />
+                  {SITE.emails[0]}
+                </a>
+                <a href={SITE.whatsappUrl} className="flex items-center gap-2 hover:text-accent transition-colors">
+                  <Phone size={16} className="text-accent" />
+                  {SITE.phone}
+                </a>
+                <span className="text-text-muted">{SITE.address}</span>
               </div>
             </div>
           </div>
