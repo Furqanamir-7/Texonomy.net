@@ -48,7 +48,7 @@ export function TradesNav() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-bg-primary/80 backdrop-blur-xl pt-[env(safe-area-inset-top)]">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 h-14 flex items-center justify-between gap-2 sm:gap-4 min-w-0">
-        <Logo to="/trades" division="trades" />
+        <Logo to="/" division="trades" />
 
         <div className="hidden lg:flex items-center gap-1">
           <Link

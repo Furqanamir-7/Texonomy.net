@@ -55,7 +55,7 @@ export function Logo({ variant = "nav", to = "/", division, className }: LogoPro
 
   if (to) {
     return (
-      <Link to={to} className="shrink-0 hover:opacity-90 transition-opacity" title="Back to homepage">
+      <Link to={to} className="shrink-0 hover:opacity-90 transition-opacity" title="Texonomy homepage">
         {content}
       </Link>
     );
