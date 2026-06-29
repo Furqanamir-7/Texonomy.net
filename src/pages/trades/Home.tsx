@@ -15,9 +15,9 @@ const CATEGORY_ICONS = { yarns: Package, fabrics: Factory, "home-textiles": Pack
 export default function TradesHome() {
   return (
     <>
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-bg-primary to-bg-primary" />
-        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 md:py-20 grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           <motion.div initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }}>
             <SectionLabel text="Global Textile Trading" />
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
@@ -38,17 +38,41 @@ export default function TradesHome() {
         </div>
       </section>
 
-      <Section>
+      <Section className="py-12 md:py-16 bg-gradient-to-br from-accent/20 via-accent/10 to-bg-primary">
+        <SectionHeader
+          eyebrow="Flagship Product"
+          title="Yarn for every mill. Count for every need."
+          className="text-center mx-auto max-w-3xl mb-8"
+        />
+        <div className="grid md:grid-cols-2 gap-5">
+          {yarnProducts.map((p, i) => (
+            <ScrollReveal key={p.id} delay={i * 0.08}>
+              <Card className="bg-bg-elevated">
+                <h3 className="font-display text-xl font-semibold mb-1">{p.name}</h3>
+                <p className="text-text-muted text-sm mb-2">{p.tagline}</p>
+                <p className="text-text-secondary text-sm mb-3">{p.counts} · {p.composition}</p>
+                <Link to="/trades/yarn" className="text-accent text-sm font-medium">View Details →</Link>
+              </Card>
+            </ScrollReveal>
+          ))}
+        </div>
+        <div className="text-center mt-8">
+          <Button to="/trades/yarn" variant="secondary">View All Yarn Products →</Button>
+        </div>
+      </Section>
+
+      <Section className="py-12 md:py-16">
         <SectionHeader
           eyebrow="Trade Categories"
           title="Yarn, fabric, and home textiles — sourced to spec."
           description="Browse our trade categories and request a quote for your specification."
+          className="text-center mx-auto max-w-3xl mb-8"
         />
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {TRADES_CATEGORIES.map((cat, i) => {
             const Icon = CATEGORY_ICONS[cat.id as keyof typeof CATEGORY_ICONS] ?? Package;
             return (
-              <ScrollReveal key={cat.id} delay={i * 0.08}>
+              <ScrollReveal key={cat.id} delay={i * 0.06}>
                 {cat.placeholder ? (
                   <Card className="h-full opacity-60">
                     <Icon size={28} className="text-accent mb-3" />
@@ -79,28 +103,9 @@ export default function TradesHome() {
         </div>
       </Section>
 
-      <Section className="bg-gradient-to-br from-accent/20 via-accent/10 to-bg-primary">
-        <SectionHeader eyebrow="Flagship Product" title="Yarn for every mill. Count for every need." />
-        <div className="grid md:grid-cols-2 gap-6">
-          {yarnProducts.map((p, i) => (
-            <ScrollReveal key={p.id} delay={i * 0.1}>
-              <Card className="bg-bg-elevated">
-                <h3 className="font-display text-xl font-semibold mb-1">{p.name}</h3>
-                <p className="text-text-muted text-sm mb-3">{p.tagline}</p>
-                <p className="text-text-secondary text-sm mb-3">{p.counts} · {p.composition}</p>
-                <Link to="/trades/yarn" className="text-accent text-sm font-medium">View Details →</Link>
-              </Card>
-            </ScrollReveal>
-          ))}
-        </div>
-        <div className="text-center mt-10">
-          <Button to="/trades/yarn" variant="secondary">View All Yarn Products →</Button>
-        </div>
-      </Section>
-
-      <Section>
+      <Section className="py-12 md:py-16">
         <ScrollReveal>
-          <div className="rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/15 to-bg-elevated p-12 text-center">
+          <div className="rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/15 to-bg-elevated p-10 md:p-12 text-center">
             <Globe size={40} className="text-accent mx-auto mb-4" />
             <h2 className="font-display text-3xl font-bold mb-4">Ready to source premium yarn?</h2>
             <p className="text-text-secondary mb-8 max-w-lg mx-auto">

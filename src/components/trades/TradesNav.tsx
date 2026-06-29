@@ -36,10 +36,10 @@ export function TradesNav() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [tradesOpen]);
 
-  const goTo = (path: string) => {
+  const goTo = (path: string, hash?: string) => {
     setTradesOpen(false);
     setOpen(false);
-    navigate(path);
+    navigate(hash ? { pathname: path, hash } : path);
   };
 
   return (
@@ -108,7 +108,7 @@ export function TradesNav() {
                               <li key={sub.slug}>
                                 <button
                                   type="button"
-                                  onClick={() => goTo(cat.path)}
+                                  onClick={() => goTo(cat.path, `#${sub.slug}`)}
                                   className="text-xs text-text-muted hover:text-accent transition-colors text-left"
                                 >
                                   {sub.label}
