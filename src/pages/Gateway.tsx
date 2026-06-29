@@ -138,8 +138,8 @@ export default function Gateway() {
       <section className="relative min-h-[100svh] flex flex-col items-center justify-center px-4 pt-20 pb-12 sm:pt-24 sm:pb-16 overflow-hidden">
         <img
           src="/images/hero-gateway.jpg"
-          alt="Textile fibers and woven fabric"
-          className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
+          alt="Trail runner in mountain landscape at golden hour"
+          className="absolute inset-0 w-full h-full object-cover object-[55%_center] sm:object-center opacity-25 pointer-events-none"
           loading="eager"
         />
         <HeroScene />
