@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Card } from "@/components/ui/Card";
@@ -6,7 +5,6 @@ import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { YarnScene3D } from "@/components/3d/YarnScene3D";
-import { yarnProducts } from "@/data/trades/products";
 import { getCategoryByPath } from "@/data/trades/trades.config";
 import { useDevice } from "@/hooks/useDevice";
 import { useScrollToHash } from "@/hooks/useScrollToHash";
@@ -14,9 +12,7 @@ import { useScrollToHash } from "@/hooks/useScrollToHash";
 const category = getCategoryByPath("/trades/yarn")!;
 
 export default function TradesYarn() {
-  const [tab, setTab] = useState(yarnProducts[0].id);
   const { isMobile, prefersReducedMotion } = useDevice();
-  const active = yarnProducts.find((p) => p.id === tab)!;
   useScrollToHash();
 
   return (
@@ -62,49 +58,6 @@ export default function TradesYarn() {
               </ScrollReveal>
             ))}
           </div>
-
-          <h2 className="font-display text-xl font-semibold mb-4">Product lines</h2>
-          <div className="flex flex-wrap gap-2 mb-6">
-            {yarnProducts.map((p) => (
-              <button
-                key={p.id}
-                type="button"
-                onClick={() => setTab(p.id)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  tab === p.id
-                    ? "bg-accent text-bg-primary"
-                    : "bg-bg-elevated text-text-secondary hover:text-text-primary border border-border"
-                }`}
-              >
-                {p.name.replace(" Yarn", "")}
-              </button>
-            ))}
-          </div>
-          <Card glow>
-            <h2 className="font-display text-2xl font-bold mb-2">{active.name}</h2>
-            <p className="text-accent text-sm mb-4">{active.tagline}</p>
-            <p className="text-text-secondary mb-6">{active.description}</p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-              {[
-                { label: "Counts", value: active.counts },
-                { label: "Composition", value: active.composition },
-                { label: "Packaging", value: active.packaging },
-                { label: "MOQ", value: active.moq },
-              ].map((s) => (
-                <div key={s.label} className="p-4 rounded-lg bg-bg-primary border border-border">
-                  <div className="text-text-muted text-xs mb-1">{s.label}</div>
-                  <div className="text-sm font-medium">{s.value}</div>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {active.applications.map((a) => (
-                <span key={a} className="px-3 py-1 rounded-full text-xs bg-accent/10 text-accent">
-                  {a}
-                </span>
-              ))}
-            </div>
-          </Card>
         </div>
       </section>
 

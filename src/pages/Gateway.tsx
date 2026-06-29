@@ -10,6 +10,13 @@ import {
 } from "lucide-react";
 import { Canvas } from "@react-three/fiber";
 import { SITE } from "@/lib/constants";
+import {
+  GATEWAY_CONTACT,
+  GATEWAY_DIVISIONS,
+  GATEWAY_HERO,
+  GATEWAY_WHAT_WE_TRADE,
+  GATEWAY_WHY_TEXONOMY,
+} from "@/data/gateway/content";
 import { Logo } from "@/components/shared/Logo";
 import { SiteFooter } from "@/components/shared/SiteFooter";
 import { Button } from "@/components/ui/Button";
@@ -18,43 +25,6 @@ import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { ThreadParticles3D } from "@/components/3d/ThreadParticles3D";
 import { useDevice } from "@/hooks/useDevice";
-
-const WHAT_WE_TRADE = [
-  {
-    title: "Yarn",
-    desc: "Cotton, polyester, and blended yarns. Ring-spun, open-end, and vortex, from Ne 4 to Ne 120.",
-    path: "/trades/yarn",
-  },
-  {
-    title: "Fabric",
-    desc: "Cotton, poly-cotton, Tencel-cotton, and blended constructions.",
-    path: "/trades/fabrics",
-  },
-  {
-    title: "Home Textiles",
-    desc: "Bed linen, towels, quilts, duvets, and furnishings.",
-    path: "/trades/home-textile",
-  },
-];
-
-const WHY_TEXONOMY = [
-  {
-    title: "Two decades of product knowledge",
-    desc: "Count systems, fiber behavior, and how a yarn or fabric performs before it ever ships.",
-  },
-  {
-    title: "The right quality, deliberately",
-    desc: "Texonomy matches the textile to your end use — so you don't pay for quality you don't need, or get caught short on the quality you do.",
-  },
-  {
-    title: "Production-plan thinking",
-    desc: "Hundreds of production plans built over the years mean an order gets read the way a mill reads it, not the way a broker does.",
-  },
-  {
-    title: "Quotes in an hour or two",
-    desc: "Knowing the markets and the mills cold means fast, specific pricing — not a service promise, just what working the trade looks like.",
-  },
-];
 
 function HeroScene() {
   const { isMobile, prefersReducedMotion } = useDevice();
@@ -103,7 +73,6 @@ export default function Gateway() {
         </div>
       </header>
 
-      {/* Hero */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-4 pt-16 pb-16 overflow-hidden">
         <img
           src="/images/hero-gateway.jpg"
@@ -123,7 +92,7 @@ export default function Gateway() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/5 text-accent text-xs font-semibold tracking-widest uppercase mb-8"
           >
             <Sparkles size={14} />
-            Texonomy — Trades &amp; Thinks
+            {GATEWAY_HERO.eyebrow}
           </motion.div>
 
           <motion.h1
@@ -142,8 +111,7 @@ export default function Gateway() {
             transition={{ delay: 0.4 }}
             className="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10"
           >
-            B2B textile supply — yarn, fabric, and home textiles — for mills, manufacturers, and exporters,
-            by people who know count systems, trade flows, and where margins come from.
+            {GATEWAY_HERO.body}
           </motion.p>
 
           <motion.div
@@ -172,22 +140,21 @@ export default function Gateway() {
         </motion.a>
       </section>
 
-      {/* What We Trade */}
       <section id="what-we-trade" className="py-24 md:py-32 px-4 border-y border-border bg-bg-secondary">
         <div className="mx-auto max-w-7xl">
           <ScrollReveal className="text-center mb-16">
-            <SectionLabel text="What We Trade" className="justify-center" />
+            <SectionLabel text={GATEWAY_WHAT_WE_TRADE.sectionLabel} className="justify-center" />
             <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-              Yarn, fabric, and home textiles — sourced to spec.
+              {GATEWAY_WHAT_WE_TRADE.title}
             </h2>
           </ScrollReveal>
           <div className="grid md:grid-cols-3 gap-6 mb-10">
-            {WHAT_WE_TRADE.map((item, i) => (
+            {GATEWAY_WHAT_WE_TRADE.items.map((item, i) => (
               <ScrollReveal key={item.title} delay={i * 0.08}>
                 <Card className="h-full">
                   <Factory size={28} className="text-accent mb-4" />
                   <h3 className="font-display text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-text-secondary text-sm leading-relaxed mb-4">{item.desc}</p>
+                  <p className="text-text-secondary text-sm leading-relaxed mb-4">{item.body}</p>
                   <Button to={item.path} variant="ghost" size="sm">
                     View {item.title} →
                   </Button>
@@ -197,31 +164,32 @@ export default function Gateway() {
           </div>
           <ScrollReveal>
             <p className="text-center text-text-muted text-sm max-w-xl mx-auto">
-              Don&apos;t see your product? Send the spec anyway — sourcing the right textile is what we do.
+              {GATEWAY_WHAT_WE_TRADE.closingNote}
             </p>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* Why Texonomy */}
       <section id="why-texonomy" className="py-24 md:py-32 px-4">
         <div className="mx-auto max-w-7xl">
           <ScrollReveal className="mb-16 max-w-3xl">
-            <span className="text-accent text-xs font-bold tracking-widest uppercase">Why Texonomy</span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mt-4 mb-4 leading-tight">
-              The right quality for the job — not over-spec&apos;d, not under.
+            <SectionLabel text={GATEWAY_WHY_TEXONOMY.sectionLabel} />
+            <span className="block text-accent text-xs font-bold tracking-widest uppercase mt-4 mb-3">
+              {GATEWAY_WHY_TEXONOMY.eyebrow}
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 leading-tight">
+              {GATEWAY_WHY_TEXONOMY.title}
             </h2>
             <p className="text-text-secondary text-lg leading-relaxed">
-              Texonomy is a new name backed by twenty years on the textile floor. Every quote carries that judgment:
-              knowing what a spec actually needs, and what it doesn&apos;t.
+              {GATEWAY_WHY_TEXONOMY.intro}
             </p>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 gap-6">
-            {WHY_TEXONOMY.map((item, i) => (
+            {GATEWAY_WHY_TEXONOMY.items.map((item, i) => (
               <ScrollReveal key={item.title} delay={i * 0.07}>
                 <Card className="h-full">
                   <h3 className="font-display text-lg font-semibold mb-2">{item.title}</h3>
-                  <p className="text-text-secondary text-sm leading-relaxed">{item.desc}</p>
+                  <p className="text-text-secondary text-sm leading-relaxed">{item.body}</p>
                 </Card>
               </ScrollReveal>
             ))}
@@ -229,85 +197,66 @@ export default function Gateway() {
         </div>
       </section>
 
-      {/* Two Divisions */}
       <section id="divisions" className="py-24 md:py-32 px-4 bg-bg-secondary border-y border-border">
         <div className="mx-auto max-w-7xl">
           <ScrollReveal className="text-center mb-16">
-            <SectionLabel text="The Two Divisions" className="justify-center" />
-            <h2 className="font-display text-3xl md:text-5xl font-bold">Two divisions. One trade.</h2>
+            <SectionLabel text={GATEWAY_DIVISIONS.sectionLabel} className="justify-center" />
+            <h2 className="font-display text-3xl md:text-5xl font-bold">{GATEWAY_DIVISIONS.title}</h2>
           </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
-            <motion.div
-              onMouseEnter={() => setHovered("trades")}
-              onMouseLeave={() => setHovered(null)}
-              animate={{ scale: hovered === "trades" ? 1.02 : hovered === "thinks" ? 0.98 : 1 }}
-              transition={{ duration: 0.35 }}
-              className="group relative rounded-2xl border border-border overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-bg-elevated" />
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-accent/5 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent to-accent-muted" />
-              <div className="relative p-8 md:p-10">
-                <span className="text-accent text-xs font-bold tracking-widest uppercase">Texonomy Trades</span>
-                <h3 className="font-display text-2xl font-bold mt-2 mb-4">Our core business.</h3>
-                <p className="text-text-secondary text-sm leading-relaxed mb-8">
-                  Sourcing and supplying yarn, fabric, and home textiles to mills, manufacturers, and exporters.
-                </p>
-                <Button to="/trades" size="lg">
-                  Go to Trades <ArrowRight size={18} />
-                </Button>
-              </div>
-            </motion.div>
-
-            <motion.div
-              onMouseEnter={() => setHovered("thinks")}
-              onMouseLeave={() => setHovered(null)}
-              animate={{ scale: hovered === "thinks" ? 1.02 : hovered === "trades" ? 0.98 : 1 }}
-              transition={{ duration: 0.35 }}
-              className="group relative rounded-2xl border border-border overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-bg-elevated" />
-              <div className="absolute inset-0 bg-gradient-to-bl from-accent/20 via-accent/5 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent-muted to-accent" />
-              <div className="relative p-8 md:p-10">
-                <span className="text-accent text-xs font-bold tracking-widest uppercase">Texonomy Thinks</span>
-                <h3 className="font-display text-2xl font-bold mt-2 mb-4">The advisory side.</h3>
-                <p className="text-text-secondary text-sm leading-relaxed mb-8">
-                  Training, consulting, and market intelligence for textile professionals. Newer than Trades,
-                  built on the same floor experience.
-                </p>
-                <Button to="/thinks" variant="outline" size="lg">
-                  Explore Thinks <ArrowRight size={18} />
-                </Button>
-              </div>
-            </motion.div>
+            {(["trades", "thinks"] as const).map((key) => {
+              const division = GATEWAY_DIVISIONS[key];
+              return (
+                <motion.div
+                  key={key}
+                  onMouseEnter={() => setHovered(key)}
+                  onMouseLeave={() => setHovered(null)}
+                  animate={{ scale: hovered === key ? 1.02 : hovered && hovered !== key ? 0.98 : 1 }}
+                  transition={{ duration: 0.35 }}
+                  className="group relative rounded-2xl border border-border overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-bg-elevated" />
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-${key === "trades" ? "br" : "bl"} from-accent/20 via-accent/5 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500`}
+                  />
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent to-accent-muted" />
+                  <div className="relative p-8 md:p-10">
+                    <h3 className="text-accent text-xs font-bold tracking-widest uppercase">{division.label}</h3>
+                    <p className="text-text-secondary text-sm leading-relaxed mt-4 mb-8">{division.body}</p>
+                    <Button to={division.path} variant={key === "thinks" ? "outline" : "primary"} size="lg">
+                      {division.cta} <ArrowRight size={18} />
+                    </Button>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Contact CTA */}
       <section id="contact" className="py-24 px-4">
         <ScrollReveal>
           <div className="mx-auto max-w-4xl rounded-3xl border border-accent/25 bg-gradient-to-br from-accent/15 via-bg-elevated to-bg-secondary p-10 md:p-16 text-center relative overflow-hidden">
             <div className="absolute inset-0 woven-pattern opacity-40" />
             <div className="relative">
-              <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Tell us what you need.</h2>
-              <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
-                Send your spec — count, volume, destination — and we&apos;ll come back within an hour or two.
-              </p>
+              <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">{GATEWAY_CONTACT.title}</h2>
+              <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">{GATEWAY_CONTACT.body}</p>
               <Button to="/trades/rfq" size="lg" className="mb-8">
-                Request a Quote
+                {GATEWAY_CONTACT.cta}
               </Button>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-text-secondary">
-                <a href={`mailto:${SITE.emails[0]}`} className="flex items-center gap-2 hover:text-accent transition-colors">
+                <a
+                  href={`mailto:${GATEWAY_CONTACT.email}`}
+                  className="flex items-center gap-2 hover:text-accent transition-colors"
+                >
                   <Mail size={16} className="text-accent" />
-                  {SITE.emails[0]}
+                  {GATEWAY_CONTACT.email}
                 </a>
                 <a href={SITE.whatsappUrl} className="flex items-center gap-2 hover:text-accent transition-colors">
                   <Phone size={16} className="text-accent" />
-                  {SITE.phone}
+                  {GATEWAY_CONTACT.phone}
                 </a>
-                <span className="text-text-muted">{SITE.address}</span>
+                <span className="text-text-muted">{GATEWAY_CONTACT.location}</span>
               </div>
             </div>
           </div>
