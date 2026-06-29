@@ -2,22 +2,13 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, MapPin, Package } from "lucide-react";
 import { TradingGlobe3D, type GlobeMarker } from "@/components/3d/TradingGlobe3D";
-import { GLOBE_MARKERS } from "@/data/trades/globe-markers";
 import { cn } from "@/lib/utils";
-import { useDevice } from "@/hooks/useDevice";
 
 type Filter = "all" | "supplier" | "customer";
 
 export function GlobeHeroPanel({ className }: { className?: string }) {
   const [filter, setFilter] = useState<Filter>("all");
   const [active, setActive] = useState<GlobeMarker | null>(null);
-  const { isMobile } = useDevice();
-
-  const chips = GLOBE_MARKERS.filter((m) => {
-    if (filter === "all") return true;
-    if (filter === "supplier") return m.role === "supplier" || m.role === "both";
-    return m.role === "customer" || m.role === "both";
-  });
 
   return (
     <div className={cn("flex flex-col gap-3 sm:gap-4 min-w-0", className)}>
@@ -41,26 +32,6 @@ export function GlobeHeroPanel({ className }: { className?: string }) {
             )}
           >
             {f === "all" ? "All Regions" : f === "supplier" ? "Suppliers" : "Customers"}
-          </button>
-        ))}
-      </div>
-
-      <div className="flex gap-2 overflow-x-auto scrollbar-none -mx-1 px-1 pb-1 snap-x snap-mandatory">
-        {chips.map((m) => (
-          <button
-            key={m.id}
-            onClick={() => setActive(m)}
-            className={cn(
-              "shrink-0 snap-start max-w-[min(100%,14rem)] px-3 py-2 rounded-lg text-xs border transition-colors text-left",
-              active?.id === m.id
-                ? "bg-accent/10 border-accent/40 text-accent"
-                : "border-border/60 text-text-secondary hover:border-accent/30 hover:text-text-primary",
-            )}
-          >
-            <span className="font-medium block truncate">{m.name}</span>
-            {!isMobile && (
-              <span className="text-text-muted block truncate mt-0.5">· {m.products.slice(0, 2).join(", ")}</span>
-            )}
           </button>
         ))}
       </div>

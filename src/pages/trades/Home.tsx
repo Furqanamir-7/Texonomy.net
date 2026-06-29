@@ -42,16 +42,6 @@ export default function TradesHome() {
         </div>
       </section>
 
-      <section className="relative border-y border-border overflow-hidden" aria-hidden>
-        <img
-          src="/images/trades-banner.jpg"
-          alt=""
-          className="w-full h-20 sm:h-28 md:h-[10.5rem] object-cover object-[center_35%]"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-bg-primary/30 via-transparent to-bg-primary/30 pointer-events-none" />
-      </section>
-
       <Section className="py-12 md:py-16">
         <SectionHeader
           eyebrow="Trade Categories"

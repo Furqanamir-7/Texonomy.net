@@ -141,15 +141,19 @@ export default function Gateway() {
       </header>
 
       <section className="relative min-h-[100svh] flex flex-col items-center justify-center px-4 pt-20 pb-12 sm:pt-24 sm:pb-16 overflow-hidden">
-        <img
-          src="/images/hero-gateway.jpg"
-          alt="Trail runner in mountain landscape at golden hour"
-          className="absolute inset-0 w-full h-full object-cover object-[55%_center] sm:object-center opacity-25 pointer-events-none"
-          loading="eager"
-        />
+        <div className="absolute inset-0 bg-gradient-to-b from-bg-primary via-bg-secondary/80 to-bg-primary pointer-events-none" />
         <HeroScene />
         <div className="absolute inset-0 woven-pattern opacity-30 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-primary/40 via-bg-primary/85 to-bg-primary pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-28 sm:h-36 md:h-44 lg:h-52 overflow-hidden pointer-events-none">
+          <img
+            src="/images/hero-gateway.jpg"
+            alt=""
+            className="w-full h-full object-cover object-[center_40%] opacity-70 dark:opacity-60"
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/70 to-transparent" />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-bg-primary/50 via-bg-primary/75 to-bg-primary/90 pointer-events-none" />
 
         <div className="relative z-10 text-center max-w-4xl mx-auto w-full">
           <motion.div
