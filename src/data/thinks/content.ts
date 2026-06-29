@@ -20,13 +20,6 @@ export const thinksServices = [
       "Price data, supply trend reports, and demand forecasts for yarn and textile markets.",
     path: "/thinks/intelligence",
   },
-  {
-    id: "research",
-    title: "Research",
-    description:
-      "Commissioned primary research and sector studies for industry stakeholders.",
-    path: "/thinks/research",
-  },
 ] as const;
 
 export const trainingPrograms = [

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Logo } from "@/components/shared/Logo";
@@ -10,9 +10,37 @@ import { cn } from "@/lib/utils";
 export function TradesNav() {
   const [open, setOpen] = useState(false);
   const [tradesOpen, setTradesOpen] = useState(false);
+  const tradesMenuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isActive = (path: string) => location.pathname === path;
+
+  const isTradesCategoryActive = TRADES_CATEGORIES.some(
+    (cat) => !cat.placeholder && location.pathname.startsWith(cat.path),
+  );
+
+  useEffect(() => {
+    setTradesOpen(false);
+    setOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!tradesOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (tradesMenuRef.current && !tradesMenuRef.current.contains(e.target as Node)) {
+        setTradesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [tradesOpen]);
+
+  const goTo = (path: string) => {
+    setTradesOpen(false);
+    setOpen(false);
+    navigate(path);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-bg-primary/80 backdrop-blur-xl">
@@ -31,59 +59,67 @@ export function TradesNav() {
           </Link>
 
           <div
+            ref={tradesMenuRef}
             className="relative"
             onMouseEnter={() => setTradesOpen(true)}
             onMouseLeave={() => setTradesOpen(false)}
           >
             <button
+              type="button"
+              aria-expanded={tradesOpen}
+              aria-haspopup="true"
+              onClick={() => setTradesOpen((v) => !v)}
               className={cn(
                 "flex items-center gap-1 px-3 py-2 text-sm font-medium",
-                location.pathname.startsWith("/trades/yarn") ||
-                  location.pathname.startsWith("/trades/fabrics") ||
-                  location.pathname.startsWith("/trades/home-textile") ||
-                  location.pathname.startsWith("/trades/garments")
+                isTradesCategoryActive
                   ? "text-accent"
                   : "text-text-secondary hover:text-text-primary",
               )}
             >
-              Trades <ChevronDown size={14} />
+              Trades <ChevronDown size={14} className={cn("transition-transform", tradesOpen && "rotate-180")} />
             </button>
             <AnimatePresence>
               {tradesOpen && (
                 <motion.div
-                  initial={{ opacity: 0, y: 8 }}
+                  initial={{ opacity: 0, y: 4 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  className="absolute top-full left-0 mt-1 w-[520px] rounded-xl border border-border bg-bg-elevated/95 backdrop-blur-xl p-4 shadow-xl z-50 grid grid-cols-2 gap-4"
+                  exit={{ opacity: 0, y: 4 }}
+                  className="absolute top-full left-0 pt-1 z-[60]"
                 >
-                  {TRADES_CATEGORIES.map((cat) => (
-                    <div key={cat.id}>
-                      <Link
-                        to={cat.placeholder ? "#" : cat.path}
-                        className={cn(
-                          "block font-medium text-sm mb-2 hover:text-accent transition-colors",
-                          cat.placeholder ? "text-text-muted cursor-default" : "text-text-primary",
+                  <div className="w-[520px] rounded-xl border border-border bg-bg-elevated shadow-xl p-4 grid grid-cols-2 gap-4">
+                    {TRADES_CATEGORIES.map((cat) => (
+                      <div key={cat.id}>
+                        {cat.placeholder ? (
+                          <span className="block font-medium text-sm mb-2 text-text-muted">
+                            {cat.label} <span className="text-xs">(TBD)</span>
+                          </span>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => goTo(cat.path)}
+                            className="block w-full text-left font-medium text-sm mb-2 text-text-primary hover:text-accent transition-colors"
+                          >
+                            {cat.label}
+                          </button>
                         )}
-                      >
-                        {cat.label}
-                        {cat.placeholder && <span className="text-xs text-text-muted ml-1">(TBD)</span>}
-                      </Link>
-                      {cat.subcategories.length > 0 && (
-                        <ul className="space-y-1">
-                          {cat.subcategories.map((sub) => (
-                            <li key={sub.slug}>
-                              <Link
-                                to={cat.path}
-                                className="text-xs text-text-muted hover:text-accent transition-colors"
-                              >
-                                {sub.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  ))}
+                        {cat.subcategories.length > 0 && !cat.placeholder && (
+                          <ul className="space-y-1">
+                            {cat.subcategories.map((sub) => (
+                              <li key={sub.slug}>
+                                <button
+                                  type="button"
+                                  onClick={() => goTo(cat.path)}
+                                  className="text-xs text-text-muted hover:text-accent transition-colors text-left"
+                                >
+                                  {sub.label}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -128,16 +164,22 @@ export function TradesNav() {
                 Home
               </Link>
               <div className="px-4 py-2 text-xs font-semibold text-accent uppercase tracking-wider">Trades</div>
-              {TRADES_CATEGORIES.map((cat) => (
-                <Link
-                  key={cat.id}
-                  to={cat.placeholder ? "#" : cat.path}
-                  onClick={() => setOpen(false)}
-                  className="block px-4 py-2 text-sm text-text-secondary hover:bg-bg-elevated rounded-lg"
-                >
-                  {cat.label}
-                </Link>
-              ))}
+              {TRADES_CATEGORIES.map((cat) =>
+                cat.placeholder ? (
+                  <span key={cat.id} className="block px-4 py-2 text-sm text-text-muted">
+                    {cat.label} (TBD)
+                  </span>
+                ) : (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => goTo(cat.path)}
+                    className="block w-full text-left px-4 py-2 text-sm text-text-secondary hover:bg-bg-elevated rounded-lg"
+                  >
+                    {cat.label}
+                  </button>
+                ),
+              )}
               <div className="border-t border-border my-2" />
               {TRADES_STATIC_PAGES.map((page) => (
                 <Link

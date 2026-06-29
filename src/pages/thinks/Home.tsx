@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, BookOpen, Brain, LineChart, Search } from "lucide-react";
+import { ArrowRight, BookOpen, Brain, LineChart } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Section, SectionHeader } from "@/components/ui/Section";
@@ -11,12 +11,10 @@ import { Scene3D } from "@/components/3d/Scene3D";
 import {
   thinksServices,
   trainingPrograms,
-  insights,
-  caseStudies,
   consultingSteps,
 } from "@/data/thinks/content";
 
-const icons = { training: BookOpen, consulting: Brain, intelligence: LineChart, research: Search };
+const icons = { training: BookOpen, consulting: Brain, intelligence: LineChart };
 
 export default function ThinksHome() {
   return (
@@ -33,7 +31,7 @@ export default function ThinksHome() {
               Think Beyond <span className="text-gradient">Markets.</span>
             </h1>
             <p className="text-text-secondary text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-              Training, consulting, market intelligence, and strategic advisory — for organizations shaping the future of the textile industry.
+              Training, consulting, and market intelligence — for organizations shaping the future of the textile industry.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button to="/thinks/contact" size="lg">Book a Consultation <ArrowRight size={18} /></Button>
@@ -44,8 +42,8 @@ export default function ThinksHome() {
       </HeroBackdrop>
 
       <Section pattern>
-        <SectionHeader eyebrow="What We Do" title="Four disciplines. One outcome: better decisions." />
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <SectionHeader eyebrow="What We Do" title="Three disciplines. One outcome: better decisions." />
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {thinksServices.map((s, i) => {
             const Icon = icons[s.id as keyof typeof icons];
             return (
@@ -98,35 +96,16 @@ export default function ThinksHome() {
       </Section>
 
       <Section className="bg-bg-secondary">
-        <SectionHeader eyebrow="Market Intelligence" title="The signals that matter. Before they become obvious." />
-        <div className="grid md:grid-cols-3 gap-6">
-          {insights.map((a, i) => (
-            <ScrollReveal key={a.slug} delay={i * 0.1}>
-              <Card>
-                <span className="text-xs font-semibold text-accent bg-accent/10 px-2 py-1 rounded-full">{a.category}</span>
-                <h3 className="font-display text-lg font-semibold mt-3 mb-2">{a.title}</h3>
-                <p className="text-text-secondary text-sm mb-4">{a.excerpt}</p>
-                <Link to="/thinks/insights" className="text-accent text-sm">Read →</Link>
-              </Card>
-            </ScrollReveal>
-          ))}
-        </div>
-      </Section>
-
-      <Section>
-        <SectionHeader eyebrow="Case Studies" title="Work that moved the needle." />
-        <div className="grid md:grid-cols-3 gap-6">
-          {caseStudies.map((c, i) => (
-            <ScrollReveal key={c.id} delay={i * 0.1}>
-              <Card className="bg-bg-elevated">
-                <span className="font-display text-4xl font-bold text-accent/30">{c.id}</span>
-                <p className="text-text-muted text-xs mt-2 mb-3">{c.client}</p>
-                <h3 className="font-semibold mb-2">{c.challenge}</h3>
-                <p className="text-accent font-display text-xl font-bold">{c.result}</p>
-              </Card>
-            </ScrollReveal>
-          ))}
-        </div>
+        <ScrollReveal>
+          <div className="rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/10 to-bg-elevated p-12 text-center max-w-3xl mx-auto">
+            <LineChart size={40} className="text-accent mx-auto mb-4" />
+            <h2 className="font-display text-2xl font-bold mb-3">Market Intelligence</h2>
+            <p className="text-text-secondary text-sm mb-6 max-w-lg mx-auto">
+              Subscription-based price data, supply trend reports, and demand forecasts for yarn and textile markets.
+            </p>
+            <Button to="/thinks/intelligence" size="lg">Explore Intelligence →</Button>
+          </div>
+        </ScrollReveal>
       </Section>
 
       <Section>

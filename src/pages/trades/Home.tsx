@@ -7,14 +7,12 @@ import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { GlobeHeroPanel } from "@/components/trades/GlobeHeroPanel";
 import { TRADES_CATEGORIES } from "@/data/trades/trades.config";
-import { yarnProducts, tradesStats } from "@/data/trades/products";
+import { yarnProducts } from "@/data/trades/products";
 import { Link } from "react-router-dom";
 
 const CATEGORY_ICONS = { yarns: Package, fabrics: Factory, "home-textiles": Package, garments: Package };
 
 export default function TradesHome() {
-  const activeCategories = TRADES_CATEGORIES.filter((c) => !c.placeholder);
-
   return (
     <>
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
@@ -40,46 +38,41 @@ export default function TradesHome() {
         </div>
       </section>
 
-      <section className="py-12 border-y border-border bg-bg-secondary">
-        <div className="mx-auto max-w-5xl px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {tradesStats.map((s) => (
-            <div key={s.label}>
-              <div className="font-display text-3xl font-bold text-accent">{s.value}</div>
-              <div className="text-text-muted text-sm">{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <Section>
         <SectionHeader
           eyebrow="Trade Categories"
           title="Yarn, fabric, and home textiles — sourced to spec."
-          description="Four trade categories. Click through to explore subcategories and request a quote."
+          description="Browse our trade categories and request a quote for your specification."
         />
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {TRADES_CATEGORIES.map((cat, i) => {
             const Icon = CATEGORY_ICONS[cat.id as keyof typeof CATEGORY_ICONS] ?? Package;
             return (
               <ScrollReveal key={cat.id} delay={i * 0.08}>
-                <Link to={cat.placeholder ? "#" : cat.path}>
-                  <Card className={`h-full ${cat.placeholder ? "opacity-60" : ""}`}>
+                {cat.placeholder ? (
+                  <Card className="h-full opacity-60">
                     <Icon size={28} className="text-accent mb-3" />
                     <h3 className="font-display text-lg font-semibold mb-2">
                       {cat.label}
-                      {cat.placeholder && (
-                        <span className="ml-2 text-xs text-text-muted font-normal">(Coming soon)</span>
-                      )}
+                      <span className="ml-2 text-xs text-text-muted font-normal">(Coming soon)</span>
                     </h3>
-                    <p className="text-text-secondary text-sm mb-3">{cat.description}</p>
-                    {!cat.placeholder && cat.subcategories.length > 0 && (
-                      <p className="text-text-muted text-xs">
-                        {cat.subcategories.slice(0, 4).map((s) => s.label).join(" · ")}
-                        {cat.subcategories.length > 4 ? " · …" : ""}
-                      </p>
-                    )}
+                    <p className="text-text-secondary text-sm">{cat.description}</p>
                   </Card>
-                </Link>
+                ) : (
+                  <Link to={cat.path}>
+                    <Card className="h-full hover:border-accent/30 transition-colors">
+                      <Icon size={28} className="text-accent mb-3" />
+                      <h3 className="font-display text-lg font-semibold mb-2">{cat.label}</h3>
+                      <p className="text-text-secondary text-sm mb-3">{cat.description}</p>
+                      {cat.subcategories.length > 0 && (
+                        <p className="text-text-muted text-xs">
+                          {cat.subcategories.slice(0, 4).map((s) => s.label).join(" · ")}
+                          {cat.subcategories.length > 4 ? " · …" : ""}
+                        </p>
+                      )}
+                    </Card>
+                  </Link>
+                )}
               </ScrollReveal>
             );
           })}
@@ -102,22 +95,6 @@ export default function TradesHome() {
         </div>
         <div className="text-center mt-10">
           <Button to="/trades/yarn" variant="secondary">View All Yarn Products →</Button>
-        </div>
-      </Section>
-
-      <Section className="bg-bg-secondary">
-        <SectionHeader eyebrow="Quick Links" title="Explore our trade network" />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {activeCategories.map((cat) => (
-            <Link
-              key={cat.id}
-              to={cat.path}
-              className="p-4 rounded-xl border border-border hover:border-accent/30 hover:bg-accent/5 transition-colors text-center"
-            >
-              <div className="font-medium text-sm">{cat.label}</div>
-              <div className="text-text-muted text-xs mt-1">{cat.subcategories.length} types</div>
-            </Link>
-          ))}
         </div>
       </Section>
 
