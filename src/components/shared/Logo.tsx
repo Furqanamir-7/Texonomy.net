@@ -19,15 +19,15 @@ const logoSrc: Record<LogoVariant, string> = {
 };
 
 const baseImgSizes: Record<LogoVariant, string> = {
-  nav: "h-8 w-8 object-contain object-left scale-[2.25] origin-left",
-  hero: "h-16 md:h-20 w-auto max-w-[320px] object-contain scale-[3] origin-left",
-  footer: "h-10 w-10 object-contain scale-[3] origin-center",
+  nav: "h-8 w-8 object-contain object-left scale-[1.75] sm:scale-[2.25] origin-left",
+  hero: "h-14 sm:h-16 md:h-20 w-auto max-w-[280px] sm:max-w-[320px] object-contain scale-[2.5] sm:scale-[3] origin-left",
+  footer: "h-10 w-10 object-contain scale-[2.5] sm:scale-[3] origin-center",
 };
 
 const wrapperSizes: Record<LogoVariant, string> = {
-  nav: "h-14 w-16 overflow-hidden flex items-center shrink-0",
-  hero: "overflow-hidden flex items-center max-w-sm",
-  footer: "h-14 w-28 overflow-hidden flex items-center justify-center shrink-0",
+  nav: "h-14 w-14 sm:w-16 overflow-hidden flex items-center shrink-0",
+  hero: "overflow-hidden flex items-center max-w-[240px] sm:max-w-sm",
+  footer: "h-14 w-24 sm:w-28 overflow-hidden flex items-center justify-center shrink-0",
 };
 
 export function Logo({ variant = "nav", to = "/", division, className }: LogoProps) {
@@ -41,12 +41,12 @@ export function Logo({ variant = "nav", to = "/", division, className }: LogoPro
         />
       </div>
       {variant === "nav" && (
-        <span className="font-display font-bold text-base sm:text-lg tracking-[0.12em] text-text-primary whitespace-nowrap">
+        <span className="font-display font-bold text-sm sm:text-lg tracking-[0.08em] sm:tracking-[0.12em] text-text-primary whitespace-nowrap">
           TE<span className="text-accent">X</span>ONOMY
         </span>
       )}
       {division && variant === "nav" && (
-        <span className="hidden sm:inline-flex px-2 py-0.5 rounded-md text-[10px] font-bold tracking-widest uppercase bg-accent/10 text-accent border border-accent/20">
+        <span className="inline-flex px-1.5 sm:px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-bold tracking-widest uppercase bg-accent/10 text-accent border border-accent/20 shrink-0">
           {division}
         </span>
       )}

@@ -4,12 +4,14 @@ import { X, MapPin, Package } from "lucide-react";
 import { TradingGlobe3D, type GlobeMarker } from "@/components/3d/TradingGlobe3D";
 import { GLOBE_MARKERS } from "@/data/trades/globe-markers";
 import { cn } from "@/lib/utils";
+import { useDevice } from "@/hooks/useDevice";
 
 type Filter = "all" | "supplier" | "customer";
 
 export function GlobeHeroPanel({ className }: { className?: string }) {
   const [filter, setFilter] = useState<Filter>("all");
   const [active, setActive] = useState<GlobeMarker | null>(null);
+  const { isMobile } = useDevice();
 
   const chips = GLOBE_MARKERS.filter((m) => {
     if (filter === "all") return true;
@@ -18,21 +20,21 @@ export function GlobeHeroPanel({ className }: { className?: string }) {
   });
 
   return (
-    <div className={cn("flex flex-col gap-4", className)}>
+    <div className={cn("flex flex-col gap-3 sm:gap-4 min-w-0", className)}>
       <TradingGlobe3D
         filter={filter}
         activeId={active?.id ?? null}
         onSelect={setActive}
-        className="h-72 sm:h-80 lg:h-[420px] w-full"
+        className="h-52 sm:h-72 md:h-80 lg:h-[420px] w-full min-w-0"
       />
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex gap-2 overflow-x-auto scrollbar-none -mx-1 px-1 pb-0.5">
         {(["all", "supplier", "customer"] as const).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
             className={cn(
-              "px-3 py-1.5 rounded-full text-xs font-medium border transition-colors",
+              "shrink-0 px-3 py-1.5 rounded-full text-xs font-medium border transition-colors",
               filter === f
                 ? "bg-accent/15 border-accent/40 text-accent"
                 : "border-border text-text-muted hover:text-text-primary hover:border-border/80",
@@ -43,20 +45,22 @@ export function GlobeHeroPanel({ className }: { className?: string }) {
         ))}
       </div>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex gap-2 overflow-x-auto scrollbar-none -mx-1 px-1 pb-1 snap-x snap-mandatory">
         {chips.map((m) => (
           <button
             key={m.id}
             onClick={() => setActive(m)}
             className={cn(
-              "px-3 py-1.5 rounded-lg text-xs border transition-colors text-left",
+              "shrink-0 snap-start max-w-[min(100%,14rem)] px-3 py-2 rounded-lg text-xs border transition-colors text-left",
               active?.id === m.id
                 ? "bg-accent/10 border-accent/40 text-accent"
                 : "border-border/60 text-text-secondary hover:border-accent/30 hover:text-text-primary",
             )}
           >
-            <span className="font-medium">{m.name}</span>
-            <span className="text-text-muted ml-1.5">· {m.products.slice(0, 2).join(", ")}</span>
+            <span className="font-medium block truncate">{m.name}</span>
+            {!isMobile && (
+              <span className="text-text-muted block truncate mt-0.5">· {m.products.slice(0, 2).join(", ")}</span>
+            )}
           </button>
         ))}
       </div>
@@ -67,19 +71,19 @@ export function GlobeHeroPanel({ className }: { className?: string }) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
-            className="rounded-xl border border-accent/30 bg-bg-elevated/95 backdrop-blur-xl p-5 shadow-xl shadow-accent/5"
+            className="rounded-xl border border-accent/30 bg-bg-elevated/95 backdrop-blur-xl p-4 sm:p-5 shadow-xl shadow-accent/5"
           >
             <div className="flex items-start justify-between gap-3 mb-3">
-              <div>
-                <div className="flex items-center gap-2 text-accent text-xs font-semibold uppercase tracking-wider mb-1">
-                  <MapPin size={12} />
+              <div className="min-w-0">
+                <div className="flex items-center gap-2 text-accent text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-1">
+                  <MapPin size={12} className="shrink-0" />
                   {active.role === "both" ? "Supplier & Customer" : active.role === "supplier" ? "Supplier" : "Customer"}
                 </div>
-                <h3 className="font-display text-lg font-bold">{active.headline}</h3>
+                <h3 className="font-display text-base sm:text-lg font-bold leading-snug">{active.headline}</h3>
               </div>
               <button
                 onClick={() => setActive(null)}
-                className="p-1 rounded-lg text-text-muted hover:text-text-primary hover:bg-bg-primary transition-colors"
+                className="p-1 rounded-lg text-text-muted hover:text-text-primary hover:bg-bg-primary transition-colors shrink-0"
                 aria-label="Close"
               >
                 <X size={16} />

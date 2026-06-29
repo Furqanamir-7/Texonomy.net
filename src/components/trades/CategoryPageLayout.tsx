@@ -20,13 +20,13 @@ export function CategoryPageLayout({
   useScrollToHash();
 
   return (
-    <section className={cn("pt-8 pb-14 md:pt-10 md:pb-16", className)}>
+    <section className={cn("pt-6 pb-10 sm:pt-8 sm:pb-14 md:pt-10 md:pb-16", className)}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <ScrollReveal>
-          <span className="text-accent text-xs font-bold tracking-widest uppercase">{eyebrow}</span>
-          <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mt-3 mb-3">{title}</h1>
+          <span className="text-accent text-[10px] sm:text-xs font-bold tracking-wide sm:tracking-widest uppercase">{eyebrow}</span>
+          <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-2 sm:mt-3 mb-2 sm:mb-3 leading-tight">{title}</h1>
           {description && (
-            <p className="text-text-secondary text-base md:text-lg max-w-2xl mb-8 leading-relaxed">
+            <p className="text-text-secondary text-sm sm:text-base md:text-lg max-w-2xl mb-6 sm:mb-8 leading-relaxed">
               {description}
             </p>
           )}

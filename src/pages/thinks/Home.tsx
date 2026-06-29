@@ -24,18 +24,18 @@ export default function ThinksHome() {
         alt="Strategic business planning and market analysis"
         effect={<Scene3D particleCount={120} className="opacity-40" />}
       >
-        <div className="mx-auto max-w-7xl px-4 py-20 text-center">
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:py-20 text-center">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}>
             <SectionLabel text="Strategic Intelligence for Textile Professionals" className="justify-center" />
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight px-1">
               Think Beyond <span className="text-gradient">Markets.</span>
             </h1>
-            <p className="text-text-secondary text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-text-secondary text-base sm:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-1">
               Training, consulting, and market intelligence — for organizations shaping the future of the textile industry.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button to="/thinks/contact" size="lg">Book a Consultation <ArrowRight size={18} /></Button>
-              <Button to="/thinks/consulting" variant="outline" size="lg">View Services</Button>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
+              <Button to="/thinks/contact" size="lg" className="w-full sm:w-auto">Book a Consultation <ArrowRight size={18} /></Button>
+              <Button to="/thinks/consulting" variant="outline" size="lg" className="w-full sm:w-auto">View Services</Button>
             </div>
           </motion.div>
         </div>

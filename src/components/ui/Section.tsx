@@ -20,7 +20,7 @@ export function Section({
     <section
       id={id}
       className={cn(
-        "relative py-20 md:py-28 lg:py-32",
+        "relative py-14 sm:py-20 md:py-28 lg:py-32",
         pattern && "woven-pattern",
         className,
       )}
@@ -48,17 +48,17 @@ export function SectionHeader({
   className,
 }: SectionHeaderProps) {
   return (
-    <ScrollReveal className={cn(align === "center" && "text-center mx-auto max-w-3xl mb-16", className)}>
+    <ScrollReveal className={cn(align === "center" && "text-center mx-auto max-w-3xl mb-10 sm:mb-16", className)}>
       {eyebrow && (
-        <span className="inline-block text-accent text-sm font-semibold tracking-widest uppercase mb-4">
+        <span className="inline-block text-accent text-xs sm:text-sm font-semibold tracking-widest uppercase mb-3 sm:mb-4">
           {eyebrow}
         </span>
       )}
-      <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-4">
+      <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-3 sm:mb-4">
         {title}
       </h2>
       {description && (
-        <p className="text-text-secondary text-lg leading-relaxed">{description}</p>
+        <p className="text-text-secondary text-base sm:text-lg leading-relaxed">{description}</p>
       )}
     </ScrollReveal>
   );

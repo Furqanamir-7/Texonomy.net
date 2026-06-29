@@ -15,24 +15,29 @@ const CATEGORY_ICONS = { yarns: Package, fabrics: Factory, "home-textiles": Pack
 export default function TradesHome() {
   return (
     <>
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+      <section className="relative min-h-0 md:min-h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-bg-primary to-bg-primary" />
-        <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 md:py-20 grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
-          <motion.div initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }}>
+        <div className="relative z-10 mx-auto max-w-7xl w-full px-4 sm:px-6 py-12 sm:py-16 md:py-20 grid lg:grid-cols-2 gap-8 lg:gap-14 items-start">
+          <motion.div initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }} className="min-w-0">
             <SectionLabel text="Global Textile Trading" />
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6">
               Premium Yarn.<br />Delivered Worldwide.
             </h1>
-            <p className="text-text-secondary text-lg mb-8 leading-relaxed">
+            <p className="text-text-secondary text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed">
               Supplying mills, manufacturers, and exporters with consistent-quality yarn across every major market.
               Explore our global supplier and customer network on the map.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button to="/trades/yarn" size="lg">Explore Yarn <ArrowRight size={18} /></Button>
-              <Button to="/trades/rfq" variant="outline" size="lg">Request a Quote</Button>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <Button to="/trades/yarn" size="lg" className="w-full sm:w-auto">Explore Yarn <ArrowRight size={18} /></Button>
+              <Button to="/trades/rfq" variant="outline" size="lg" className="w-full sm:w-auto">Request a Quote</Button>
             </div>
           </motion.div>
-          <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.15 }}>
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.15 }}
+            className="min-w-0 w-full"
+          >
             <GlobeHeroPanel />
           </motion.div>
         </div>
@@ -89,7 +94,7 @@ export default function TradesHome() {
                       <h3 className="font-display text-lg font-semibold mb-2">{cat.label}</h3>
                       <p className="text-text-secondary text-sm mb-3">{cat.description}</p>
                       {cat.subcategories.length > 0 && (
-                        <p className="text-text-muted text-xs">
+                        <p className="text-text-muted text-xs line-clamp-2">
                           {cat.subcategories.slice(0, 4).map((s) => s.label).join(" · ")}
                           {cat.subcategories.length > 4 ? " · …" : ""}
                         </p>
@@ -105,13 +110,13 @@ export default function TradesHome() {
 
       <Section className="py-12 md:py-16">
         <ScrollReveal>
-          <div className="rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/15 to-bg-elevated p-10 md:p-12 text-center">
+          <div className="rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/15 to-bg-elevated p-6 sm:p-10 md:p-12 text-center">
             <Globe size={40} className="text-accent mx-auto mb-4" />
-            <h2 className="font-display text-3xl font-bold mb-4">Ready to source premium yarn?</h2>
-            <p className="text-text-secondary mb-8 max-w-lg mx-auto">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4">Ready to source premium yarn?</h2>
+            <p className="text-text-secondary text-sm sm:text-base mb-6 sm:mb-8 max-w-lg mx-auto">
               Tell us your count, composition, and quantity. We respond within 24 hours.
             </p>
-            <Button to="/trades/rfq" size="lg">Send Inquiry →</Button>
+            <Button to="/trades/rfq" size="lg" className="w-full sm:w-auto">Send Inquiry →</Button>
           </div>
         </ScrollReveal>
       </Section>

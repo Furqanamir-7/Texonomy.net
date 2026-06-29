@@ -31,7 +31,7 @@ interface HeroBackdropProps {
 
 export function HeroBackdrop({ src, alt, children, className, effect }: HeroBackdropProps) {
   return (
-    <section className={cn("relative min-h-[85vh] flex items-center overflow-hidden", className)}>
+    <section className={cn("relative min-h-[72vh] sm:min-h-[85vh] flex items-center overflow-hidden", className)}>
       <img
         src={src}
         alt={alt}

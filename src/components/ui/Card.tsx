@@ -12,7 +12,7 @@ export function Card({ children, className, hover = true, glow = false }: CardPr
   return (
     <motion.div
       className={cn(
-        "rounded-xl border border-border bg-bg-elevated/60 backdrop-blur-sm p-6",
+        "rounded-xl border border-border bg-bg-elevated/60 backdrop-blur-sm p-4 sm:p-6",
         glow && "glow-accent",
         className,
       )}

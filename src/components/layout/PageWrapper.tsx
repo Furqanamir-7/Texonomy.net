@@ -12,7 +12,7 @@ export function PageWrapper() {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2, ease: "easeInOut" }}
-        className="min-h-screen pt-14"
+        className="min-h-screen pt-14 pb-[max(1rem,env(safe-area-inset-bottom))]"
       >
         <Outlet />
       </motion.main>

@@ -6,6 +6,7 @@ import { Logo } from "@/components/shared/Logo";
 import { TRADES_STATIC_PAGES, TRADES_CATEGORIES, getCategoryGroups } from "@/data/trades/trades.config";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
 export function TradesNav() {
   const [open, setOpen] = useState(false);
@@ -13,6 +14,7 @@ export function TradesNav() {
   const tradesMenuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const navigate = useNavigate();
+  useBodyScrollLock(open);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -43,8 +45,8 @@ export function TradesNav() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-bg-primary/80 backdrop-blur-xl">
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-bg-primary/80 backdrop-blur-xl pt-[env(safe-area-inset-top)]">
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 h-14 flex items-center justify-between gap-2 sm:gap-4 min-w-0">
         <Logo to="/trades" division="trades" />
 
         <div className="hidden lg:flex items-center gap-1">
@@ -157,7 +159,7 @@ export function TradesNav() {
           <Button to="/trades/rfq" size="sm">Request Quote</Button>
         </div>
 
-        <button className="lg:hidden p-2 shrink-0" onClick={() => setOpen(!open)} aria-label="Menu">
+        <button className="lg:hidden p-2 shrink-0 -mr-1" onClick={() => setOpen(!open)} aria-label="Menu">
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </nav>

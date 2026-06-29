@@ -29,8 +29,8 @@ const variants: Record<ButtonVariant, string> = {
 
 const sizes: Record<ButtonSize, string> = {
   sm: "px-4 py-2 text-sm",
-  md: "px-6 py-3 text-base",
-  lg: "px-8 py-4 text-lg",
+  md: "px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base",
+  lg: "px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg",
 };
 
 const motionProps = (disabled?: boolean) => ({
