@@ -144,19 +144,19 @@ export default function Gateway() {
         <img
           src="/images/hero-gateway.jpg"
           alt="Runner on a mountain ridge at sunrise"
-          className="absolute inset-0 w-full h-full object-cover object-[center_65%] sm:object-[center_55%] pointer-events-none"
+          className="hero-photo absolute inset-0 w-full h-full object-cover object-[center_65%] sm:object-[center_55%] pointer-events-none"
           loading="eager"
         />
         <HeroScene />
-        <div className="absolute inset-0 woven-pattern opacity-20 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-primary/75 via-bg-primary/85 to-bg-primary pointer-events-none" />
+        <div className="hero-woven absolute inset-0 woven-pattern pointer-events-none" />
+        <div className="hero-scrim absolute inset-0 pointer-events-none" />
 
-        <div className="relative z-10 text-center max-w-4xl mx-auto w-full">
+        <div className="hero-content relative z-10 text-center max-w-4xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full border border-accent/30 bg-accent/5 text-accent text-[10px] sm:text-xs font-semibold tracking-wide sm:tracking-widest uppercase mb-6 sm:mb-8 max-w-full"
+            className="hero-eyebrow inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full border border-accent/30 bg-accent/5 text-accent text-[10px] sm:text-xs font-semibold tracking-wide sm:tracking-widest uppercase mb-6 sm:mb-8 max-w-full"
           >
             <Sparkles size={14} className="shrink-0" />
             <span className="truncate">{GATEWAY_HERO.eyebrow}</span>

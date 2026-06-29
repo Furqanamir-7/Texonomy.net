@@ -32,6 +32,11 @@ html.dark {
   --app-border: #2a2a38;
   --app-accent-foreground: #0a0a0f;
   --app-woven-alpha: 0.03;
+  --app-hero-scrim-top: 75%;
+  --app-hero-scrim-mid: 85%;
+  --app-hero-scrim-bottom: 100%;
+  --app-hero-photo-opacity: 1;
+  --app-hero-woven-opacity: 0.2;
 }
 
 html.light {
@@ -47,7 +52,12 @@ html.light {
   --app-text-muted: #6b7380;
   --app-border: #d4dae3;
   --app-accent-foreground: #ffffff;
-  --app-woven-alpha: 0.06;
+  --app-woven-alpha: 0.05;
+  --app-hero-scrim-top: 28%;
+  --app-hero-scrim-mid: 48%;
+  --app-hero-scrim-bottom: 72%;
+  --app-hero-photo-opacity: 1;
+  --app-hero-woven-opacity: 0.06;
 }
 
 * {
@@ -159,4 +169,48 @@ h1, h2, h3, h4, h5, h6 {
 
 .scrollbar-none::-webkit-scrollbar {
   display: none;
+}
+
+/* Hero imagery — lighter scrim in light mode so photos stay visible */
+.hero-photo {
+  opacity: var(--app-hero-photo-opacity);
+}
+
+.hero-woven {
+  opacity: var(--app-hero-woven-opacity);
+}
+
+.hero-scrim {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-bg-primary) var(--app-hero-scrim-top), transparent),
+    color-mix(in srgb, var(--color-bg-primary) var(--app-hero-scrim-mid), transparent),
+    color-mix(in srgb, var(--color-bg-primary) var(--app-hero-scrim-bottom), transparent)
+  );
+}
+
+html.light .hero-content h1,
+html.light .hero-content p,
+html.light .hero-content .text-text-secondary {
+  text-shadow:
+    0 1px 2px rgba(255, 255, 255, 0.95),
+    0 0 24px rgba(255, 255, 255, 0.65);
+}
+
+html.light .hero-content .text-gradient {
+  filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.9));
+}
+
+html.light .hero-eyebrow {
+  background-color: color-mix(in srgb, var(--color-bg-elevated) 82%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.globe-panel-scrim {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-accent) 5%, transparent),
+    transparent,
+    color-mix(in srgb, var(--color-bg-primary) var(--app-hero-scrim-bottom), transparent)
+  );
 }

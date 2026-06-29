@@ -160,8 +160,8 @@ export function TradingGlobe3D({ filter, activeId, onSelect, className }: Tradin
 
   return (
     <div className={`relative rounded-2xl border border-accent/25 overflow-hidden bg-bg-elevated ${className}`}>
-      <div className="absolute inset-0 woven-pattern opacity-30 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-bg-primary/80 pointer-events-none" />
+      <div className="absolute inset-0 hero-woven woven-pattern pointer-events-none" />
+      <div className="globe-panel-scrim absolute inset-0 pointer-events-none" />
       <Canvas
         camera={{ position: [0, 0, 5.5], fov: 45 }}
         dpr={isMobile ? 1 : 1.5}
