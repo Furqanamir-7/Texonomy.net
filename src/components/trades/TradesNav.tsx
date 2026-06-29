@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Logo } from "@/components/shared/Logo";
-import { TRADES_STATIC_PAGES, TRADES_CATEGORIES } from "@/data/trades/trades.config";
+import { TRADES_STATIC_PAGES, TRADES_CATEGORIES, getCategoryGroups } from "@/data/trades/trades.config";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -103,19 +103,30 @@ export function TradesNav() {
                           </button>
                         )}
                         {cat.subcategories.length > 0 && !cat.placeholder && (
-                          <ul className="space-y-1">
-                            {cat.subcategories.map((sub) => (
-                              <li key={sub.slug}>
-                                <button
-                                  type="button"
-                                  onClick={() => goTo(cat.path, `#${sub.slug}`)}
-                                  className="text-xs text-text-muted hover:text-accent transition-colors text-left"
-                                >
-                                  {sub.label}
-                                </button>
-                              </li>
+                          <div className="space-y-2">
+                            {getCategoryGroups(cat).map((group) => (
+                              <div key={group.label || cat.id}>
+                                {group.label && (
+                                  <p className="text-[10px] font-semibold uppercase tracking-wider text-text-muted mb-1">
+                                    {group.label}
+                                  </p>
+                                )}
+                                <ul className="space-y-1">
+                                  {group.items.map((sub) => (
+                                    <li key={sub.slug}>
+                                      <button
+                                        type="button"
+                                        onClick={() => goTo(cat.path, `#${sub.slug}`)}
+                                        className="text-xs text-text-muted hover:text-accent transition-colors text-left"
+                                      >
+                                        {sub.label}
+                                      </button>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
                             ))}
-                          </ul>
+                          </div>
                         )}
                       </div>
                     ))}

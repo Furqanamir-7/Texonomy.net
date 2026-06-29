@@ -4,14 +4,34 @@ export type TradeSubcategory = {
   description: string;
 };
 
+export type TradeCategoryGroup = {
+  label: string;
+  items: TradeSubcategory[];
+};
+
 export type TradeCategory = {
   id: string;
   label: string;
   path: string;
   description: string;
   subcategories: TradeSubcategory[];
+  groups?: TradeCategoryGroup[];
   placeholder?: boolean;
 };
+
+const YARN_TECHNOLOGIES: TradeSubcategory[] = [
+  { label: "Open End", slug: "open-end", description: "Cost-efficient open-end yarn for towels, denim, and industrial fabrics." },
+  { label: "Ring Spun", slug: "ring-spun", description: "Combed and carded ring-spun counts for premium knit and woven programs." },
+  { label: "Vortex", slug: "vortex", description: "MVS yarn with low hairiness and excellent abrasion resistance for shirting." },
+];
+
+const YARN_FIBRES: TradeSubcategory[] = [
+  { label: "Cotton", slug: "cotton", description: "100% cotton carded and combed yarn, Ne 6–Ne 60, for apparel and home textile." },
+  { label: "Polyester", slug: "polyester", description: "Filament and spun polyester for blends, sportswear, and industrial end-uses." },
+  { label: "Cotton Blends", slug: "cotton-blends", description: "CVC, PC, and TC blends with custom ratios for uniforms and workwear." },
+  { label: "Fleece", slug: "fleece", description: "Polyester and cotton-poly fleece counts for sweatshirt and activewear programs." },
+  { label: "Linen", slug: "linen", description: "Linen and linen-blend yarn for breathable shirting and home textile applications." },
+];
 
 export const TRADES_CATEGORIES: TradeCategory[] = [
   {
@@ -20,15 +40,10 @@ export const TRADES_CATEGORIES: TradeCategory[] = [
     path: "/trades/yarn",
     description:
       "Cotton, polyester, and blended yarns — ring-spun, open-end, and vortex — from Ne 4 to Ne 120.",
-    subcategories: [
-      { label: "OE (Open End)", slug: "oe", description: "Cost-efficient open-end yarn for towels, denim, and industrial fabrics." },
-      { label: "Ring Spun", slug: "ring-spun", description: "Combed and carded ring-spun counts for premium knit and woven programs." },
-      { label: "Vortex", slug: "vortex", description: "MVS yarn with low hairiness and excellent abrasion resistance for shirting." },
-      { label: "Cotton", slug: "cotton", description: "100% cotton carded and combed yarn, Ne 6–Ne 60, for apparel and home textile." },
-      { label: "Polyester (Poly)", slug: "polyester", description: "Filament and spun polyester for blends, sportswear, and industrial end-uses." },
-      { label: "Cotton Blends", slug: "cotton-blends", description: "CVC, PC, and TC blends with custom ratios for uniforms and workwear." },
-      { label: "Fleece", slug: "fleece", description: "Polyester and cotton-poly fleece counts for sweatshirt and activewear programs." },
-      { label: "Linen", slug: "linen", description: "Linen and linen-blend yarn for breathable shirting and home textile applications." },
+    subcategories: [...YARN_TECHNOLOGIES, ...YARN_FIBRES],
+    groups: [
+      { label: "Technologies", items: YARN_TECHNOLOGIES },
+      { label: "Fibres", items: YARN_FIBRES },
     ],
   },
   {
@@ -70,6 +85,12 @@ export const TRADES_CATEGORIES: TradeCategory[] = [
 
 export function getCategoryByPath(path: string) {
   return TRADES_CATEGORIES.find((c) => c.path === path);
+}
+
+export function getCategoryGroups(category: TradeCategory): TradeCategoryGroup[] {
+  if (category.groups?.length) return category.groups;
+  if (category.subcategories.length) return [{ label: "", items: category.subcategories }];
+  return [];
 }
 
 export const TRADES_STATIC_PAGES = [

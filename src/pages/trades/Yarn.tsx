@@ -5,11 +5,36 @@ import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { YarnScene3D } from "@/components/3d/YarnScene3D";
-import { getCategoryByPath } from "@/data/trades/trades.config";
+import { getCategoryByPath, getCategoryGroups } from "@/data/trades/trades.config";
 import { useDevice } from "@/hooks/useDevice";
 import { useScrollToHash } from "@/hooks/useScrollToHash";
 
 const category = getCategoryByPath("/trades/yarn")!;
+const yarnGroups = getCategoryGroups(category);
+
+function TechnologyCard({ label, description, slug }: { label: string; description: string; slug: string }) {
+  return (
+    <div id={slug} className="scroll-mt-24 h-full">
+      <Card className="h-full border-t-2 border-t-accent/60 bg-bg-elevated">
+        <p className="text-accent text-[10px] font-bold tracking-widest uppercase mb-2">Spinning</p>
+        <h3 className="font-display text-base font-semibold mb-2">{label}</h3>
+        <p className="text-text-secondary text-xs leading-relaxed">{description}</p>
+      </Card>
+    </div>
+  );
+}
+
+function FibreCard({ label, description, slug }: { label: string; description: string; slug: string }) {
+  return (
+    <div id={slug} className="scroll-mt-24 h-full">
+      <Card className="h-full">
+        <p className="text-text-muted text-[10px] font-bold tracking-widest uppercase mb-2">Fibre</p>
+        <h3 className="font-semibold text-sm mb-1.5">{label}</h3>
+        <p className="text-text-secondary text-xs leading-relaxed">{description}</p>
+      </Card>
+    </div>
+  );
+}
 
 export default function TradesYarn() {
   const { isMobile, prefersReducedMotion } = useDevice();
@@ -44,20 +69,37 @@ export default function TradesYarn() {
       </section>
 
       <section className="pb-12 md:pb-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <h2 className="font-display text-xl font-semibold mb-4">Yarn types</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-            {category.subcategories.map((sub, i) => (
-              <ScrollReveal key={sub.slug} delay={i * 0.04}>
-                <div id={sub.slug} className="scroll-mt-24 h-full">
-                  <Card className="h-full">
-                    <h3 className="font-semibold text-sm mb-1.5">{sub.label}</h3>
-                    <p className="text-text-secondary text-xs leading-relaxed">{sub.description}</p>
-                  </Card>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12">
+          {yarnGroups.map((group) => {
+            const isTechnologies = group.label === "Technologies";
+            return (
+              <div key={group.label}>
+                <h2 className="font-display text-xl font-semibold mb-1">{group.label}</h2>
+                <p className="text-text-muted text-sm mb-5">
+                  {isTechnologies
+                    ? "How the yarn is spun — open end, ring spun, or vortex."
+                    : "What the yarn is made from — cotton, polyester, blends, and more."}
+                </p>
+                <div
+                  className={
+                    isTechnologies
+                      ? "grid md:grid-cols-3 gap-4"
+                      : "grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                  }
+                >
+                  {group.items.map((sub, i) => (
+                    <ScrollReveal key={sub.slug} delay={i * 0.04}>
+                      {isTechnologies ? (
+                        <TechnologyCard label={sub.label} description={sub.description} slug={sub.slug} />
+                      ) : (
+                        <FibreCard label={sub.label} description={sub.description} slug={sub.slug} />
+                      )}
+                    </ScrollReveal>
+                  ))}
                 </div>
-              </ScrollReveal>
-            ))}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
