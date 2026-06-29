@@ -88,9 +88,9 @@ export default function TradesHome() {
         <ScrollReveal>
           <div className="rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/15 to-bg-elevated p-6 sm:p-10 md:p-12 text-center">
             <Globe size={40} className="text-accent mx-auto mb-4" />
-            <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4">Ready to source premium yarn?</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4">Ready to source textile?</h2>
             <p className="text-text-secondary text-sm sm:text-base mb-6 sm:mb-8 max-w-lg mx-auto">
-              Tell us your count, composition, and quantity. We respond within 24 hours.
+              Tell us your yarn, fabric, or home textile spec — count, composition, and quantity. We respond within 24 hours.
             </p>
             <Button to="/trades/rfq" size="lg" className="w-full sm:w-auto">Send Inquiry →</Button>
           </div>
