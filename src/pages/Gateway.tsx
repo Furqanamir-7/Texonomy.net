@@ -152,11 +152,11 @@ export default function Gateway() {
             transition={{ delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button to="/trades/rfq" size="lg">
-              Request a Quote <ArrowRight size={18} />
+            <Button to="/trades" size="lg">
+              Explore Trades <ArrowRight size={18} />
             </Button>
-            <Button to="/trades" variant="outline" size="lg">
-              What We Trade
+            <Button to="/thinks" variant="outline" size="lg">
+              Explore Thinks
             </Button>
           </motion.div>
         </div>
