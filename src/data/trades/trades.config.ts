@@ -25,13 +25,54 @@ const YARN_TECHNOLOGIES: TradeSubcategory[] = [
   { label: "Vortex", slug: "vortex", description: "MVS yarn with low hairiness and excellent abrasion resistance for shirting." },
 ];
 
-const YARN_FIBRES: TradeSubcategory[] = [
+export type YarnFibreTabGroup = {
+  label: string;
+  slug: string;
+  items: TradeSubcategory[];
+};
+
+const YARN_BASE_FIBRES: TradeSubcategory[] = [
   { label: "Cotton", slug: "cotton", description: "100% cotton carded and combed yarn, Ne 6–Ne 60, for apparel and home textile." },
   { label: "Polyester", slug: "polyester", description: "Filament and spun polyester for blends, sportswear, and industrial end-uses." },
   { label: "Cotton Blends", slug: "cotton-blends", description: "CVC, PC, and TC blends with custom ratios for uniforms and workwear." },
-  { label: "Fleece", slug: "fleece", description: "Polyester and cotton-poly fleece counts for sweatshirt and activewear programs." },
-  { label: "Linen", slug: "linen", description: "Linen and linen-blend yarn for breathable shirting and home textile applications." },
 ];
+
+const YARN_FIBRE_TAB_GROUPS: YarnFibreTabGroup[] = [
+  {
+    label: "Modal · Viscose · Rayon · Tencel",
+    slug: "regenerated-cellulosics",
+    items: [
+      { label: "Modal", slug: "modal", description: "Soft, breathable regenerated cellulosic for intimate apparel and premium knits." },
+      { label: "Viscose", slug: "viscose", description: "Versatile rayon staple for woven shirting, dresses, and lining programs." },
+      { label: "Rayon", slug: "rayon", description: "Drapey cellulosic counts for fashion and home textile applications." },
+      { label: "Tencel", slug: "tencel", description: "Lyocell fibre with moisture management for sustainable apparel lines." },
+    ],
+  },
+  {
+    label: "Linen · Hemp · Spandex",
+    slug: "natural-elastic",
+    items: [
+      { label: "Linen", slug: "linen", description: "Linen and linen-blend yarn for breathable shirting and home textile applications." },
+      { label: "Hemp", slug: "hemp", description: "Durable natural bast fibre for workwear, canvas, and sustainable blends." },
+      { label: "Spandex", slug: "spandex", description: "Elastic core and covered yarns for stretch denim, activewear, and hosiery." },
+    ],
+  },
+  {
+    label: "Meta & Para Aramids · Modacrylics",
+    slug: "high-performance-synthetics",
+    items: [
+      { label: "Meta & Para Aramids", slug: "meta-para-aramids", description: "Heat- and flame-resistant aramid yarns for protective and industrial textiles." },
+      { label: "Modacrylics", slug: "modacrylics", description: "Flame-retardant modacrylic counts for PPE, upholstery, and specialty programs." },
+    ],
+  },
+];
+
+const YARN_FIBRES: TradeSubcategory[] = [
+  ...YARN_BASE_FIBRES,
+  ...YARN_FIBRE_TAB_GROUPS.flatMap((g) => g.items),
+];
+
+export { YARN_FIBRE_TAB_GROUPS, YARN_BASE_FIBRES };
 
 export const TRADES_CATEGORIES: TradeCategory[] = [
   {

@@ -5,12 +5,17 @@ import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { YarnScene3D } from "@/components/3d/YarnScene3D";
-import { getCategoryByPath, getCategoryGroups } from "@/data/trades/trades.config";
+import {
+  getCategoryByPath,
+  getCategoryGroups,
+  YARN_BASE_FIBRES,
+  YARN_FIBRE_TAB_GROUPS,
+} from "@/data/trades/trades.config";
 import { useDevice } from "@/hooks/useDevice";
 import { useScrollToHash } from "@/hooks/useScrollToHash";
 
 const category = getCategoryByPath("/trades/yarn")!;
-const yarnGroups = getCategoryGroups(category);
+const yarnGroups = getCategoryGroups(category).filter((g) => g.label === "Technologies");
 
 function TechnologyCard({ label, description, slug }: { label: string; description: string; slug: string }) {
   return (
@@ -31,6 +36,32 @@ function FibreCard({ label, description, slug }: { label: string; description: s
         <p className="text-text-muted text-[10px] font-bold tracking-widest uppercase mb-2">Fibre</p>
         <h3 className="font-semibold text-sm mb-1.5">{label}</h3>
         <p className="text-text-secondary text-xs leading-relaxed">{description}</p>
+      </Card>
+    </div>
+  );
+}
+
+function FibreGroupBox({
+  label,
+  slug,
+  items,
+}: {
+  label: string;
+  slug: string;
+  items: { label: string; slug: string; description: string }[];
+}) {
+  return (
+    <div id={slug} className="scroll-mt-24 h-full flex flex-col">
+      <Card className="h-full flex flex-col">
+        <p className="text-accent text-[10px] font-bold tracking-widest uppercase mb-3">{label}</p>
+        <ul className="space-y-4 flex-1">
+          {items.map((item) => (
+            <li key={item.slug} id={item.slug} className="scroll-mt-24">
+              <h3 className="font-semibold text-sm mb-1">{item.label}</h3>
+              <p className="text-text-secondary text-xs leading-relaxed">{item.description}</p>
+            </li>
+          ))}
+        </ul>
       </Card>
     </div>
   );
@@ -70,36 +101,44 @@ export default function TradesYarn() {
 
       <section className="pb-12 md:pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12">
-          {yarnGroups.map((group) => {
-            const isTechnologies = group.label === "Technologies";
-            return (
-              <div key={group.label}>
-                <h2 className="font-display text-xl font-semibold mb-1">{group.label}</h2>
-                <p className="text-text-muted text-sm mb-5">
-                  {isTechnologies
-                    ? "How the yarn is spun — open end, ring spun, or vortex."
-                    : "What the yarn is made from — cotton, polyester, blends, and more."}
-                </p>
-                <div
-                  className={
-                    isTechnologies
-                      ? "grid md:grid-cols-3 gap-4"
-                      : "grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                  }
-                >
-                  {group.items.map((sub, i) => (
-                    <ScrollReveal key={sub.slug} delay={i * 0.04}>
-                      {isTechnologies ? (
-                        <TechnologyCard label={sub.label} description={sub.description} slug={sub.slug} />
-                      ) : (
-                        <FibreCard label={sub.label} description={sub.description} slug={sub.slug} />
-                      )}
-                    </ScrollReveal>
-                  ))}
-                </div>
+          {yarnGroups.map((group) => (
+            <div key={group.label}>
+              <h2 className="font-display text-xl font-semibold mb-1">{group.label}</h2>
+              <p className="text-text-muted text-sm mb-5">
+                How the yarn is spun — open end, ring spun, or vortex.
+              </p>
+              <div className="grid md:grid-cols-3 gap-4">
+                {group.items.map((sub, i) => (
+                  <ScrollReveal key={sub.slug} delay={i * 0.04}>
+                    <TechnologyCard label={sub.label} description={sub.description} slug={sub.slug} />
+                  </ScrollReveal>
+                ))}
               </div>
-            );
-          })}
+            </div>
+          ))}
+
+          <div>
+            <h2 className="font-display text-xl font-semibold mb-1">Fibres</h2>
+            <p className="text-text-muted text-sm mb-5">
+              What the yarn is made from — staple fibres, specialty counts, and performance synthetics.
+            </p>
+
+            <div className="grid sm:grid-cols-3 gap-4 mb-8">
+              {YARN_BASE_FIBRES.map((sub, i) => (
+                <ScrollReveal key={sub.slug} delay={i * 0.04}>
+                  <FibreCard label={sub.label} description={sub.description} slug={sub.slug} />
+                </ScrollReveal>
+              ))}
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-4 items-stretch">
+              {YARN_FIBRE_TAB_GROUPS.map((tab, i) => (
+                <ScrollReveal key={tab.slug} delay={i * 0.06}>
+                  <FibreGroupBox label={tab.label} slug={tab.slug} items={tab.items} />
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
