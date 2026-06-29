@@ -9,6 +9,19 @@
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
     <link rel="apple-touch-icon" sizes="512x512" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <script>
+      (function () {
+        var t = localStorage.getItem("texonomy-theme");
+        if (t === "light" || t === "dark") {
+          document.documentElement.classList.add(t);
+          document.documentElement.dataset.theme = t;
+        } else {
+          document.documentElement.classList.add("dark");
+          document.documentElement.dataset.theme = "dark";
+        }
+      })();
+    </script>
     <meta name="description" content="Texonomy combines B2B textile trading with strategic industry intelligence. Two divisions. One company." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.texonomy.net/" />

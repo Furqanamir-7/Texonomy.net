@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Logo } from "@/components/shared/Logo";
+import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { TRADES_STATIC_PAGES, TRADES_CATEGORIES, getCategoryGroups } from "@/data/trades/trades.config";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
@@ -153,15 +154,19 @@ export function TradesNav() {
         </div>
 
         <div className="hidden lg:flex items-center gap-3 shrink-0">
+          <ThemeToggle size="sm" />
           <Link to="/thinks" className="text-xs text-text-muted hover:text-accent transition-colors whitespace-nowrap">
             Switch to Thinks →
           </Link>
           <Button to="/trades/rfq" size="sm">Request Quote</Button>
         </div>
 
-        <button className="lg:hidden p-2 shrink-0 -mr-1" onClick={() => setOpen(!open)} aria-label="Menu">
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="flex lg:hidden items-center gap-1 shrink-0">
+          <ThemeToggle size="sm" />
+          <button className="p-2 -mr-1" onClick={() => setOpen(!open)} aria-label="Menu">
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </nav>
 
       <AnimatePresence>

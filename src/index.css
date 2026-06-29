@@ -1,19 +1,53 @@
 @import "tailwindcss";
 
-@theme {
-  --color-bg-primary: #0a0a0f;
-  --color-bg-secondary: #121218;
-  --color-bg-elevated: #1a1a24;
-  --color-accent: #00b4d8;
-  --color-accent-hover: #0096b7;
-  --color-accent-muted: #0891b2;
-  --color-bronze: #6b7b8c;
-  --color-text-primary: #f0f0f5;
-  --color-text-secondary: #a0a0b0;
-  --color-text-muted: #6b6b7b;
-  --color-border: #2a2a38;
+@theme inline {
+  --color-bg-primary: var(--app-bg-primary);
+  --color-bg-secondary: var(--app-bg-secondary);
+  --color-bg-elevated: var(--app-bg-elevated);
+  --color-accent: var(--app-accent);
+  --color-accent-hover: var(--app-accent-hover);
+  --color-accent-muted: var(--app-accent-muted);
+  --color-bronze: var(--app-bronze);
+  --color-text-primary: var(--app-text-primary);
+  --color-text-secondary: var(--app-text-secondary);
+  --color-text-muted: var(--app-text-muted);
+  --color-border: var(--app-border);
+  --color-accent-foreground: var(--app-accent-foreground);
   --font-display: "Instrument Sans", system-ui, sans-serif;
   --font-body: "DM Sans", system-ui, sans-serif;
+}
+
+:root,
+html.dark {
+  --app-bg-primary: #0a0a0f;
+  --app-bg-secondary: #121218;
+  --app-bg-elevated: #1a1a24;
+  --app-accent: #00b4d8;
+  --app-accent-hover: #0096b7;
+  --app-accent-muted: #0891b2;
+  --app-bronze: #6b7b8c;
+  --app-text-primary: #f0f0f5;
+  --app-text-secondary: #a0a0b0;
+  --app-text-muted: #6b6b7b;
+  --app-border: #2a2a38;
+  --app-accent-foreground: #0a0a0f;
+  --app-woven-alpha: 0.03;
+}
+
+html.light {
+  --app-bg-primary: #f4f6f9;
+  --app-bg-secondary: #e8ecf2;
+  --app-bg-elevated: #ffffff;
+  --app-accent: #007a96;
+  --app-accent-hover: #006580;
+  --app-accent-muted: #0891b2;
+  --app-bronze: #5a6a7a;
+  --app-text-primary: #12141c;
+  --app-text-secondary: #454d5c;
+  --app-text-muted: #6b7380;
+  --app-border: #d4dae3;
+  --app-accent-foreground: #ffffff;
+  --app-woven-alpha: 0.06;
 }
 
 * {
@@ -23,6 +57,11 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
 }
 
 body {
@@ -35,6 +74,7 @@ body {
   overflow-x: hidden;
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -48,24 +88,24 @@ h1, h2, h3, h4, h5, h6 {
 
 .woven-pattern {
   background-image:
-    linear-gradient(45deg, rgba(0, 180, 216, 0.03) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(0, 180, 216, 0.03) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgba(0, 180, 216, 0.03) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(0, 180, 216, 0.03) 75%);
+    linear-gradient(45deg, color-mix(in srgb, var(--color-accent) calc(var(--app-woven-alpha) * 100%), transparent) 25%, transparent 25%),
+    linear-gradient(-45deg, color-mix(in srgb, var(--color-accent) calc(var(--app-woven-alpha) * 100%), transparent) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, color-mix(in srgb, var(--color-accent) calc(var(--app-woven-alpha) * 100%), transparent) 75%),
+    linear-gradient(-45deg, transparent 75%, color-mix(in srgb, var(--color-accent) calc(var(--app-woven-alpha) * 100%), transparent) 75%);
   background-size: 40px 40px;
   background-position: 0 0, 0 20px, 20px -20px, -20px 0;
 }
 
 .glow-accent {
-  box-shadow: 0 0 40px rgba(0, 180, 216, 0.15);
+  box-shadow: 0 0 40px color-mix(in srgb, var(--color-accent) 15%, transparent);
 }
 
 .bg-gradient-radial {
-  background: radial-gradient(ellipse at center, var(--tw-gradient-from, rgba(0, 180, 216, 0.08)) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, var(--tw-gradient-from, color-mix(in srgb, var(--color-accent) 8%, transparent)) 0%, transparent 70%);
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-muted) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

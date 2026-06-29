@@ -26,6 +26,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { SectionLabel } from "@/components/shared/SectionLabel";
+import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { ThreadParticles3D } from "@/components/3d/ThreadParticles3D";
 import { useDevice } from "@/hooks/useDevice";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
@@ -77,6 +78,7 @@ export default function Gateway() {
             ))}
           </nav>
           <div className="hidden sm:flex items-center gap-2 shrink-0">
+            <ThemeToggle size="sm" />
             <Button to="/trades/rfq" size="sm" variant="ghost" className="hidden lg:inline-flex">
               Request a Quote
             </Button>
@@ -84,7 +86,9 @@ export default function Gateway() {
               What We Trade
             </Button>
           </div>
-          <button
+          <div className="flex sm:hidden items-center gap-1 shrink-0">
+            <ThemeToggle size="sm" />
+            <button
             type="button"
             className="md:hidden p-2 shrink-0 -mr-1"
             onClick={() => setMenuOpen((v) => !v)}
@@ -93,6 +97,7 @@ export default function Gateway() {
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
+          </div>
         </div>
 
         <AnimatePresence>

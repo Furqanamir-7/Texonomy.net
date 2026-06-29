@@ -7,7 +7,6 @@ import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { GlobeHeroPanel } from "@/components/trades/GlobeHeroPanel";
 import { TRADES_CATEGORIES } from "@/data/trades/trades.config";
-import { yarnProducts } from "@/data/trades/products";
 import { Link } from "react-router-dom";
 
 const CATEGORY_ICONS = { yarns: Package, fabrics: Factory, "home-textiles": Package, garments: Package };
@@ -43,28 +42,15 @@ export default function TradesHome() {
         </div>
       </section>
 
-      <Section className="py-12 md:py-16 bg-gradient-to-br from-accent/20 via-accent/10 to-bg-primary">
-        <SectionHeader
-          eyebrow="Flagship Product"
-          title="Yarn for every mill. Count for every need."
-          className="text-center mx-auto max-w-3xl mb-8"
+      <section className="relative border-y border-border overflow-hidden" aria-hidden>
+        <img
+          src="/images/trades-banner.jpg"
+          alt=""
+          className="w-full h-20 sm:h-28 md:h-[10.5rem] object-cover object-[center_35%]"
+          loading="lazy"
         />
-        <div className="grid md:grid-cols-2 gap-5">
-          {yarnProducts.map((p, i) => (
-            <ScrollReveal key={p.id} delay={i * 0.08}>
-              <Card className="bg-bg-elevated">
-                <h3 className="font-display text-xl font-semibold mb-1">{p.name}</h3>
-                <p className="text-text-muted text-sm mb-2">{p.tagline}</p>
-                <p className="text-text-secondary text-sm mb-3">{p.counts} · {p.composition}</p>
-                <Link to="/trades/yarn" className="text-accent text-sm font-medium">View Details →</Link>
-              </Card>
-            </ScrollReveal>
-          ))}
-        </div>
-        <div className="text-center mt-8">
-          <Button to="/trades/yarn" variant="secondary">View All Yarn Products →</Button>
-        </div>
-      </Section>
+        <div className="absolute inset-0 bg-gradient-to-r from-bg-primary/30 via-transparent to-bg-primary/30 pointer-events-none" />
+      </section>
 
       <Section className="py-12 md:py-16">
         <SectionHeader
