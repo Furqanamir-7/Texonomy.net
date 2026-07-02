@@ -92,11 +92,8 @@ export default function SuppliersCertifications() {
           <ScrollReveal className="lg:col-span-2" delay={0.08}>
             <div className="h-full rounded-xl border border-accent/25 bg-accent/5 p-6 flex flex-col justify-center">
               <FileCheck size={22} className="text-accent mb-3" />
-              <p className="font-display text-base font-semibold text-text-primary leading-snug mb-3">
+              <p className="font-display text-base font-semibold text-text-primary leading-snug">
                 {CERTIFICATIONS_OVERVIEW.transactionCertificates}
-              </p>
-              <p className="text-text-muted text-xs leading-relaxed">
-                {CERTIFICATIONS_OVERVIEW.transactionNote}
               </p>
             </div>
           </ScrollReveal>

@@ -41,7 +41,7 @@ export default function ThinksContact() {
                   <div>
                     <label className="block text-sm text-text-secondary mb-1">Inquiry Type</label>
                     <select className="w-full px-4 py-3 rounded-lg bg-bg-primary border border-border focus:border-accent/50 outline-none">
-                      <option>Training</option><option>Consulting</option><option>Intelligence</option><option>Research</option><option>Other</option>
+                      <option>Training</option><option>Consulting</option><option>Research</option><option>Other</option>
                     </select>
                   </div>
                   <div>

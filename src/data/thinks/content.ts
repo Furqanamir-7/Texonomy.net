@@ -13,13 +13,6 @@ export const thinksServices = [
       "On-site and remote advisory for mills, manufacturers, and trading companies.",
     path: "/thinks/consulting",
   },
-  {
-    id: "intelligence",
-    title: "Market Intelligence",
-    description:
-      "Price data, supply trend reports, and demand forecasts for yarn and textile markets.",
-    path: "/thinks/intelligence",
-  },
 ] as const;
 
 export const trainingPrograms = [

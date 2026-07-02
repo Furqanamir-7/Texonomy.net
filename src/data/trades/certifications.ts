@@ -10,8 +10,6 @@ export const CERTIFICATIONS_OVERVIEW = {
     "Texonomy is a trading and sourcing company — it does not hold farm-level or mill-level certifications itself. Those certifications belong to the growers, ginners, and processors in the supply chain. Texonomy's role is to work with certified partners when a certified order is placed, and to pass on the supporting paperwork.",
   transactionCertificates:
     "All certified products come with Transaction Certificates where applicable.",
-  transactionNote:
-    "This phrasing avoids overclaiming (not every order is certified, and not every certification issues the same document type) while still signalling that documentation backs the claim.",
   closing:
     "If a buyer specifies a certification not listed here, send the spec anyway — Texonomy will source through the appropriate certified supply chain, or say honestly if it's outside the current network.",
 } as const;

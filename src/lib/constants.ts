@@ -23,7 +23,6 @@ export const THINKS_NAV = [
   { label: "Home", path: "/thinks" },
   { label: "Training", path: "/thinks/training" },
   { label: "Consulting", path: "/thinks/consulting" },
-  { label: "Intelligence", path: "/thinks/intelligence" },
   { label: "Contact", path: "/thinks/contact" },
 ] as const;
 

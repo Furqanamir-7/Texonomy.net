@@ -5,7 +5,6 @@ import { TradesLayout } from "@/components/trades/TradesLayout";
 import ThinksHome from "@/pages/thinks/Home";
 import ThinksTraining from "@/pages/thinks/Training";
 import ThinksConsulting from "@/pages/thinks/Consulting";
-import ThinksIntelligence from "@/pages/thinks/Intelligence";
 import ThinksContact from "@/pages/thinks/Contact";
 import TradesHome from "@/pages/trades/Home";
 import TradesYarn from "@/pages/trades/Yarn";
@@ -29,9 +28,9 @@ export default function App() {
           <Route index element={<ThinksHome />} />
           <Route path="training" element={<ThinksTraining />} />
           <Route path="consulting" element={<ThinksConsulting />} />
-          <Route path="intelligence" element={<ThinksIntelligence />} />
-          <Route path="research" element={<Navigate to="/thinks/intelligence" replace />} />
-          <Route path="insights" element={<Navigate to="/thinks/intelligence" replace />} />
+          <Route path="intelligence" element={<Navigate to="/thinks" replace />} />
+          <Route path="research" element={<Navigate to="/thinks" replace />} />
+          <Route path="insights" element={<Navigate to="/thinks" replace />} />
           <Route path="case-studies" element={<Navigate to="/thinks" replace />} />
           <Route path="contact" element={<ThinksContact />} />
         </Route>
@@ -54,7 +53,7 @@ export default function App() {
         <Route path="about" element={<Navigate to="/thinks" replace />} />
         <Route path="consultation" element={<Navigate to="/thinks/consulting" replace />} />
         <Route path="training" element={<Navigate to="/thinks/training" replace />} />
-        <Route path="insights" element={<Navigate to="/thinks/intelligence" replace />} />
+        <Route path="insights" element={<Navigate to="/thinks" replace />} />
         <Route path="contact" element={<Navigate to="/thinks/contact" replace />} />
       </Routes>
       <GlobalChrome />
