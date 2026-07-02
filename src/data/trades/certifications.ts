@@ -75,11 +75,3 @@ export const FIBER_SOURCING_INTRO =
 
 export const PRODUCT_SAFETY_INTRO =
   "This certification verifies that the finished yarn or fabric itself has been laboratory-tested and cleared for harmful substances — a different kind of claim from fiber sourcing.";
-
-export const CERTIFICATION_TABS = [
-  { id: "overview", label: "Overview" },
-  { id: "fiber-sourcing", label: "Fiber & Sourcing" },
-  { id: "product-safety", label: "Product Safety" },
-] as const;
-
-export type CertificationTabId = (typeof CERTIFICATION_TABS)[number]["id"];

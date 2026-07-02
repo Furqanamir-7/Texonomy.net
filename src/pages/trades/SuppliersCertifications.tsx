@@ -1,21 +1,18 @@
-import { useState } from "react";
-import { Shield, Award, CheckCircle, FileText, Leaf, FlaskConical } from "lucide-react";
+import { Shield, Award, CheckCircle, Leaf, FlaskConical, FileCheck, ArrowDown } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { SectionLabel } from "@/components/shared/SectionLabel";
 import {
   CERTIFICATIONS_OVERVIEW,
-  CERTIFICATION_TABS,
   FIBER_SOURCING_CERTIFICATIONS,
   FIBER_SOURCING_INTRO,
   PRODUCT_SAFETY_CERTIFICATIONS,
   PRODUCT_SAFETY_INTRO,
   PRODUCT_SAFETY_NOTE,
   type CertificationEntry,
-  type CertificationTabId,
 } from "@/data/trades/certifications";
-import { cn } from "@/lib/utils";
 
 const SUPPLIER_STANDARDS = [
   "Lab-tested yarn with documented count and strength specs",
@@ -23,6 +20,19 @@ const SUPPLIER_STANDARDS = [
   "Traceable lot numbers on every shipment",
   "Pre-shipment inspection and cone sampling",
 ];
+
+const OVERVIEW_CATEGORIES = [
+  {
+    icon: Leaf,
+    title: "Fiber & Sourcing",
+    description: "What the fiber is made of and how it was grown or recycled — tracked via chain-of-custody, not lab testing.",
+  },
+  {
+    icon: FlaskConical,
+    title: "Product Safety",
+    description: "Finished yarn or fabric laboratory-tested and cleared for harmful substances — a different claim from sourcing.",
+  },
+] as const;
 
 function CertificationCard({ entry }: { entry: CertificationEntry }) {
   return (
@@ -35,8 +45,6 @@ function CertificationCard({ entry }: { entry: CertificationEntry }) {
 }
 
 export default function SuppliersCertifications() {
-  const [tab, setTab] = useState<CertificationTabId>("overview");
-
   return (
     <>
       <section className="py-14 sm:py-20 md:py-28 bg-bg-secondary">
@@ -53,112 +61,127 @@ export default function SuppliersCertifications() {
         </div>
       </section>
 
-      <Section className="py-12 md:py-16">
-        <div className="flex flex-wrap gap-2 mb-8 border-b border-border pb-4">
-          {CERTIFICATION_TABS.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              onClick={() => setTab(t.id)}
-              className={cn(
-                "px-4 py-2.5 rounded-lg text-sm font-medium transition-colors",
-                tab === t.id
-                  ? "bg-accent text-accent-foreground"
-                  : "bg-bg-elevated text-text-secondary hover:text-text-primary border border-border",
-              )}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
+      <Section id="overview" className="py-14 md:py-20 scroll-mt-24">
+        <ScrollReveal>
+          <SectionLabel text="Overview" />
+          <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4 max-w-3xl">
+            Certifications for yarn, fabric, and home textile trade
+          </h2>
+          <p className="text-text-secondary text-base sm:text-lg leading-relaxed max-w-3xl mb-10">
+            {CERTIFICATIONS_OVERVIEW.purpose}
+          </p>
+        </ScrollReveal>
 
-        {tab === "overview" && (
-          <ScrollReveal>
-            <div className="max-w-3xl space-y-6">
-              <Card hover={false}>
-                <div className="flex items-start gap-3 mb-4">
-                  <FileText size={22} className="text-accent shrink-0 mt-0.5" />
-                  <div>
-                    <h2 className="font-display text-xl font-semibold mb-2">Purpose</h2>
-                    <p className="text-text-secondary text-sm leading-relaxed">{CERTIFICATIONS_OVERVIEW.purpose}</p>
-                  </div>
+        <div className="grid lg:grid-cols-5 gap-6 lg:gap-8 mb-10">
+          <ScrollReveal className="lg:col-span-3">
+            <Card hover={false} className="h-full border-l-4 border-l-accent">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
+                  <Shield size={20} className="text-accent" />
                 </div>
-              </Card>
-              <Card hover={false}>
-                <div className="flex items-start gap-3 mb-4">
-                  <Shield size={22} className="text-accent shrink-0 mt-0.5" />
-                  <div>
-                    <h2 className="font-display text-xl font-semibold mb-2">How Texonomy presents certifications</h2>
-                    <p className="text-text-secondary text-sm leading-relaxed mb-4">
-                      {CERTIFICATIONS_OVERVIEW.tradingRole}
-                    </p>
-                    <p className="text-text-primary text-sm font-medium border-l-2 border-accent pl-4">
-                      {CERTIFICATIONS_OVERVIEW.transactionCertificates}
-                    </p>
-                    <p className="text-text-muted text-xs mt-3 italic leading-relaxed">
-                      {CERTIFICATIONS_OVERVIEW.transactionNote}
-                    </p>
-                  </div>
+                <div>
+                  <h3 className="font-display text-lg font-semibold mb-3">Texonomy&apos;s role</h3>
+                  <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
+                    {CERTIFICATIONS_OVERVIEW.tradingRole}
+                  </p>
                 </div>
-              </Card>
+              </div>
+            </Card>
+          </ScrollReveal>
+
+          <ScrollReveal className="lg:col-span-2" delay={0.08}>
+            <div className="h-full rounded-xl border border-accent/25 bg-accent/5 p-6 flex flex-col justify-center">
+              <FileCheck size={22} className="text-accent mb-3" />
+              <p className="font-display text-base font-semibold text-text-primary leading-snug mb-3">
+                {CERTIFICATIONS_OVERVIEW.transactionCertificates}
+              </p>
+              <p className="text-text-muted text-xs leading-relaxed">
+                {CERTIFICATIONS_OVERVIEW.transactionNote}
+              </p>
             </div>
           </ScrollReveal>
-        )}
-
-        {tab === "fiber-sourcing" && (
-          <div>
-            <ScrollReveal>
-              <div className="flex items-start gap-3 mb-8 max-w-3xl">
-                <Leaf size={22} className="text-accent shrink-0 mt-1" />
-                <div>
-                  <h2 className="font-display text-xl font-semibold mb-2">Fiber &amp; Sourcing Certifications</h2>
-                  <p className="text-text-secondary text-sm leading-relaxed">{FIBER_SOURCING_INTRO}</p>
-                </div>
-              </div>
-            </ScrollReveal>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {FIBER_SOURCING_CERTIFICATIONS.map((entry, i) => (
-                <ScrollReveal key={entry.name} delay={i * 0.04}>
-                  <CertificationCard entry={entry} />
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {tab === "product-safety" && (
-          <div className="max-w-3xl">
-            <ScrollReveal>
-              <div className="flex items-start gap-3 mb-8">
-                <FlaskConical size={22} className="text-accent shrink-0 mt-1" />
-                <div>
-                  <h2 className="font-display text-xl font-semibold mb-2">Product Safety &amp; Testing</h2>
-                  <p className="text-text-secondary text-sm leading-relaxed">{PRODUCT_SAFETY_INTRO}</p>
-                </div>
-              </div>
-            </ScrollReveal>
-            {PRODUCT_SAFETY_CERTIFICATIONS.map((entry, i) => (
-              <ScrollReveal key={entry.name} delay={i * 0.06}>
-                <CertificationCard entry={entry} />
-              </ScrollReveal>
-            ))}
-            <ScrollReveal>
-              <p className="text-text-muted text-xs sm:text-sm mt-6 italic leading-relaxed border-t border-border pt-6">
-                {PRODUCT_SAFETY_NOTE}
-              </p>
-            </ScrollReveal>
-          </div>
-        )}
+        </div>
 
         <ScrollReveal>
-          <p className="text-text-secondary text-sm sm:text-base max-w-3xl mt-12 pt-8 border-t border-border leading-relaxed">
+          <p className="text-text-muted text-xs font-bold tracking-widest uppercase mb-4">
+            Two categories on this page
+          </p>
+          <div className="grid sm:grid-cols-2 gap-4 max-w-4xl">
+            {OVERVIEW_CATEGORIES.map((cat) => (
+              <div
+                key={cat.title}
+                className="flex items-start gap-3 rounded-xl border border-border bg-bg-elevated p-5"
+              >
+                <cat.icon size={20} className="text-accent shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-sm mb-1.5">{cat.title}</h3>
+                  <p className="text-text-secondary text-xs sm:text-sm leading-relaxed">{cat.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="flex items-center gap-2 text-text-muted text-xs mt-6">
+            <ArrowDown size={14} className="shrink-0" />
+            Scroll for the full certification reference below
+          </p>
+        </ScrollReveal>
+      </Section>
+
+      <Section id="fiber-sourcing" className="py-14 md:py-20 bg-bg-secondary scroll-mt-24">
+        <ScrollReveal>
+          <SectionLabel text="Category 1" />
+          <div className="flex items-start gap-3 mb-8 max-w-3xl">
+            <Leaf size={24} className="text-accent shrink-0 mt-1" />
+            <div>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold mb-3">Fiber &amp; Sourcing</h2>
+              <p className="text-text-secondary text-sm sm:text-base leading-relaxed">{FIBER_SOURCING_INTRO}</p>
+            </div>
+          </div>
+        </ScrollReveal>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {FIBER_SOURCING_CERTIFICATIONS.map((entry, i) => (
+            <ScrollReveal key={entry.name} delay={i * 0.04}>
+              <CertificationCard entry={entry} />
+            </ScrollReveal>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="product-safety" className="py-14 md:py-20 scroll-mt-24">
+        <ScrollReveal>
+          <SectionLabel text="Category 2" />
+          <div className="flex items-start gap-3 mb-8 max-w-3xl">
+            <FlaskConical size={24} className="text-accent shrink-0 mt-1" />
+            <div>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold mb-3">Product Safety &amp; Testing</h2>
+              <p className="text-text-secondary text-sm sm:text-base leading-relaxed">{PRODUCT_SAFETY_INTRO}</p>
+            </div>
+          </div>
+        </ScrollReveal>
+        <div className="max-w-2xl">
+          {PRODUCT_SAFETY_CERTIFICATIONS.map((entry, i) => (
+            <ScrollReveal key={entry.name} delay={i * 0.06}>
+              <CertificationCard entry={entry} />
+            </ScrollReveal>
+          ))}
+          <ScrollReveal>
+            <p className="text-text-muted text-xs sm:text-sm mt-6 leading-relaxed border-l-2 border-border pl-4">
+              {PRODUCT_SAFETY_NOTE}
+            </p>
+          </ScrollReveal>
+        </div>
+      </Section>
+
+      <Section className="py-14 md:py-20 bg-bg-secondary">
+        <ScrollReveal>
+          <p className="text-text-secondary text-sm sm:text-base max-w-3xl leading-relaxed mb-14">
             {CERTIFICATIONS_OVERVIEW.closing}
           </p>
         </ScrollReveal>
 
-        <div className="mt-14">
-          <h2 className="font-display text-xl sm:text-2xl font-bold mb-6 text-center">Supplier Standards</h2>
-          <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto mb-10">
+        <ScrollReveal>
+          <h2 className="font-display text-xl sm:text-2xl font-bold mb-6">Supplier Standards</h2>
+          <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mb-10">
             {SUPPLIER_STANDARDS.map((s) => (
               <div key={s} className="flex items-start gap-3 text-sm text-text-secondary">
                 <CheckCircle size={16} className="text-accent shrink-0 mt-0.5" />
@@ -166,12 +189,10 @@ export default function SuppliersCertifications() {
               </div>
             ))}
           </div>
-          <div className="text-center">
-            <Button to="/trades/rfq" size="lg" className="w-full sm:w-auto">
-              <Shield size={18} /> Request Certified Supply
-            </Button>
-          </div>
-        </div>
+          <Button to="/trades/rfq" size="lg" className="w-full sm:w-auto">
+            <Shield size={18} /> Request Certified Supply
+          </Button>
+        </ScrollReveal>
       </Section>
     </>
   );
