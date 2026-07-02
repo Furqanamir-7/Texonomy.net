@@ -141,11 +141,6 @@ export const TRADES_STATIC_PAGES = [
     description: "Supplier network, quality standards, and certification coverage.",
   },
   {
-    label: "Export Markets",
-    path: "/trades/export-markets",
-    description: "Global export corridors and shipping timelines.",
-  },
-  {
     label: "Trading Alliances",
     path: "/trades/trading-alliances",
     description: "Mill partnerships and strategic sourcing alliances.",

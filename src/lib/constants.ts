@@ -31,7 +31,6 @@ export const TRADES_NAV = [
   { label: "Home", path: "/trades" },
   { label: "Yarn", path: "/trades/yarn" },
   { label: "Fabrics", path: "/trades/fabrics" },
-  { label: "Export Markets", path: "/trades/export-markets" },
   { label: "Contact", path: "/trades/contact" },
 ] as const;
 

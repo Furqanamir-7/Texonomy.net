@@ -12,7 +12,6 @@ import TradesYarn from "@/pages/trades/Yarn";
 import TradesFabrics from "@/pages/trades/Fabrics";
 import TradesHomeTextile from "@/pages/trades/HomeTextile";
 import TradesGarments from "@/pages/trades/Garments";
-import TradesExportMarkets from "@/pages/trades/ExportMarkets";
 import TradesRfq from "@/pages/trades/Rfq";
 import TradesContact from "@/pages/trades/Contact";
 import SuppliersCertifications from "@/pages/trades/SuppliersCertifications";
@@ -43,7 +42,7 @@ export default function App() {
           <Route path="fabrics" element={<TradesFabrics />} />
           <Route path="home-textile" element={<TradesHomeTextile />} />
           <Route path="garments" element={<TradesGarments />} />
-          <Route path="export-markets" element={<TradesExportMarkets />} />
+          <Route path="export-markets" element={<Navigate to="/trades/suppliers-certifications" replace />} />
           <Route path="suppliers-certifications" element={<SuppliersCertifications />} />
           <Route path="trading-alliances" element={<TradingAlliances />} />
           <Route path="sellers-audit" element={<SellersAudit />} />
